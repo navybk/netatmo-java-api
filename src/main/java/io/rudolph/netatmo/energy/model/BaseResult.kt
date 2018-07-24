@@ -3,7 +3,8 @@ package io.rudolph.netatmo.energy.model
 import com.fasterxml.jackson.annotation.JsonProperty
 
 
-open class Baseresult(
+open class BaseResult(
+
         @JsonProperty("status")
         var status: String? = null,
 

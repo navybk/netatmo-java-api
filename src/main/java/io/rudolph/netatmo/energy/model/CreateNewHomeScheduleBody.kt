@@ -4,22 +4,23 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 
 class CreateNewHomeScheduleBody(
+        @JsonProperty("home_id")
+        var homeId: String? = null,
+
         @JsonProperty("timetable")
-        var timetable: List<Timetable> = listOf(),
+        var timetable: MutableList<Timetable>? = null,
 
         @JsonProperty("zones")
-        var zones: List<Baseresult> = listOf(),
+        var zones: MutableList<Zone>? = null,
 
         @JsonProperty("name")
         var name: String? = null,
 
-        @JsonProperty("home_id")
-        var homeId: String? = null,
-
         @JsonProperty("hg_temp")
-        var hgTemp: Int? = null,
+        var hgTemp: Float? = null,
 
         @JsonProperty("away_temp")
-        var awayTemp: Int? = null
+        var awayTemp: Float? = null
+
 )
 

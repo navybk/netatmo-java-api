@@ -35,7 +35,7 @@ data class Home(
         var modules: List<Module>? = null,
 
         @JsonProperty("therm_schedules")
-        var thermSchedules: List<ThermSchedule>? = null,
+        var thermSchedules: List<Schedule>? = null,
 
         @JsonProperty("schedules")
         var schedules: List<Schedule>? = null

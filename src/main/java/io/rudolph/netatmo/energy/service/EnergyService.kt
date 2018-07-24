@@ -4,53 +4,45 @@ import io.rudolph.netatmo.energy.model.*
 import retrofit2.Call
 import retrofit2.http.*
 
-interface EnergyService {
+internal interface EnergyService {
     @Headers("Content-Type:text/plain")
     @GET("createnewhomeschedule")
-    fun createNewHomeGet(
+    fun createNewHomeScheduleGet(
             @Body body: CreateNewHomeScheduleBody
-    ): Call<Baseresult>
+    ): Call<TypedBaseResult<CreateNewHomeScheduleResponse>>
 
-    @Headers("Content-Type:text/plain")
     @POST("createnewhomeschedule")
     fun createNewHomeSchedule(
             @Body body: CreateNewHomeScheduleBody
-    ): Call<Baseresult>
+    ): Call<TypedBaseResult<CreateNewHomeScheduleResponse>>
 
     @Headers("Content-Type:text/plain")
     @POST("deletehomeschedule")
     fun deleteHomeSchedule(
             @Query("schedule_id") scheduleId: String,
             @Query("home_id") homeId: String
-    ): Call<Baseresult>
+    ): Call<BaseResult>
 
     @Headers("Content-Type:text/plain")
     @GET("deletehomeschedule")
     fun deleteHomeScheduleGet(
             @Query("schedule_id") scheduleId: String,
             @Query("home_id") homeId: String
-    ): Call<Baseresult>
-
-    @Headers("Content-Type:text/plain")
-    @GET("switchhomeschedule")
-    fun etSwitchHomeScheduleGet(
-            @Query("schedule_id") scheduleId: String,
-            @Query("home_id") homeId: String
-    ): Call<Baseresult>
+    ): Call<BaseResult>
 
     @Headers("Content-Type:text/plain")
     @GET("homesdata")
     fun getHomeData(
             @Query("home_id") homeId: String? = null,
-            @Query("gateway_types") gatewayTypes: MutableList<GatewayType>? = null
-    ): Call<HomesData>
+            @Query("gateway_types") gatewayTypes: MutableList<DeviceType>? = null
+    ): Call<TypedBaseResult<HomesdataBody>>
 
     @Headers("Content-Type:text/plain")
     @POST("homesdata")
     fun getHomeDataPost(
             @Query("home_id") homeId: String,
-            @Query("gateway_types") gatewayTypes: MutableList<GatewayType>? = null
-    ): Call<HomesData>
+            @Query("gateway_types") gatewayTypes: MutableList<DeviceType>? = null
+    ): Call<TypedBaseResult<HomesdataBody>>
 
     @Headers("Content-Type:text/plain")
     @GET("homestatus")
@@ -72,7 +64,7 @@ interface EnergyService {
             @Query("schedule_id") scheduleId: String,
             @Query("name") name: String,
             @Query("home_id") homeId: String
-    ): Call<Baseresult>
+    ): Call<BaseResult>
 
     @Headers("Content-Type:text/plain")
     @GET("getroommeasure")
@@ -108,61 +100,68 @@ interface EnergyService {
             @Query("schedule_id") scheduleId: String,
             @Query("name") name: String,
             @Query("home_id") homeId: String
-    ): Call<Baseresult>
+    ): Call<BaseResult>
 
     @Headers("Content-Type:text/plain")
     @POST("synchomeschedule")
-    fun setHomeSchedule(
+    fun setSyncHomeSchedule(
             @Body body: SetHomeScheduleBody
-    ): Call<Baseresult>
+    ): Call<BaseResult>
 
     @Headers("Content-Type:text/plain")
     @GET("synchomeschedule")
-    fun setHomeScheduleGet(
+    fun setSyncHomeScheduleGet(
             @Body body: Body
-    ): Call<Baseresult>
+    ): Call<BaseResult>
 
     @Headers("Content-Type:text/plain")
     @POST("setroomthermmode")
     fun setRoomThermMode(
             @Query("home_id") homeId: String,
-            @Query("mode") mode: String,
-            @Query("endtime") endtime: Int
-    ): Call<Baseresult>
+            @Query("mode") mode: Mode,
+            @Query("endtime") endtime: Long?
+    ): Call<BaseResult>
 
     @Headers("Content-Type:text/plain")
     @GET("setroomthermmode")
     fun setRoomThermModeGet(
             @Query("home_id") homeId: String,
-            @Query("mode") mode: String,
-            @Query("endtime") endtime: Int
-    ): Call<Baseresult>
+            @Query("mode") mode: Mode,
+            @Query("endtime") endtime: Long?
+    ): Call<BaseResult>
 
     @Headers("Content-Type:text/plain")
     @POST("setroomthermpoint")
     fun setRoomThermPoint(
             @Query("home_id") homeId: String,
             @Query("room_id") roomId: String,
-            @Query("mode") mode: String,
-            @Query("temp") temp: Int,
-            @Query("endtime") endtime: Int
-    ): Call<Baseresult>
+            @Query("mode") mode: ThermPointMode,
+            @Query("temp") temp: Float? = null,
+            @Query("endtime") endtime: Long? = null
+    ): Call<BaseResult>
 
     @Headers("Content-Type:text/plain")
     @GET("setroomthermpoint")
     fun setRoomThermPointGet(
             @Query("home_id") homeId: String,
             @Query("room_id") roomId: String,
-            @Query("mode") mode: String,
-            @Query("temp") temp: Int,
-            @Query("endtime") endtime: Int
-    ): Call<Baseresult>
+            @Query("mode") mode: ThermPointMode,
+            @Query("temp") temp: Float? = null,
+            @Query("endtime") endtime: Long? = null
+    ): Call<BaseResult>
 
     @Headers("Content-Type:text/plain")
     @POST("switchhomeschedule")
     fun setSwitchHomeSchedule(
             @Query("schedule_id") scheduleId: String,
             @Query("home_id") homeId: String
-    ): Call<Baseresult>
+    ): Call<BaseResult>
+
+    @Headers("Content-Type:text/plain")
+    @GET("switchhomeschedule")
+    fun getSwitchHomeScheduleGet(
+            @Query("schedule_id") scheduleId: String,
+            @Query("home_id") homeId: String
+    ): Call<BaseResult>
 
 }

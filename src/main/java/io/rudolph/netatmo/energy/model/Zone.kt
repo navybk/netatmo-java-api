@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class Zone(
         @JsonProperty("type")
-        var type: Int? = null,
+        var type: ZoneType? = null,
 
         @JsonProperty("id")
         var id: Int? = null,
@@ -14,5 +14,8 @@ data class Zone(
         var name: String? = null,
 
         @JsonProperty("rooms_temp")
-        var roomsTemp: List<RoomsTemp>? = null
+        var roomsTemp: List<RoomsTemp>? = null,
+
+        @JsonProperty("rooms")
+        var rooms: List<ScheduleRoom>? = null
 )

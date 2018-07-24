@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 
 data class Timetable(
-        @JsonProperty("zone_id")
+        @param: JsonProperty("zone_id")
+        @field: JsonProperty("zone_id")
         var zoneId: Int? = null,
 
-        @JsonProperty("m_offset")
+        @param: JsonProperty("m_offset")
+        @field: JsonProperty("m_offset")
         var mOffset: Int? = null
 )

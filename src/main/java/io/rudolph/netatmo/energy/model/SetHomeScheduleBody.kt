@@ -5,23 +5,23 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class SetHomeScheduleBody(
         @JsonProperty("schedule_id")
-        var scheduleId: String? = null,
+        var scheduleId: String,
 
         @JsonProperty("timetable")
-        var timetable: List<Timetable> = listOf(),
+        var timetable: List<Timetable>,
 
         @JsonProperty("zones")
-        var zones: List<Baseresult> = listOf(),
+        var zones: List<Zone>,
 
         @JsonProperty("name")
         var name: String? = null,
 
         @JsonProperty("home_id")
-        var homeId: String? = null,
+        var homeId: String,
 
         @JsonProperty("hg_temp")
-        var hgTemp: Int? = null,
+        var hgTemp: Float = 8F,
 
         @JsonProperty("away_temp")
-        var awayTemp: Int? = null
+        var awayTemp: Float = 15F
 )
