@@ -2,8 +2,8 @@ package io.rudolph.netatmo.oauth2.networkinterceptor
 
 import io.rudolph.netatmo.oauth2.TokenStorage
 import io.rudolph.netatmo.oauth2.errorbuilder
+import io.rudolph.netatmo.oauth2.logger
 import io.rudolph.netatmo.oauth2.model.AuthResponse
-import io.rudolph.netatmo.oauth2.model.Scope
 import io.rudolph.netatmo.oauth2.proceed
 import io.rudolph.netatmo.transform.JacksonTransform
 import okhttp3.FormBody
@@ -15,7 +15,6 @@ internal class AuthInterceptor(private val userMail: String?,
                                private val userPassword: String?,
                                private val clientId: String?,
                                private val clientSecret: String?,
-                               private val scope: List<Scope>,
                                private val authEndpoint: String,
                                private val refreshEndpoint: String = authEndpoint,
                                private val tokenStore: TokenStorage) : Interceptor {
@@ -66,7 +65,7 @@ internal class AuthInterceptor(private val userMail: String?,
         clientId ?: throw IllegalStateException("relogin with client id not pssible")
         clientSecret ?: throw IllegalStateException("relogin with client secret not pssible")
 
-        val scopeList = scope.joinToString(" ") { it.value }
+        val scopeList = tokenStore.scope.joinToString(" ") { it.value }
 
         val formBody = FormBody.Builder()
                 .addEncoded("password", userPassword)
@@ -90,7 +89,10 @@ internal class AuthInterceptor(private val userMail: String?,
         return chain.proceed(request)?.body()?.string()?.let {
             JacksonTransform.deserialize<AuthResponse>(it)
                     ?.let {
-                        tokenStore.setTokens(it.accessToken, it.refreshToken)
+                        if (!(it.scope.toTypedArray() contentEquals tokenStore.scope.toTypedArray())) {
+                            logger.warn("Netatmo Java Api", "Scope from response does not match requested scope")
+                        }
+                        tokenStore.setTokens(it.accessToken, it.refreshToken, it.scope)
                         it.accessToken
                     }
         }

@@ -1,9 +1,11 @@
 package io.rudolph.netatmo.oauth2
 
+import mu.KotlinLogging
 import okhttp3.*
 import java.time.LocalDateTime
 import java.time.ZoneId
 
+internal val logger = KotlinLogging.logger {}
 
 fun Interceptor.Chain.errorbuilder(errorMessage: String): Response {
     return Response.Builder().request(this.request())

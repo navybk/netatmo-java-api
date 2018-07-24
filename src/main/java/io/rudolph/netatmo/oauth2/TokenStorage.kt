@@ -5,23 +5,20 @@ import io.rudolph.netatmo.oauth2.model.Scope
 
 internal data class TokenStorage(private var _accessToken: String? = null,
                                  var refreshToken: String? = null,
-                                 var scope: List<Scope> = listOf()) {
+                                 private val _scope: List<Scope>) {
 
-    var accessToken: String?
+    var scope: List<Scope> = _scope
+        private set
+
+    var accessToken: String? = _accessToken
         get() = _accessToken
-        set(value) {
-            _accessToken = value
-            value?.apply {
-                onAccessTokenUpdate(this)
-            }
-        }
 
-    var onAccessTokenUpdate: (String) -> Unit = {}
-    var onRefreshTokenUpdate: (String, String) -> Unit = { acc: String, refresh: String -> }
+    var onRefreshTokenUpdate: (String, String, List<Scope>) -> Unit = { _: String, _: String, _: List<Scope> -> }
 
-    fun setTokens(accToken: String, refrToken: String) {
+    fun setTokens(accToken: String, refrToken: String, scope: List<Scope>) {
         _accessToken = accToken
         refreshToken = refrToken
-        onRefreshTokenUpdate(accToken, refrToken)
+        this.scope = scope
+        onRefreshTokenUpdate(accToken, refrToken, scope)
     }
 }

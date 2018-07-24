@@ -36,10 +36,10 @@ class NetatmoApi(userMail: String? = null,
     var refreshToken: String? = null
         private set
 
-    private val tokenStorage = TokenStorage(accessToken, refreshToken).apply {
-        onRefreshTokenUpdate = { accessToken: String, refreshToken: String ->
-            this.accessToken = accessToken
-            this.refreshToken = refreshToken
+    private val tokenStorage = TokenStorage(accessToken, refreshToken, scope).apply {
+        onRefreshTokenUpdate = { accessToken: String, refreshToken: String, _: List<Scope> ->
+            this@NetatmoApi.accessToken = accessToken
+            this@NetatmoApi.refreshToken = refreshToken
         }
     }
 
@@ -79,7 +79,6 @@ class NetatmoApi(userMail: String? = null,
                             userPassword = userPassword,
                             clientId = clientId,
                             clientSecret = clientSecret,
-                            scope = scope,
                             authEndpoint = authEndpoint,
                             refreshEndpoint = refreshEndpoint,
                             tokenStore = tokenStorage))
