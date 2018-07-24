@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import io.rudolph.netatmo.api.energy.model.DeviceType
+import io.rudolph.netatmo.api.basemodel.DeviceType
 import io.rudolph.netatmo.api.energy.model.TemperatureType
 import io.rudolph.netatmo.api.energy.model.ThermMode
 import io.rudolph.netatmo.api.energy.model.ZoneType
@@ -34,6 +34,7 @@ internal object JacksonTransform {
             addSerializer(LocalDateTime::class.java, LocalDateTimeSerializer())
 
             addKeyDeserializer(LocalDateTime::class.java, LocalDateTimeKeyDeserializer())
+
         })
         registerKotlinModule()
     }

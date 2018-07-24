@@ -1,5 +1,6 @@
 package io.rudolph.netatmo.api.energy.service
 
+import io.rudolph.netatmo.api.basemodel.DeviceType
 import io.rudolph.netatmo.api.energy.model.*
 import retrofit2.Call
 import retrofit2.http.*

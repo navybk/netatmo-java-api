@@ -1,6 +1,7 @@
 package io.rudolph.netatmo.api.energy.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.rudolph.netatmo.api.basemodel.DeviceType
 import java.time.LocalDateTime
 
 
