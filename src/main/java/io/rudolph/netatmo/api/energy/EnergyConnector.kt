@@ -1,8 +1,8 @@
 package io.rudolph.netatmo.api.energy
 
-import io.rudolph.netatmo.api.misc.model.DeviceType
 import io.rudolph.netatmo.api.energy.model.*
 import io.rudolph.netatmo.api.energy.service.EnergyService
+import io.rudolph.netatmo.api.misc.model.DeviceType
 import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.oauth2.toTimestamp
 import retrofit2.Retrofit

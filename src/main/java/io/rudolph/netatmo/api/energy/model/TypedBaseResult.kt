@@ -15,7 +15,7 @@ data class TypedBaseResult<T>(
 
         @JsonProperty("time_server")
         var inTimeServer: Long? = null
-): BaseResult(
+) : BaseResult(
         inStatus,
         inTimeExec,
         inTimeServer

@@ -9,4 +9,4 @@ data class BaseOutdoorMeasure(
 
         @JsonProperty("type")
         val type: MutableList<String> = mutableListOf()
-): Measure
+) : Measure

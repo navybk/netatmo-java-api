@@ -6,7 +6,7 @@ import io.rudolph.netatmo.api.energy.model.constants.Constants
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 
-class LocalDateTimeKeyDeserializer: KeyDeserializer() {
+class LocalDateTimeKeyDeserializer : KeyDeserializer() {
     override fun deserializeKey(key: String, ctxt: DeserializationContext?): Any {
         return key.toLongOrNull()?.let {
             LocalDateTime.ofEpochSecond(it, 0, ZoneOffset.UTC)

@@ -58,7 +58,7 @@ class NetatmoApi(userMail: String? = null,
             scope = scope,
             accessToken = accessToken,
             refreshToken = refreshToken,
-            apiEndpoint= BASEAPIENDPOINT,
+            apiEndpoint = BASEAPIENDPOINT,
             debug = false)
 
     constructor(userMail: String,
@@ -71,7 +71,7 @@ class NetatmoApi(userMail: String? = null,
             clientId = clientId,
             clientSecret = clientSecret,
             scope = scope,
-            apiEndpoint= BASEAPIENDPOINT,
+            apiEndpoint = BASEAPIENDPOINT,
             debug = false)
 
     private val api = OkHttpClient.Builder()

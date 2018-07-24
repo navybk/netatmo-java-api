@@ -35,5 +35,5 @@ data class Station(
          *
          */
         @JsonProperty("module_types")
-        val moduleTypes: MutableMap<String, DeviceType>?= mutableMapOf()
+        val moduleTypes: MutableMap<String, DeviceType>? = mutableMapOf()
 )

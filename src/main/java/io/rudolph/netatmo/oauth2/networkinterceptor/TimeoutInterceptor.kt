@@ -5,7 +5,7 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import java.util.concurrent.TimeoutException
 
-internal class TimeoutInterceptor(private val debug: Boolean = false): Interceptor{
+internal class TimeoutInterceptor(private val debug: Boolean = false) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         return try {

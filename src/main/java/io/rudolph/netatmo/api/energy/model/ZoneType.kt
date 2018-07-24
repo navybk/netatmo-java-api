@@ -13,5 +13,5 @@ enum class ZoneType(val value: Int) {
 
     //TODO Check if this is an documentation error in https://dev.netatmo.com/resources/technical/reference/energy/synchomeschedule
     COMFORT(5),
-    WHAT (8)
+    WHAT(8)
 }

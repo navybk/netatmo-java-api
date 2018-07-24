@@ -40,7 +40,7 @@ class Executable<T>(private val call: Call<T>) {
      * @param callback the [Callback] object which includes the success and error methods
      */
     fun executeAsync(callback: Callback<T>) {
-        AsyncExecutable(call) { error -> callback.onError(error)}
+        AsyncExecutable(call) { error -> callback.onError(error) }
                 .executeAsync { result -> callback.onResult(result) }
     }
 
