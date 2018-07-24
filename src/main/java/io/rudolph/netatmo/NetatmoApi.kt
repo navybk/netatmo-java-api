@@ -16,13 +16,19 @@ class NetatmoApi(userMail: String? = null,
                  userPassword: String? = null,
                  clientId: String? = null,
                  clientSecret: String? = null,
-                 apiEndpoint: String = "https://api.netatmo.com/api/",
-                 authEndpoint: String = "https://api.netatmo.com/oauth2/token",
+                 apiEndpoint: String = BASEAPIENDPOINT,
+                 authEndpoint: String = AUTHENDPOINT,
+                 refreshEndpoint: String = AUTHENDPOINT,
                  scope: List<Scope>,
                  accessToken: String? = null,
                  refreshToken: String? = null,
                  debug: Boolean = false
 ) {
+
+    private companion object {
+        const val BASEAPIENDPOINT = "https://api.netatmo.com/api/"
+        const val AUTHENDPOINT = "https://api.netatmo.com/oauth2/token"
+    }
 
     var accessToken: String? = null
         private set
@@ -37,6 +43,36 @@ class NetatmoApi(userMail: String? = null,
         }
     }
 
+    constructor(userMail: String,
+                userPassword: String,
+                clientId: String,
+                clientSecret: String,
+                scope: List<Scope>,
+                accessToken: String?,
+                refreshToken: String?)
+            : this(userMail = userMail,
+            userPassword = userPassword,
+            clientId = clientId,
+            clientSecret = clientSecret,
+            scope = scope,
+            accessToken = accessToken,
+            refreshToken = refreshToken,
+            apiEndpoint= BASEAPIENDPOINT,
+            debug = false)
+
+    constructor(userMail: String,
+                userPassword: String,
+                clientId: String,
+                clientSecret: String,
+                scope: List<Scope>)
+            : this(userMail = userMail,
+            userPassword = userPassword,
+            clientId = clientId,
+            clientSecret = clientSecret,
+            scope = scope,
+            apiEndpoint= BASEAPIENDPOINT,
+            debug = false)
+
     private val api = OkHttpClient.Builder()
             .addInterceptor(
                     AuthInterceptor(userMail = userMail,
@@ -45,6 +81,7 @@ class NetatmoApi(userMail: String? = null,
                             clientSecret = clientSecret,
                             scope = scope,
                             authEndpoint = authEndpoint,
+                            refreshEndpoint = refreshEndpoint,
                             tokenStore = tokenStorage))
             .addInterceptor(TimeoutInterceptor(debug))
             .apply {
