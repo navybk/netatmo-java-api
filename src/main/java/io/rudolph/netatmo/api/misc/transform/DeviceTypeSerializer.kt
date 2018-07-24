@@ -1,9 +1,9 @@
-package io.rudolph.netatmo.api.energy.model.transform
+package io.rudolph.netatmo.api.misc.transform
 
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.JsonSerializer
 import com.fasterxml.jackson.databind.SerializerProvider
-import io.rudolph.netatmo.api.basemodel.DeviceType
+import io.rudolph.netatmo.api.misc.model.DeviceType
 
 
 class DeviceTypeSerializer : JsonSerializer<DeviceType>() {

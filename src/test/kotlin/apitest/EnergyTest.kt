@@ -10,7 +10,7 @@ import java.time.LocalDateTime
 import java.util.concurrent.CountDownLatch
 
 
-class BaseTest {
+class EnergyTest {
 
     /**
      * for tests save credentials as json at /src/main/resources

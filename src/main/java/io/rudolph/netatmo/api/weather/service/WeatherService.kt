@@ -9,7 +9,7 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 
-interface WeatherService {
+internal interface WeatherService {
 
     @Headers("Content-Type:text/plain")
     @GET("getpublicdata")

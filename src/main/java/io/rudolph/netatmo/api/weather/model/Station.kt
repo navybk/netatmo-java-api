@@ -1,7 +1,7 @@
 package io.rudolph.netatmo.api.weather.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import io.rudolph.netatmo.api.basemodel.DeviceType
+import io.rudolph.netatmo.api.misc.model.DeviceType
 
 data class Station(
         /**

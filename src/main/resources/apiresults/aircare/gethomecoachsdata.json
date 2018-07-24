@@ -1,0 +1,90 @@
+{
+  "status": "ok",
+  "body": {
+    "devices": [
+      {
+        "_id": "string",
+        "cipher_id": "string",
+        "last_status_store": 0,
+        "place": {
+          "city": "string",
+          "altitude": 0,
+          "country": "string",
+          "from_ip": true,
+          "improveLocProposed": true,
+          "location": [
+            0
+          ],
+          "timezone": "string",
+          "trust_location": true
+        },
+        "type": "string",
+        "dashboard_data": {
+          "time_utc": 0,
+          "device_id": 0,
+          "BoilerOn": 0,
+          "BoilerOff": 0,
+          "Temperature": 0,
+          "temp_trend": "string",
+          "date_max_temp": 0,
+          "date_min_temp": 0,
+          "min_temp": 0,
+          "max_temp": 0,
+          "AbsolutePressure": 0,
+          "CO2": 0,
+          "Humidity": 0,
+          "Noise": 0,
+          "Pressure": 0,
+          "pressure_trend": "string",
+          "Rain": 0,
+          "sum_rain_1": 0,
+          "sum_rain_24": 0,
+          "WindAngle": 0,
+          "GustAngle": 0,
+          "WindStrength": 0,
+          "max_wind_str": 0,
+          "date_max_wind_str": 0,
+          "GustStrength": 0,
+          "health_idx": 0
+        },
+        "data_type": [
+          "string"
+        ],
+        "co2_calibrating": true,
+        "date_setup": 0,
+        "last_setup": 0,
+        "firmware": 0,
+        "last_upgrade": 0,
+        "wifi_status": 0,
+        "name": "string"
+      }
+    ],
+    "user": {
+      "_id": "string",
+      "administrative": {
+        "country": "string",
+        "lang": "string",
+        "reg_locale": "string",
+        "unit": "string",
+        "windunit": "string",
+        "pressureunit": "string",
+        "feel_like_algo": "string"
+      },
+      "date_creation": {
+        "sec": 0,
+        "usec": 0
+      },
+      "devices": [
+        "string"
+      ],
+      "friend_devices": [
+        "string"
+      ],
+      "mail": "string",
+      "timeline_not_read": 0,
+      "timeline_size": 0
+    }
+  },
+  "time_exec": 0,
+  "time_server": 0
+}
