@@ -7,7 +7,7 @@ import io.rudolph.netatmo.api.weather.service.WeatherService
 import io.rudolph.netatmo.executable.Executable
 import retrofit2.Retrofit
 
-class WeatherConnector(api: Retrofit): CommonConnector(api) {
+class WeatherConnector(api: Retrofit) : CommonConnector(api) {
     private val weatherService = api.create(WeatherService::class.java)
 
     /**

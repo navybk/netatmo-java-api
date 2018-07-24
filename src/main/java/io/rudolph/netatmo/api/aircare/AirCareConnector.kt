@@ -7,7 +7,7 @@ import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.executable.Executable
 import retrofit2.Retrofit
 
-class AirCareConnector(api: Retrofit): CommonConnector(api) {
+class AirCareConnector(api: Retrofit) : CommonConnector(api) {
 
     private val airCareService = api.create(AirCareService::class.java)
 

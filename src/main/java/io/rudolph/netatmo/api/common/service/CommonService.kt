@@ -22,5 +22,5 @@ interface CommonService {
             @Query("limit") limit: Int? = null,
             @Query("optimize") optimize: Boolean? = null,
             @Query("real_time") realTime: String? = null
-            ): Call<TypedBaseResult<List<MeasureRequestResponse>>>
+    ): Call<TypedBaseResult<List<MeasureRequestResponse>>>
 }

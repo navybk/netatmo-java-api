@@ -2,13 +2,13 @@ package io.rudolph.netatmo
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import io.rudolph.netatmo.api.aircare.AirCareConnector
+import io.rudolph.netatmo.api.common.transform.JacksonTransform
 import io.rudolph.netatmo.api.energy.EnergyConnector
 import io.rudolph.netatmo.api.weather.WeatherConnector
 import io.rudolph.netatmo.oauth2.TokenStorage
 import io.rudolph.netatmo.oauth2.model.Scope
 import io.rudolph.netatmo.oauth2.networkinterceptor.AuthInterceptor
 import io.rudolph.netatmo.oauth2.networkinterceptor.TimeoutInterceptor
-import io.rudolph.netatmo.api.common.transform.JacksonTransform
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import io.rudolph.netatmo.api.common.model.DeviceType
+import io.rudolph.netatmo.api.common.model.Scale
+import io.rudolph.netatmo.api.common.model.ScaleType
 import io.rudolph.netatmo.api.energy.model.TemperatureType
 import io.rudolph.netatmo.api.energy.model.ThermMode
 import io.rudolph.netatmo.api.energy.model.ZoneType
@@ -11,9 +14,6 @@ import io.rudolph.netatmo.api.energy.model.transform.TemperaturTypeDeserializer
 import io.rudolph.netatmo.api.energy.model.transform.ThermModeDeserializer
 import io.rudolph.netatmo.api.energy.model.transform.ZoneTypeDeserializer
 import io.rudolph.netatmo.api.energy.model.transform.ZoneTypeSerializer
-import io.rudolph.netatmo.api.common.model.DeviceType
-import io.rudolph.netatmo.api.common.model.Scale
-import io.rudolph.netatmo.api.common.model.ScaleType
 import io.rudolph.netatmo.api.weather.model.Measure
 import io.rudolph.netatmo.api.weather.model.transform.MeasureDeserializer
 import io.rudolph.netatmo.oauth2.model.Scope

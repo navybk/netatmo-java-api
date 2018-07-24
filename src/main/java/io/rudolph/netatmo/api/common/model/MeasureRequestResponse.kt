@@ -11,5 +11,5 @@ data class MeasureRequestResponse(
         val stepTime: LocalDateTime,
 
         @JsonProperty("value")
-        val value: MutableList<MutableList<Float>>?= mutableListOf<MutableList<Float>>()
+        val value: MutableList<MutableList<Float>>? = mutableListOf<MutableList<Float>>()
 )

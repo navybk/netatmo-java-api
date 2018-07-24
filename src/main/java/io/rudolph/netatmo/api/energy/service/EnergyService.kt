@@ -1,8 +1,7 @@
 package io.rudolph.netatmo.api.energy.service
 
-import io.rudolph.netatmo.api.energy.model.*
 import io.rudolph.netatmo.api.common.model.DeviceType
-import io.rudolph.netatmo.api.common.service.CommonService
+import io.rudolph.netatmo.api.energy.model.*
 import retrofit2.Call
 import retrofit2.http.*
 

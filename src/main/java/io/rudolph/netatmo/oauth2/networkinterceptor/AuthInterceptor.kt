@@ -1,11 +1,11 @@
 package io.rudolph.netatmo.oauth2.networkinterceptor
 
+import io.rudolph.netatmo.api.common.transform.JacksonTransform
 import io.rudolph.netatmo.oauth2.TokenStorage
 import io.rudolph.netatmo.oauth2.errorbuilder
 import io.rudolph.netatmo.oauth2.logger
 import io.rudolph.netatmo.oauth2.model.AuthResponse
 import io.rudolph.netatmo.oauth2.proceed
-import io.rudolph.netatmo.api.common.transform.JacksonTransform
 import okhttp3.FormBody
 import okhttp3.Interceptor
 import okhttp3.Request
