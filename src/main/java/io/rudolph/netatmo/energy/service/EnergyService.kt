@@ -35,28 +35,28 @@ internal interface EnergyService {
     fun getHomeData(
             @Query("home_id") homeId: String? = null,
             @Query("gateway_types") gatewayTypes: MutableList<DeviceType>? = null
-    ): Call<TypedBaseResult<HomesdataBody>>
+    ): Call<TypedBaseResult<HomesDataBody>>
 
     @Headers("Content-Type:text/plain")
     @POST("homesdata")
     fun getHomeDataPost(
             @Query("home_id") homeId: String,
             @Query("gateway_types") gatewayTypes: MutableList<DeviceType>? = null
-    ): Call<TypedBaseResult<HomesdataBody>>
+    ): Call<TypedBaseResult<HomesDataBody>>
 
     @Headers("Content-Type:text/plain")
     @GET("homestatus")
     fun getHomeStatus(
             @Query("home_id") homeId: String,
             @Query("device_types") deviceTypes: MutableList<DeviceType>? = null
-    ): Call<HomeStatus>
+    ): Call<TypedBaseResult<HomeStatusBody>>
 
     @Headers("Content-Type:text/plain")
     @POST("homestatus")
     fun getHomeStatusPost(
             @Query("home_id") homeId: String,
             @Query("device_types") deviceTypes: MutableList<DeviceType>? = null
-    ): Call<HomeStatus>
+    ): Call<TypedBaseResult<HomeStatusBody>>
 
     @Headers("Content-Type:text/plain")
     @GET("renamehomeschedule")
@@ -78,7 +78,7 @@ internal interface EnergyService {
             @Query("limit") limit: Int? = null,
             @Query("optimize") optimize: Boolean = false,
             @Query("real_time") realTime: Boolean = false
-    ): Call<RoomMeasure>
+    ): Call<TypedBaseResult<RoomMeasureBody>>
 
     @Headers("Content-Type:text/plain")
     @POST("getroommeasure")
@@ -92,7 +92,7 @@ internal interface EnergyService {
             @Query("limit") limit: Int? = null,
             @Query("optimize") optimize: Boolean = false,
             @Query("real_time") realTime: Boolean = false
-    ): Call<RoomMeasure>
+    ): Call<TypedBaseResult<RoomMeasureBody>>
 
     @Headers("Content-Type:text/plain")
     @POST("renamehomeschedule")
@@ -102,7 +102,6 @@ internal interface EnergyService {
             @Query("home_id") homeId: String
     ): Call<BaseResult>
 
-    @Headers("Content-Type:text/plain")
     @POST("synchomeschedule")
     fun setSyncHomeSchedule(
             @Body body: SetHomeScheduleBody
@@ -159,7 +158,7 @@ internal interface EnergyService {
 
     @Headers("Content-Type:text/plain")
     @GET("switchhomeschedule")
-    fun getSwitchHomeScheduleGet(
+    fun setSwitchHomeScheduleGet(
             @Query("schedule_id") scheduleId: String,
             @Query("home_id") homeId: String
     ): Call<BaseResult>

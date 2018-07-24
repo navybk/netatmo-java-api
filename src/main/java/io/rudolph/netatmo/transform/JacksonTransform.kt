@@ -1,5 +1,6 @@
 package io.rudolph.netatmo.transform
 
+import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
@@ -10,10 +11,13 @@ import io.rudolph.netatmo.energy.model.ZoneType
 import io.rudolph.netatmo.energy.model.transform.*
 import io.rudolph.netatmo.oauth2.model.Scope
 import retrofit2.converter.jackson.JacksonConverterFactory
+import java.time.LocalDateTime
 
 
 internal object JacksonTransform {
     val mapper = ObjectMapper().apply {
+        enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+
         registerModule(SimpleModule().apply {
             addDeserializer(Scope::class.java, ScopeDeserializer())
             addDeserializer(ThermMode::class.java, ThermModeDeserializer())
@@ -21,9 +25,12 @@ internal object JacksonTransform {
             addDeserializer(TemperatureType::class.java, TemperaturTypeDeserializer())
             addDeserializer(DeviceType::class.java, DeviceTypeDeserializer())
             addDeserializer(ZoneType::class.java, ZoneTypeDeserializer())
+            addDeserializer(LocalDateTime::class.java, LocalDateTimeDeserializer())
+
 
             addSerializer(DeviceType::class.java, DeviceTypeSerializer())
             addSerializer(ZoneType::class.java, ZoneTypeSerializer())
+            addSerializer(LocalDateTime::class.java, LocalDateTimeSerializer())
         })
         registerKotlinModule()
     }

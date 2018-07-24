@@ -25,6 +25,10 @@ fun Interceptor.Chain.proceed(accessToken: String): Response {
 }
 
 fun LocalDateTime?.toTimestamp() = this?.let {
+    toTimestamp()
+}
+
+fun LocalDateTime.toTimestamp(): Long {
     val zoneId = ZoneId.systemDefault()
-    it.atZone(zoneId).toEpochSecond()
+    return atZone(zoneId).toEpochSecond()
 }

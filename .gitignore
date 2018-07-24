@@ -12,6 +12,7 @@ manifest-merger-production-release-report.txt
 # Generated files
 bin/
 gen/
+out/
 
 # Gradle files
 .gradle/

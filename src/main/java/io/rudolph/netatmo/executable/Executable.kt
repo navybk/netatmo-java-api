@@ -1,6 +1,5 @@
 package io.rudolph.netatmo.executable
 
-import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
 import retrofit2.Call

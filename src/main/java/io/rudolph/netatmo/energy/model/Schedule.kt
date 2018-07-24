@@ -25,7 +25,6 @@ data class Schedule(
         @JsonProperty("selected")
         var isSelected: Boolean? = null,
 
-
         @JsonProperty("type")
         var type: String? = null,
 

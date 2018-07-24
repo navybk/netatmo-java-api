@@ -82,7 +82,7 @@ class BaseTest {
     }
 
     @Test
-    fun testCreateAndRenameAnddDeleteSchedule() {
+    fun testCreateAndSyncAndRenameAnddDeleteSchedule() {
         api.energyApi.getHomesData().executeSync().apply {
             assert(this != null)
         }?.body?.homes?.get(0)?.apply {
@@ -101,10 +101,23 @@ class BaseTest {
                     zones = zones
             ).executeSync()
                     .apply {
-                        val scheduleId = this?.body?.scheduleId
-                        assert(scheduleId != null)
-                        scheduleId ?: return
+                        val scheduleId = this?.body?.scheduleId!!
                         var result = true
+                        api.energyApi.syncHomeSchedule(
+                                scheduleId = scheduleId,
+                                timeTable = timetable,
+                                zones = zones,
+                                hgTemp = 12.5F,
+                                homeId = homeId,
+                                awayTemp = 7F,
+                                name = name)
+                                .executeSync()
+                                .apply {
+                                    if (this?.status != "ok") {
+                                        result = false
+                                    }
+                                }
+
                         api.energyApi
                                 .renameHomeSchedule(scheduleId, "test2", homeId)
                                 .executeSync()

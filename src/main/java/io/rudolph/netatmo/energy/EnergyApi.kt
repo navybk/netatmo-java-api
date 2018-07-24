@@ -20,10 +20,10 @@ class EnergyApi(api: Retrofit) {
      *
      * @param homeId Id of the home
      * @param gatewayTypes Array of desired gateway. For Energy app, use NAPlug
-     * @return an executable object to obtain the [HomesData]
+     * @return an executable object to obtain the [HomesDataBody]
      */
     fun getHomesData(homeId: String? = null,
-                     gatewayTypes: List<DeviceType>? = null): Executable<TypedBaseResult<HomesdataBody>> {
+                     gatewayTypes: List<DeviceType>? = null): Executable<TypedBaseResult<HomesDataBody>> {
         return energyService.getHomeData(homeId, gatewayTypes?.toMutableList())
                 .let {
                     Executable(it)
@@ -39,10 +39,10 @@ class EnergyApi(api: Retrofit) {
      *
      * @param homeId id of home
      * @param deviceTypes Array of device type
-     * @return The requested [HomeStatus] or null
+     * @return The requested [HomeStatusBody] or null
      */
     fun getHomeStatus(homeId: String,
-                      deviceTypes: List<DeviceType>? = null): Executable<HomeStatus> {
+                      deviceTypes: List<DeviceType>? = null): Executable<TypedBaseResult<HomeStatusBody>> {
         return energyService.getHomeStatus(homeId, deviceTypes?.toMutableList())
                 .let {
                     Executable(it)
@@ -75,7 +75,7 @@ class EnergyApi(api: Retrofit) {
                        dateEnd: LocalDateTime? = null,
                        limit: Int? = null,
                        optimize: Boolean = false,
-                       realTime: Boolean = false): Executable<RoomMeasure> {
+                       realTime: Boolean = false): Executable<TypedBaseResult<RoomMeasureBody>> {
         return energyService.getRoomMeasure(homeId,
                 roomId,
                 scale,
@@ -97,7 +97,7 @@ class EnergyApi(api: Retrofit) {
      *
      * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energy/setthermmode)
      *
-     * @param id of home
+     * @param homeId of home
      * @param thermMode Heating mode
      * @param endTime timestamp
      * @return a [BaseResult] or null
@@ -178,7 +178,7 @@ class EnergyApi(api: Retrofit) {
     fun syncHomeSchedule(scheduleId: String,
                          timeTable: List<Timetable>,
                          zones: List<Zone>,
-                         name: String?,
+                         name: String,
                          homeId: String,
                          hgTemp: Float,
                          awayTemp: Float): Executable<BaseResult> {

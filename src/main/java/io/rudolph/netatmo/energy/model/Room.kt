@@ -3,10 +3,19 @@ package io.rudolph.netatmo.energy.model
 import com.fasterxml.jackson.annotation.JsonProperty
 
 
+/**
+ * Room status definition
+ */
 data class Room(
+        /**
+         * Id of the room
+         */
         @JsonProperty("id")
         var id: String? = null,
 
+        /**
+         * setpoint temprature
+         */
         @JsonProperty("name")
         var name: String? = null,
 
