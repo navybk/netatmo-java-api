@@ -1,8 +1,8 @@
 package apitest
 
 import io.rudolph.netatmo.NetatmoApi
-import io.rudolph.netatmo.energy.model.HomesDataBody
-import io.rudolph.netatmo.energy.model.TypedBaseResult
+import io.rudolph.netatmo.api.energy.model.HomesDataBody
+import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.oauth2.model.Scope
 import org.junit.Test
@@ -36,7 +36,7 @@ class BaseTest {
         var result = false
 
         // First with lambda
-        api.energyApi
+        api.energyApiConnector
                 .getHomesData()
                 .onError {
                     waitForeverLatch.countDown()
@@ -44,7 +44,7 @@ class BaseTest {
                 .executeAsync {
 
                     // second with callback interface
-                    api.energyApi.getHomesData().executeAsync(object : Executable.Callback<TypedBaseResult<HomesDataBody>> {
+                    api.energyApiConnector.getHomesData().executeAsync(object : Executable.Callback<TypedBaseResult<HomesDataBody>> {
                         override fun onResult(value: TypedBaseResult<HomesDataBody>) {
                             result = true
                             waitForeverLatch.countDown()
@@ -63,14 +63,14 @@ class BaseTest {
 
     @Test
     fun testGetHomeStatus() {
-        api.energyApi.getHomesData().executeSync().apply {
+        api.energyApiConnector.getHomesData().executeSync().apply {
             assert(this != null)
         }?.body
                 ?.homes
                 ?.get(0)
                 ?.id
                 ?.apply homeid@{
-                    api.energyApi
+                    api.energyApiConnector
                             .getHomeStatus(this)
                             .executeSync().apply {
                                 assert(this != null)
@@ -83,7 +83,7 @@ class BaseTest {
 
     @Test
     fun testGetRoomMeasure() {
-        api.energyApi.getHomesData().executeSync().apply {
+        api.energyApiConnector.getHomesData().executeSync().apply {
             assert(this != null)
         }?.body
                 ?.homes
@@ -101,7 +101,7 @@ class BaseTest {
 
                     val begin = LocalDateTime.parse("2018-01-01T00:00:00")
 
-                    api.energyApi.getRoomMeasure(homeId = homeId,
+                    api.energyApiConnector.getRoomMeasure(homeId = homeId,
                             roomId = roomId,
                             scale = "1day",
                             dateBegin = begin,
@@ -119,7 +119,7 @@ class BaseTest {
 
     @Test
     fun testCreateAndSyncAndRenameAnddDeleteSchedule() {
-        api.energyApi.getHomesData().executeSync().apply {
+        api.energyApiConnector.getHomesData().executeSync().apply {
             assert(this != null)
         }?.body?.homes?.get(0)?.apply {
 
@@ -129,7 +129,7 @@ class BaseTest {
             val hgTRemp = 8F
             val awayTemp = 16F
             val homeId = id!!
-            api.energyApi.createNewHomeSchedule(homeId = homeId,
+            api.energyApiConnector.createNewHomeSchedule(homeId = homeId,
                     awayTemp = awayTemp,
                     hgTemp = hgTRemp,
                     name = name,
@@ -139,7 +139,7 @@ class BaseTest {
                     .apply {
                         val scheduleId = this?.body?.scheduleId!!
                         var result = true
-                        api.energyApi.syncHomeSchedule(
+                        api.energyApiConnector.syncHomeSchedule(
                                 scheduleId = scheduleId,
                                 timeTable = timetable,
                                 zones = zones,
@@ -154,7 +154,7 @@ class BaseTest {
                                     }
                                 }
 
-                        api.energyApi
+                        api.energyApiConnector
                                 .renameHomeSchedule(scheduleId, "test2", homeId)
                                 .executeSync()
                                 .apply {
@@ -163,7 +163,7 @@ class BaseTest {
                                     }
                                 }
 
-                        api.energyApi
+                        api.energyApiConnector
                                 .deleteHomeSchedule(scheduleId, homeId)
                                 .executeSync()
                                 .apply {

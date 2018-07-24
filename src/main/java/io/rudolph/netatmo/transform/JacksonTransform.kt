@@ -4,11 +4,13 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import io.rudolph.netatmo.energy.model.DeviceType
-import io.rudolph.netatmo.energy.model.TemperatureType
-import io.rudolph.netatmo.energy.model.ThermMode
-import io.rudolph.netatmo.energy.model.ZoneType
-import io.rudolph.netatmo.energy.model.transform.*
+import io.rudolph.netatmo.api.energy.model.DeviceType
+import io.rudolph.netatmo.api.energy.model.TemperatureType
+import io.rudolph.netatmo.api.energy.model.ThermMode
+import io.rudolph.netatmo.api.energy.model.ZoneType
+import io.rudolph.netatmo.api.energy.model.transform.*
+import io.rudolph.netatmo.api.weather.model.Measure
+import io.rudolph.netatmo.api.weather.model.transform.MeasureDeserializer
 import io.rudolph.netatmo.oauth2.model.Scope
 import retrofit2.converter.jackson.JacksonConverterFactory
 import java.time.LocalDateTime
@@ -23,14 +25,15 @@ internal object JacksonTransform {
             addDeserializer(ThermMode::class.java, ThermModeDeserializer())
             addDeserializer(DeviceType::class.java, DeviceTypeDeserializer())
             addDeserializer(TemperatureType::class.java, TemperaturTypeDeserializer())
-            addDeserializer(DeviceType::class.java, DeviceTypeDeserializer())
             addDeserializer(ZoneType::class.java, ZoneTypeDeserializer())
             addDeserializer(LocalDateTime::class.java, LocalDateTimeDeserializer())
-
+            addDeserializer(Measure::class.java, MeasureDeserializer())
 
             addSerializer(DeviceType::class.java, DeviceTypeSerializer())
             addSerializer(ZoneType::class.java, ZoneTypeSerializer())
             addSerializer(LocalDateTime::class.java, LocalDateTimeSerializer())
+
+            addKeyDeserializer(LocalDateTime::class.java, LocalDateTimeKeyDeserializer())
         })
         registerKotlinModule()
     }

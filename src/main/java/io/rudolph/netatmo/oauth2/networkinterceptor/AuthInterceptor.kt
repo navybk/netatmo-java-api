@@ -49,8 +49,7 @@ internal class AuthInterceptor(private val userMail: String?,
                 .addEncoded("grant_type", "refresh_token")
                 .build()
 
-        return chain.request()
-                .newBuilder()
+        return Request.Builder()
                 .url(refreshEndpoint)
                 .method("POST", formBody)
                 .build()
@@ -76,8 +75,7 @@ internal class AuthInterceptor(private val userMail: String?,
                 .addEncoded("scope", scopeList)
                 .build()
 
-        val newRequest = chain.request()
-                .newBuilder()
+        val newRequest = Request.Builder()
                 .url(authEndpoint)
                 .method("POST", formBody)
                 .build()

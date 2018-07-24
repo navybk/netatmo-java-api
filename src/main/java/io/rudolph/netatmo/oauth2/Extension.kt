@@ -17,10 +17,17 @@ fun Interceptor.Chain.errorbuilder(errorMessage: String): Response {
 }
 
 fun Interceptor.Chain.proceed(accessToken: String): Response {
+    val url = request().url()
+            .newBuilder()
+            .removeAllEncodedQueryParameters("access_token")
+            .addEncodedQueryParameter("access_token", accessToken)
+            .build()
     return this.request()
             .newBuilder()
+            .url(url)
             .removeHeader("Authorization")
             .addHeader("Authorization", "Bearer $accessToken")
+
             .build().let {
                 proceed(it)
             }
