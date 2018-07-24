@@ -3,7 +3,7 @@ package io.rudolph.netatmo.api.weather.model
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDateTime
 
-data class RainMeasure(
+data class RainGaugeMeasure(
         @JsonProperty("rain_60min")
         val rainHourMin: Float,
 
