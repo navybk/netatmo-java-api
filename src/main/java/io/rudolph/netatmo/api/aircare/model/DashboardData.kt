@@ -2,7 +2,9 @@ package io.rudolph.netatmo.api.aircare.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-
+/**
+ * Last data measured per device
+ */
 data class DashboardData(
         @JsonProperty("time_utc")
         private val timeUtc: Int? = null,

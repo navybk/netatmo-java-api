@@ -10,6 +10,9 @@ data class Place(
         @JsonProperty("country")
         private val country: String? = null,
 
+        /**
+         * Name of the city where the Thermostat is located
+         */
         @JsonProperty("city")
         private val city: String? = null,
 
@@ -19,8 +22,11 @@ data class Place(
         @JsonProperty("improveLocProposed")
         private val improveLocProposed: Boolean? = null,
 
+        /**
+         * latitude and longitude
+         */
         @JsonProperty("location")
-        private val location: List<Int>? = null,
+        private val location: List<Float>? = null,
 
         @JsonProperty("trust_location")
         private val trustLocation: Boolean? = null,

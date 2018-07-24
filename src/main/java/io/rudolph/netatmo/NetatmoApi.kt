@@ -1,6 +1,7 @@
 package io.rudolph.netatmo
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
+import io.rudolph.netatmo.api.aircare.AirCareConnector
 import io.rudolph.netatmo.api.energy.EnergyConnector
 import io.rudolph.netatmo.api.weather.WeatherConnector
 import io.rudolph.netatmo.oauth2.TokenStorage
@@ -105,4 +106,5 @@ class NetatmoApi(userMail: String? = null,
 
     val energyApiConnector = EnergyConnector(api)
     val weatherApiConnector = WeatherConnector(api)
+    val airCareConnector = AirCareConnector(api)
 }

@@ -9,6 +9,9 @@ data class AirCareBody(
         @JsonProperty("devices")
         private val devices: List<DevicesItem>? = null,
 
+        /**
+         * User related information
+         */
         @JsonProperty("user")
         private val user: User? = null
 )

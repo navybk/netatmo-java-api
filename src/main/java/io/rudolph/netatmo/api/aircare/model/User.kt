@@ -2,7 +2,9 @@ package io.rudolph.netatmo.api.aircare.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-
+/**
+ * User related information
+ */
 data class User(
         @JsonProperty("mail")
         private val mail: String? = null,
