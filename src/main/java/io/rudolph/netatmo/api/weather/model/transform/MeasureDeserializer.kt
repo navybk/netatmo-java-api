@@ -8,7 +8,7 @@ import io.rudolph.netatmo.api.weather.model.BaseOutdoorMeasure
 import io.rudolph.netatmo.api.weather.model.Measure
 import io.rudolph.netatmo.api.weather.model.RainGaugeMeasure
 import io.rudolph.netatmo.api.weather.model.WindMeasure
-import io.rudolph.netatmo.transform.JacksonTransform
+import io.rudolph.netatmo.api.common.transform.JacksonTransform
 
 
 class MeasureDeserializer : JsonDeserializer<Measure>() {

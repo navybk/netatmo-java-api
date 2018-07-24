@@ -1,4 +1,4 @@
-package io.rudolph.netatmo.api.misc.model
+package io.rudolph.netatmo.api.common.model
 
 
 enum class DeviceType(val value: String) {

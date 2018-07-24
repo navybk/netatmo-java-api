@@ -1,6 +1,8 @@
 package apitest
 
 import io.rudolph.netatmo.NetatmoApi
+import io.rudolph.netatmo.api.common.model.Scale
+import io.rudolph.netatmo.api.common.model.ScaleType
 import io.rudolph.netatmo.api.energy.model.HomesDataBody
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.executable.Executable
@@ -79,6 +81,28 @@ class EnergyTest {
                 }
 
         assert(false)
+    }
+
+    @Test
+    fun gestMeasure() {
+        api.energyApiConnector.getHomesData().executeSync().apply {
+            assert(this != null)
+        }?.body
+                ?.homes
+                ?.get(0)
+                ?.apply {
+                    val moduleId = modules?.get(1)?.id!!
+                    val deviceId = modules?.get(0)?.id!!
+                    api.energyApiConnector
+                            .getMeasure(moduleId = moduleId,
+                                    deviceId = deviceId,
+                                    scale = Scale.DAY,
+                                    type = ScaleType.MIN_TEMP
+                            ).executeSync()
+                            .apply {
+                                assert(this != null)
+                            }
+                }
     }
 
     @Test

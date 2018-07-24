@@ -1,0 +1,32 @@
+package io.rudolph.netatmo.api.common.model
+
+enum class ScaleType(val value: String, val unit: String = "") {
+    TEMPERATURE("Temperature", "°C"),
+    CO2("CO2 ", "ppm"),
+    HUMIDITY("Humidity ", "%"),
+    PRESSURE("Pressure ", "mbar"),
+    NOISE("Noise ", "db"),
+    RAIN("Rain ", "mm"),
+    WINDSTRENGTH("WindStrength ", "km/h"),
+    WINDANGLE("WindAngle ", "angles"),
+    GUSTSTRENGTH("Guststrength ", "km/h"),
+    GUSTANGLE("GustAngle ", "angles"),
+    MIN_TEMP("min_temp"),
+    MAX_TEMP("max_temp"),
+    MIN_HUM("min_hum"),
+    MAX_HUM("max_hum"),
+    MAX_PRESSURE("max_pressure"),
+    SUM_RAIN("sum_rain"),
+    DATE_MAX_HUM("date_max_hum"),
+    MIN_PRESSURE("min_pressure"),
+    DATE_MIN_PRESSURE("date_min_pressure"),
+    DATE_MAX_PRESSURE("date_max_pressure"),
+    MIN_NOISE("min_noise"),
+    DATE_MIN_NOISE("date_min_noise"),
+    MAX_NOISE("max_noise"),
+    DATE_MAX_NOISE("date_max_noise"),
+    DATE_MIN_CO2("date_min_co2"),
+    DATE_MAX_CO2("date_max_co2"),
+    DATE_MAX_GUST("date_max_gust"),
+    UNKNOWN("unknown")
+}

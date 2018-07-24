@@ -1,4 +1,4 @@
-package io.rudolph.netatmo.transform
+package io.rudolph.netatmo.api.common.transform
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext

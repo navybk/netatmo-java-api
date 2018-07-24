@@ -1,9 +1,9 @@
-package io.rudolph.netatmo.api.misc.transform
+package io.rudolph.netatmo.api.common.transform
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
-import io.rudolph.netatmo.api.misc.model.DeviceType
+import io.rudolph.netatmo.api.common.model.DeviceType
 
 
 class DeviceTypeDeserializer : JsonDeserializer<DeviceType>() {

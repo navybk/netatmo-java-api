@@ -1,15 +1,16 @@
 package io.rudolph.netatmo.api.energy
 
+import io.rudolph.netatmo.api.common.CommonConnector
+import io.rudolph.netatmo.api.common.model.DeviceType
 import io.rudolph.netatmo.api.energy.model.*
 import io.rudolph.netatmo.api.energy.service.EnergyService
-import io.rudolph.netatmo.api.misc.model.DeviceType
 import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.oauth2.toTimestamp
 import retrofit2.Retrofit
 import java.time.LocalDateTime
 
 
-class EnergyConnector(api: Retrofit) {
+class EnergyConnector(api: Retrofit) : CommonConnector(api) {
     private val energyService = api.create(EnergyService::class.java)
 
     /**
