@@ -91,7 +91,7 @@ class EnergyApi(api: Retrofit) {
     }
 
     /**
-     * Set the home heating system to use schedule/ away/ frost guard mode
+     * Set the home heating system to use schedule / away / frost guard mode
      *
      * required scope: write_thermostat
      *

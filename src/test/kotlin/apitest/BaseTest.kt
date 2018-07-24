@@ -1,9 +1,13 @@
 package apitest
 
 import io.rudolph.netatmo.NetatmoApi
+import io.rudolph.netatmo.energy.model.HomesDataBody
+import io.rudolph.netatmo.energy.model.TypedBaseResult
+import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.oauth2.model.Scope
 import org.junit.Test
 import java.time.LocalDateTime
+import java.util.concurrent.CountDownLatch
 
 
 class BaseTest {
@@ -24,6 +28,38 @@ class BaseTest {
             debug = true
     )
 
+    @Test
+    fun testAsyncHomeData() {
+
+        val waitForeverLatch = CountDownLatch(1)
+
+        var result = false
+
+        // First with lambda
+        api.energyApi
+                .getHomesData()
+                .onError {
+                    waitForeverLatch.countDown()
+                }
+                .executeAsync {
+
+                    // second with callback interface
+                    api.energyApi.getHomesData().executeAsync(object : Executable.Callback<TypedBaseResult<HomesDataBody>> {
+                        override fun onResult(value: TypedBaseResult<HomesDataBody>) {
+                            result = true
+                            waitForeverLatch.countDown()
+                        }
+
+                        override fun onError(error: String) {
+                            waitForeverLatch.countDown()
+                        }
+
+                    })
+                }
+
+        waitForeverLatch.await()
+        assert(result)
+    }
 
     @Test
     fun testGetHomeStatus() {

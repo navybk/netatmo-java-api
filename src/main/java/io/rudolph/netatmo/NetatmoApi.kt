@@ -2,9 +2,9 @@ package io.rudolph.netatmo
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import io.rudolph.netatmo.energy.EnergyApi
-import io.rudolph.netatmo.oauth2.networkinterceptor.AuthInterceptor
 import io.rudolph.netatmo.oauth2.TokenStorage
 import io.rudolph.netatmo.oauth2.model.Scope
+import io.rudolph.netatmo.oauth2.networkinterceptor.AuthInterceptor
 import io.rudolph.netatmo.oauth2.networkinterceptor.TimeoutInterceptor
 import io.rudolph.netatmo.transform.JacksonTransform
 import okhttp3.OkHttpClient
