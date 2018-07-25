@@ -1,6 +1,6 @@
 package io.rudolph.netatmo.oauth2.networkinterceptor
 
-import io.rudolph.netatmo.api.common.transform.JacksonTransform
+import io.rudolph.netatmo.JacksonTransform
 import io.rudolph.netatmo.oauth2.TokenStorage
 import io.rudolph.netatmo.oauth2.errorbuilder
 import io.rudolph.netatmo.oauth2.logger

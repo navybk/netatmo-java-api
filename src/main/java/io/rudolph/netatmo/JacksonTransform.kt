@@ -1,4 +1,4 @@
-package io.rudolph.netatmo.api.common.transform
+package io.rudolph.netatmo
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -7,6 +7,7 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import io.rudolph.netatmo.api.common.model.DeviceType
 import io.rudolph.netatmo.api.common.model.Scale
 import io.rudolph.netatmo.api.common.model.ScaleType
+import io.rudolph.netatmo.api.common.transform.*
 import io.rudolph.netatmo.api.energy.model.TemperatureType
 import io.rudolph.netatmo.api.energy.model.ThermMode
 import io.rudolph.netatmo.api.energy.model.ZoneType
@@ -14,6 +15,8 @@ import io.rudolph.netatmo.api.energy.model.transform.TemperaturTypeDeserializer
 import io.rudolph.netatmo.api.energy.model.transform.ThermModeDeserializer
 import io.rudolph.netatmo.api.energy.model.transform.ZoneTypeDeserializer
 import io.rudolph.netatmo.api.energy.model.transform.ZoneTypeSerializer
+import io.rudolph.netatmo.api.presence.model.EventType
+import io.rudolph.netatmo.api.presence.transform.EventTypeDeserializer
 import io.rudolph.netatmo.api.weather.model.Measure
 import io.rudolph.netatmo.api.weather.model.transform.MeasureDeserializer
 import io.rudolph.netatmo.oauth2.model.Scope
@@ -35,6 +38,7 @@ internal object JacksonTransform {
             addDeserializer(Measure::class.java, MeasureDeserializer())
             addDeserializer(Scale::class.java, ScaleDeserializer())
             addDeserializer(ScaleType::class.java, ScaleTypeDeserializer())
+            addDeserializer(EventType::class.java, EventTypeDeserializer())
 
             addSerializer(DeviceType::class.java, DeviceTypeSerializer())
             addSerializer(ZoneType::class.java, ZoneTypeSerializer())

@@ -5,6 +5,7 @@ import io.rudolph.netatmo.api.common.model.Scale
 import io.rudolph.netatmo.api.common.model.ScaleType
 import io.rudolph.netatmo.api.common.service.CommonService
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
+import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.oauth2.toTimestamp
 import retrofit2.Retrofit
@@ -54,8 +55,6 @@ abstract class CommonConnector(api: Retrofit) {
                 limit = limit,
                 optimize = optimize,
                 realTime = realTime
-        ).let {
-            Executable(it)
-        }
+        ).executable
     }
 }

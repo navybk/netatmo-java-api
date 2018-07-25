@@ -4,6 +4,7 @@ import io.rudolph.netatmo.api.common.CommonConnector
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.api.weather.model.Station
 import io.rudolph.netatmo.api.weather.service.WeatherService
+import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.Executable
 import retrofit2.Retrofit
 
@@ -38,10 +39,8 @@ class WeatherConnector(api: Retrofit) : CommonConnector(api) {
                 latitudeSouthWest,
                 longitudeSouthWest,
                 required,
-                filter)
-                .let {
-                    Executable(it)
-                }
+                filter
+        ).executable
     }
 
 }

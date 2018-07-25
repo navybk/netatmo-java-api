@@ -4,6 +4,7 @@ import io.rudolph.netatmo.api.common.CommonConnector
 import io.rudolph.netatmo.api.common.model.DeviceType
 import io.rudolph.netatmo.api.energy.model.*
 import io.rudolph.netatmo.api.energy.service.EnergyService
+import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.oauth2.toTimestamp
 import retrofit2.Retrofit
@@ -27,9 +28,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
     fun getHomesData(homeId: String? = null,
                      gatewayTypes: List<DeviceType>? = null): Executable<TypedBaseResult<HomesDataBody>> {
         return energyService.getHomeData(homeId, gatewayTypes?.toMutableList())
-                .let {
-                    Executable(it)
-                }
+                .executable
     }
 
     /**
@@ -46,9 +45,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
     fun getHomeStatus(homeId: String,
                       deviceTypes: List<DeviceType>? = null): Executable<TypedBaseResult<HomeStatusBody>> {
         return energyService.getHomeStatus(homeId, deviceTypes?.toMutableList())
-                .let {
-                    Executable(it)
-                }
+                .executable
     }
 
     /**
@@ -87,9 +84,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
                 limit,
                 optimize,
                 realTime)
-                .let {
-                    Executable(it)
-                }
+                .executable
     }
 
     /**
@@ -110,9 +105,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
         return energyService.setRoomThermMode(homeId,
                 thermMode,
                 endTime.toTimestamp())
-                .let {
-                    Executable(it)
-                }
+                .executable
     }
 
     /**
@@ -139,9 +132,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
                 mode,
                 temperature,
                 endTime.toTimestamp())
-                .let {
-                    Executable(it)
-                }
+                .executable
     }
 
     /**
@@ -193,9 +184,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
                 hgTemp,
                 awayTemp)
         return energyService.setSyncHomeSchedule(body)
-                .let {
-                    Executable(it)
-                }
+                .executable
     }
 
     /**
@@ -213,9 +202,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
     fun renameHomeSchedule(scheduleId: String,
                            name: String,
                            homeId: String): Executable<BaseResult> {
-        return energyService.postRenameHomeSchedule(scheduleId, name, homeId).let {
-            Executable(it)
-        }
+        return energyService.postRenameHomeSchedule(scheduleId, name, homeId).executable
     }
 
     /**
@@ -231,9 +218,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      */
     fun deleteHomeSchedule(scheduleId: String,
                            homeId: String): Executable<BaseResult> {
-        return energyService.deleteHomeSchedule(scheduleId, homeId).let {
-            Executable(it)
-        }
+        return energyService.deleteHomeSchedule(scheduleId, homeId).executable
     }
 
     /**
@@ -264,9 +249,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
                 hgTemp,
                 awayTemp)
         return energyService.createNewHomeSchedule(body)
-                .let {
-                    Executable(it)
-                }
+                .executable
     }
 
 

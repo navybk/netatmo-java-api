@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonNode
-import io.rudolph.netatmo.api.common.transform.JacksonTransform
+import io.rudolph.netatmo.JacksonTransform
 import io.rudolph.netatmo.api.weather.model.BaseOutdoorMeasure
 import io.rudolph.netatmo.api.weather.model.Measure
 import io.rudolph.netatmo.api.weather.model.RainGaugeMeasure

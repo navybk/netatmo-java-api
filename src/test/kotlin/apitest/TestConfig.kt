@@ -1,7 +1,7 @@
 package apitest
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import io.rudolph.netatmo.api.common.transform.JacksonTransform
+import io.rudolph.netatmo.JacksonTransform
 
 
 data class TestConfig(
