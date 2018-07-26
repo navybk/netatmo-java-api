@@ -21,7 +21,7 @@ class WelcomeConnector(api: Retrofit) : PresenceConnector(api) {
      * @param homeId ID of the Home you're interested in
      * @param personId Your request will retrieve all events of the given home until the most recent event of the given person
      * @param offset Number of events to retrieve. Default is 30.
-     * @return an executable object to obtain the List of [Event]
+     * @return an executable object to obtain the List of [io.rudolph.netatmo.api.presence.model.Event]
      */
     fun getLastEventOf(homeId: String,
                        personId: String,
