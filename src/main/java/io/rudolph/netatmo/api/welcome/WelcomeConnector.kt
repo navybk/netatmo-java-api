@@ -6,7 +6,9 @@ import io.rudolph.netatmo.api.presence.PresenceConnector
 import io.rudolph.netatmo.api.presence.model.Events
 import io.rudolph.netatmo.api.welcome.service.WelcomeService
 import io.rudolph.netatmo.executable
+import io.rudolph.netatmo.executable.BodyResultExecutable
 import io.rudolph.netatmo.executable.Executable
+import io.rudolph.netatmo.executable.PlainExecutable
 import retrofit2.Retrofit
 
 class WelcomeConnector(api: Retrofit) : PresenceConnector(api) {
@@ -25,7 +27,7 @@ class WelcomeConnector(api: Retrofit) : PresenceConnector(api) {
      */
     fun getLastEventOf(homeId: String,
                        personId: String,
-                       offset: Int? = null): Executable<TypedBaseResult<Events>> {
+                       offset: Int? = null): BodyResultExecutable<Events> {
         return welcomeService.getLastEventOf(
                 accessToken = "",
                 homeId = homeId,
@@ -45,7 +47,7 @@ class WelcomeConnector(api: Retrofit) : PresenceConnector(api) {
      * @param personId If a person_id is specified, that person will be set as "Away". If no person_id is specified, the Home will be set as "Empty".
      * @return an executable object to obtain the [BaseResult]
      */
-    fun setPersonsAway(homeId: String, personId: String? = null): Executable<BaseResult> {
+    fun setPersonsAway(homeId: String, personId: String? = null): PlainExecutable<BaseResult> {
         return welcomeService.setPersonsAway(
                 accessToken = "",
                 homeId = homeId,
@@ -64,7 +66,7 @@ class WelcomeConnector(api: Retrofit) : PresenceConnector(api) {
      * @param personId Array of person_id
      * @return an executable object to obtain the [BaseResult]
      */
-    fun setPersonsAway(homeId: String, personIds: List<String>): Executable<BaseResult> {
+    fun setPersonsAway(homeId: String, personIds: List<String>): PlainExecutable<BaseResult> {
         return welcomeService.setPersonsHome(
                 accessToken = "",
                 homeId = homeId,

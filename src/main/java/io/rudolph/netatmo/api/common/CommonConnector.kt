@@ -6,6 +6,7 @@ import io.rudolph.netatmo.api.common.model.ScaleType
 import io.rudolph.netatmo.api.common.service.CommonService
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.executable
+import io.rudolph.netatmo.executable.BodyResultExecutable
 import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.oauth2.toTimestamp
 import retrofit2.Retrofit
@@ -31,7 +32,7 @@ abstract class CommonConnector(api: Retrofit) {
      * @param limit Maximum number of measurements (default and max are 1024)
      * @param optimize Determines the format of the answer. Default is true. For mobile apps we recommend True and False if bandwidth isn't an issue as it is easier to parse.
      * @param realTime If scale different than max, timestamps are by default offset + scale/2. To get exact timestamps, use true. Default is false.
-     * @return an executable object to obtain the [MeasureRequestResponse]
+     * @return an executable object to obtain a list of [MeasureRequestResponse]
      */
     fun getMeasure(
             moduleId: String,
@@ -43,7 +44,7 @@ abstract class CommonConnector(api: Retrofit) {
             limit: Int? = null,
             optimize: Boolean? = null,
             realTime: String? = null
-    ): Executable<TypedBaseResult<List<MeasureRequestResponse>>> {
+    ): BodyResultExecutable<List<MeasureRequestResponse>> {
         return apiService.getMeasure(
                 accessToken = "empty",
                 moduleId = moduleId,

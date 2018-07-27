@@ -25,22 +25,22 @@ For debug information simply add the debug flag as boolean parameter to the cons
 For retreiving data, you have to specify the Netatmo Api Connector (weather, energy, aircare, etc.) and method.
 
 ```java
-Executable<TypedBaseResult<HomesDataBody>> getHomesDataExec = api.getEnergyApiConnector().getHomesData(null, null)
+Executable<HomesDataBody> getHomesDataExec = api.getEnergyApiConnector().getHomesData(null, null)
 ```
 In return you get an executable with is capable of synchronous and/or asynchronous execution.
 
 #### Synchronous
 ```java
-TypedBaseResult<HomesDataBody> result = getHomesDataExec.executeSync()
+HomesDataBody result = getHomesDataExec.executeSync()
 ```
 
 The result is either the model or null or the actual object. Error values are only printed when debug is activated
 
 #### Asynchronous
 ```java
-Executable.Callback<TypedBaseResult<HomesDataBody>> callback = new Executable.Callback<TypedBaseResult<HomesDataBody>>() {
+Executable.Callback<HomesDataBody> callback = new Executable.Callback<HomesDataBody>() {
     @Override
-    public void onResult(TypedBaseResult<HomesDataBody> homesDataBodyTypedBaseResult) {
+    public void onResult(HomesDataBody homesDataBody) {
 
     }
 
@@ -68,7 +68,7 @@ public Unit onError(String error){
     return null;
 }
 
-public Unit onSuccess(TypedBaseResult<HomesDataBody> obj) {
+public Unit onSuccess(HomesDataBody obj) {
     return null;
 }
 ```

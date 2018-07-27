@@ -5,6 +5,7 @@ import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.api.weather.model.Station
 import io.rudolph.netatmo.api.weather.service.WeatherService
 import io.rudolph.netatmo.executable
+import io.rudolph.netatmo.executable.BodyResultExecutable
 import io.rudolph.netatmo.executable.Executable
 import retrofit2.Retrofit
 
@@ -31,7 +32,7 @@ class WeatherConnector(api: Retrofit) : CommonConnector(api) {
                       latitudeSouthWest: Float,
                       longitudeSouthWest: Float,
                       required: String? = null,
-                      filter: Boolean? = null): Executable<TypedBaseResult<List<Station>>> {
+                      filter: Boolean? = null): BodyResultExecutable<List<Station>> {
         return weatherService.getPublicData(
                 "Empty", // will be replaced in Chain.proceed(accessToken: String)
                 latitudeNorthEast,

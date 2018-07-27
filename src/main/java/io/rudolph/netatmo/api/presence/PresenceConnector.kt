@@ -9,7 +9,9 @@ import io.rudolph.netatmo.api.presence.model.Events
 import io.rudolph.netatmo.api.presence.model.SecurityHome
 import io.rudolph.netatmo.api.presence.service.PresenceService
 import io.rudolph.netatmo.executable
+import io.rudolph.netatmo.executable.BodyResultExecutable
 import io.rudolph.netatmo.executable.Executable
+import io.rudolph.netatmo.executable.PlainExecutable
 import retrofit2.Retrofit
 
 open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
@@ -26,7 +28,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @param key Security key to access snapshots
      * @return an executable object to obtain the camera picture as jpg bytes wraped in [String] with size of  120x120
      */
-    fun getCameraPicture(imageId: String, key: String): Executable<String> {
+    fun getCameraPicture(imageId: String, key: String): Executable<String, String> {
         return presenceService.getCamerapPicture(imageId = imageId,
                 key = key).executable
     }
@@ -42,7 +44,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @param eventId Your request will retrieve all the events until this one
      * @return an executable object to obtain the List of [Event]
      */
-    fun getEventsUntil(homeId: String, eventId: String): Executable<TypedBaseResult<Events>> {
+    fun getEventsUntil(homeId: String, eventId: String): BodyResultExecutable<Events> {
         return presenceService.getEventsUntil(
                 accessToken = "",
                 homeId = homeId,
@@ -61,7 +63,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @param eventId Your request will retrieve all the events until this one
      * @return an executable object to obtain the [SecurityHome]
      */
-    fun getHomeData(homeId: String, eventId: String): Executable<TypedBaseResult<SecurityHome>> {
+    fun getHomeData(homeId: String, eventId: String): BodyResultExecutable<SecurityHome> {
         return presenceService.getHomeData(
                 accessToken = "",
                 homeId = homeId,
@@ -81,7 +83,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @param size Number of event to retrieve. Default is 30.
      * @return an executable object to obtain the List of [Event]
      */
-    fun getNextEvents(homeId: String, eventId: String, size: Int? = null): Executable<TypedBaseResult<Events>> {
+    fun getNextEvents(homeId: String, eventId: String, size: Int? = null): BodyResultExecutable<Events> {
         return presenceService.getNextEvents(
                 accessToken = "",
                 homeId = homeId,
@@ -101,7 +103,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @param appTypes Webhooks are only available for Welcome and Presence, use app_security.
      * @return an executable object to obtain the [BaseResult]
      */
-    fun addWebHook(url: String, appTypes: String): Executable<BaseResult> {
+    fun addWebHook(url: String, appTypes: String): PlainExecutable<BaseResult> {
         return presenceService.addWebHook(
                 accessToken = "",
                 url = url,
@@ -119,7 +121,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @param appTypes For Welcome and Presence, use app_security
      * @return an executable object to obtain the [BaseResult]
      */
-    fun dropWebHook(appTypes: String): Executable<BaseResult> {
+    fun dropWebHook(appTypes: String): PlainExecutable<BaseResult> {
         return presenceService.dropWebHook(
                 accessToken = " ",
                 appTypes = appTypes
@@ -138,7 +140,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @param eventId Your request will retrieve all the events until this one
      * @return an executable object to obtain the [SecurityHome]
      */
-    fun ping(url: String) = Executable(presenceService.ping(url))
+    fun ping(url: String) = presenceService.ping(url).executable
 
     private fun getLocalUrl(camera: Camera): String? {
         return camera.vpnUrl?.let {

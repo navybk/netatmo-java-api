@@ -4,7 +4,6 @@ import io.rudolph.netatmo.NetatmoApi
 import io.rudolph.netatmo.api.common.model.Scale
 import io.rudolph.netatmo.api.common.model.ScaleType
 import io.rudolph.netatmo.api.energy.model.HomesDataBody
-import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.oauth2.model.Scope
 import org.junit.Test
@@ -19,6 +18,7 @@ class EnergyTest {
      */
     private val testConfig = TestConfig.buildFromFile("/credentials.json")
             ?: throw IllegalStateException("config file missing")
+
     private val api = NetatmoApi(
             clientId = testConfig.clientId,
             clientSecret = testConfig.clientSecret,
@@ -46,8 +46,8 @@ class EnergyTest {
                 .executeAsync {
 
                     // second with callback interface
-                    api.energyApiConnector.getHomesData().executeAsync(object : Executable.Callback<TypedBaseResult<HomesDataBody>> {
-                        override fun onResult(value: TypedBaseResult<HomesDataBody>) {
+                    api.energyApiConnector.getHomesData().executeAsync(object : Executable.Callback<HomesDataBody> {
+                        override fun onResult(value: HomesDataBody) {
                             result = true
                             waitForeverLatch.countDown()
                         }
@@ -67,8 +67,7 @@ class EnergyTest {
     fun testGetHomeStatus() {
         api.energyApiConnector.getHomesData().executeSync().apply {
             assert(this != null)
-        }?.body
-                ?.homes
+        }?.homes
                 ?.get(0)
                 ?.id
                 ?.apply homeid@{
@@ -76,7 +75,7 @@ class EnergyTest {
                             .getHomeStatus(this)
                             .executeSync().apply {
                                 assert(this != null)
-                                return
+                                return@apply
                             }
                 }
 
@@ -87,8 +86,7 @@ class EnergyTest {
     fun gestMeasure() {
         api.energyApiConnector.getHomesData().executeSync().apply {
             assert(this != null)
-        }?.body
-                ?.homes
+        }?.homes
                 ?.get(0)
                 ?.apply {
                     val moduleId = modules?.get(1)?.id!!
@@ -109,7 +107,7 @@ class EnergyTest {
     fun testGetRoomMeasure() {
         api.energyApiConnector.getHomesData().executeSync().apply {
             assert(this != null)
-        }?.body
+        }
                 ?.homes
                 ?.get(0)
                 ?.apply {
@@ -145,7 +143,7 @@ class EnergyTest {
     fun testCreateAndSyncAndRenameAnddDeleteSchedule() {
         api.energyApiConnector.getHomesData().executeSync().apply {
             assert(this != null)
-        }?.body?.homes?.get(0)?.apply {
+        }?.homes?.get(0)?.apply {
 
             val zones = thermSchedules?.get(0)?.zones!!
             val timetable = schedules?.get(0)?.timetable!!
@@ -161,7 +159,7 @@ class EnergyTest {
                     zones = zones
             ).executeSync()
                     .apply {
-                        val scheduleId = this?.body?.scheduleId!!
+                        val scheduleId = this?.scheduleId!!
                         var result = true
                         api.energyApiConnector.syncHomeSchedule(
                                 scheduleId = scheduleId,

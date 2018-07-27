@@ -5,6 +5,7 @@ import io.rudolph.netatmo.api.aircare.service.AirCareService
 import io.rudolph.netatmo.api.common.CommonConnector
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.executable
+import io.rudolph.netatmo.executable.BodyResultExecutable
 import io.rudolph.netatmo.executable.Executable
 import retrofit2.Retrofit
 
@@ -22,7 +23,7 @@ class AirCareConnector(api: Retrofit) : CommonConnector(api) {
      * @param deviceId Healthy Home Coach mac address
      * @return an executable object to obtain the [AirCareBody]
      */
-    fun Gethomecoachsdata(deviceId: String): Executable<TypedBaseResult<AirCareBody>> {
+    fun Gethomecoachsdata(deviceId: String): BodyResultExecutable<AirCareBody> {
         return airCareService.getPublicData(
                 "Empty",
                 deviceId// will be replaced in Chain.proceed(accessToken: String)
