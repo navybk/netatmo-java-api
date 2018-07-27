@@ -63,4 +63,12 @@ internal object JacksonTransform {
             null
         }
     }
+
+    inline fun <reified T> parse(value: String): T? {
+        return try {
+            mapper.readValue(value, T::class.java)
+        } catch (e: Exception) {
+            null
+        }
+    }
 }

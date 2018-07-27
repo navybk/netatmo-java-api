@@ -30,8 +30,8 @@ abstract class Executable<T, E>(internal val call: Call<T>, private val transFor
      * @param errorFunction a lambda with a error representing String as parameter
      * @return an [AsyncExecutable] which provides the async execution of the given call
      */
-    fun onError(errorFunction: (String) -> Unit): AsyncExecutable<T, T> {
-        return AsyncExecutable(call, errorFunction)
+    fun onError(errorFunction: (String) -> Unit): AsyncExecutable<T, E> {
+        return AsyncExecutable(call, errorFunction, transForm)
     }
 
     /**

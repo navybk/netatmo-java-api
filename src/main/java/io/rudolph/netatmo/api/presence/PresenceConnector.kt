@@ -2,7 +2,6 @@ package io.rudolph.netatmo.api.presence
 
 import io.rudolph.netatmo.api.common.CommonConnector
 import io.rudolph.netatmo.api.energy.model.BaseResult
-import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.api.presence.model.Camera
 import io.rudolph.netatmo.api.presence.model.Event
 import io.rudolph.netatmo.api.presence.model.Events

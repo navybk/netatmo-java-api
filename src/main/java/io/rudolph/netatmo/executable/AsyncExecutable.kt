@@ -34,7 +34,7 @@ class AsyncExecutable<T, E>(private val call: Call<T>, private val errorFunction
 
                 runBlocking {
                     errorFunction?.invoke(
-                            "${code()}: ${errorBody()?.string()}")
+                            "${code()}: ${message()}")
                 }
             }
         }

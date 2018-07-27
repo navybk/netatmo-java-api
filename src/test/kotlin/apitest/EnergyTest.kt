@@ -1,9 +1,10 @@
 package apitest
 
 import io.rudolph.netatmo.NetatmoApi
+import io.rudolph.netatmo.api.common.model.DeviceType
 import io.rudolph.netatmo.api.common.model.Scale
 import io.rudolph.netatmo.api.common.model.ScaleType
-import io.rudolph.netatmo.api.energy.model.HomesDataBody
+import io.rudolph.netatmo.api.energy.model.HomeStatusBody
 import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.oauth2.model.Scope
 import org.junit.Test
@@ -27,7 +28,7 @@ class EnergyTest {
             scope = listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT),
             accessToken = testConfig.accessToken,
             refreshToken = testConfig.refreshToken,
-            debug = true
+            debug = false
     )
 
     @Test
@@ -46,17 +47,20 @@ class EnergyTest {
                 .executeAsync {
 
                     // second with callback interface
-                    api.energyApiConnector.getHomesData().executeAsync(object : Executable.Callback<HomesDataBody> {
-                        override fun onResult(value: HomesDataBody) {
-                            result = true
-                            waitForeverLatch.countDown()
-                        }
+                    api.energyApiConnector.getHomeStatus(it.homes?.get(0)?.id!!)
+                            .executeAsync(object : Executable.Callback<HomeStatusBody> {
+                                override fun onResult(value: HomeStatusBody) {
+                                    result = true
+                                    waitForeverLatch.countDown()
+                                }
 
-                        override fun onError(error: String) {
-                            waitForeverLatch.countDown()
-                        }
+                                override fun onError(error: String) {
+                                    println(error)
 
-                    })
+                                    waitForeverLatch.countDown()
+                                }
+
+                            })
                 }
 
         waitForeverLatch.await()
@@ -65,7 +69,7 @@ class EnergyTest {
 
     @Test
     fun testGetHomeStatus() {
-        api.energyApiConnector.getHomesData().executeSync().apply {
+        api.energyApiConnector.getHomesData("1", listOf(DeviceType.UNKNOWN)).executeSync().apply {
             assert(this != null)
         }?.homes
                 ?.get(0)

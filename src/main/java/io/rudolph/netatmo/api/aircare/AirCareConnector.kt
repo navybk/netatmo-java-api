@@ -3,10 +3,8 @@ package io.rudolph.netatmo.api.aircare
 import io.rudolph.netatmo.api.aircare.model.AirCareBody
 import io.rudolph.netatmo.api.aircare.service.AirCareService
 import io.rudolph.netatmo.api.common.CommonConnector
-import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.BodyResultExecutable
-import io.rudolph.netatmo.executable.Executable
 import retrofit2.Retrofit
 
 class AirCareConnector(api: Retrofit) : CommonConnector(api) {

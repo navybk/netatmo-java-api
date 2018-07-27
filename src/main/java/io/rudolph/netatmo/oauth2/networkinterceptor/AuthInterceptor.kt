@@ -1,11 +1,9 @@
 package io.rudolph.netatmo.oauth2.networkinterceptor
 
 import io.rudolph.netatmo.JacksonTransform
-import io.rudolph.netatmo.oauth2.TokenStorage
-import io.rudolph.netatmo.oauth2.errorbuilder
-import io.rudolph.netatmo.oauth2.logger
+import io.rudolph.netatmo.oauth2.*
 import io.rudolph.netatmo.oauth2.model.AuthResponse
-import io.rudolph.netatmo.oauth2.proceed
+import io.rudolph.netatmo.oauth2.model.ErrorResult
 import okhttp3.FormBody
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -22,16 +20,30 @@ internal class AuthInterceptor(private val userMail: String?,
 
         val accessToken: String = tokenStore.accessToken ?: let {
             tokenStore.refreshToken?.let {
-                refresh(chain) ?: return chain.errorbuilder("refresh failed")
-            } ?: login(chain) ?: return chain.errorbuilder("login failed")
+                refresh(chain) ?: return chain.errorbuilder(0, ErrorResult.Error(0, "refresh failed"))
+            } ?: login(chain) ?: return chain.errorbuilder(0, ErrorResult.Error(0, "login failed"))
         }
 
-        return chain.proceed(accessToken).let {
-            if (it.code() == 403) {
-                val accToken = refresh(chain) ?: return chain.errorbuilder("access denied")
-                chain.proceed(accToken)
+        chain.proceed(accessToken).let { response ->
+            if (response.isSuccessful) {
+                return response
+            }
+            val error = response.createErrorBody()
+            return if (response.code() == 403) {
+                when (error.code) {
+                    2 -> {
+                        val accToken = refresh(chain) ?: return chain.errorbuilder(response.code(), error)
+                        chain.proceed(accToken)
+                    }
+                    13 -> {
+                        chain.errorbuilder(response.code(), error)
+                    }
+                    else -> {
+                        response
+                    }
+                }
             } else {
-                it
+                response
             }
         }
     }
@@ -54,8 +66,8 @@ internal class AuthInterceptor(private val userMail: String?,
                 .method("POST", formBody)
                 .build()
                 .let {
-                    proceedAuthRequest(chain, it) ?: return login(chain)
-                }
+                    proceedAuthRequest(chain, it)
+                } ?: return login(chain)
     }
 
     private fun login(chain: Interceptor.Chain): String? {
@@ -87,8 +99,8 @@ internal class AuthInterceptor(private val userMail: String?,
         return chain.proceed(request)?.body()?.string()?.let {
             JacksonTransform.deserialize<AuthResponse>(it)
                     ?.let {
-                        if (!(it.scope.toTypedArray() contentEquals tokenStore.scope.toTypedArray())) {
-                            logger.warn("Netatmo Java Api", "Scope from response does not match requested scope")
+                        if (!(it.scope.sortedBy { it.value }.toTypedArray() contentEquals tokenStore.scope.sortedBy { it.value }.toTypedArray())) {
+                            logger.warn("Scope from response does not match requested scope")
                         }
                         tokenStore.setTokens(it.accessToken, it.refreshToken, it.scope)
                         it.accessToken

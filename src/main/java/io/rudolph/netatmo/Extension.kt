@@ -2,7 +2,6 @@ package io.rudolph.netatmo
 
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.executable.BodyResultExecutable
-import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.executable.PlainExecutable
 import retrofit2.Call
 

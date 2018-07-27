@@ -5,7 +5,7 @@ import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
 import retrofit2.Call
 
-class BodyResultAsyncExecutable<T: TypedBaseResult<E>, E>(private val call: Call<T>, private val errorFunction: ((String) -> Unit)? = null) {
+class BodyResultAsyncExecutable<T : TypedBaseResult<E>, E>(private val call: Call<T>, private val errorFunction: ((String) -> Unit)? = null) {
 
     /**
      * execute a call asynchronously with the power of kotlin coroutines

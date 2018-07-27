@@ -1,13 +1,11 @@
 package io.rudolph.netatmo.api.welcome
 
 import io.rudolph.netatmo.api.energy.model.BaseResult
-import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.api.presence.PresenceConnector
 import io.rudolph.netatmo.api.presence.model.Events
 import io.rudolph.netatmo.api.welcome.service.WelcomeService
 import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.BodyResultExecutable
-import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.executable.PlainExecutable
 import retrofit2.Retrofit
 

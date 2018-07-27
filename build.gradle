@@ -35,10 +35,11 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.23.4'
     compile 'io.github.microutils:kotlin-logging:1.5.4'
+    compile 'org.slf4j:slf4j-simple:1.7.25'
     compile 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0'
     compile 'com.squareup.retrofit2:retrofit:2.4.0'
     compile 'com.squareup.retrofit2:converter-jackson:2.4.0'
-    compile ('com.fasterxml.jackson.core:jackson-core:2.9.6') {
+    compile('com.fasterxml.jackson.core:jackson-core:2.9.6') {
         exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'
     }
 
