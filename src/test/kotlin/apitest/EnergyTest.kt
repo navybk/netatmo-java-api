@@ -1,6 +1,5 @@
 package apitest
 
-import io.rudolph.netatmo.NetatmoApi
 import io.rudolph.netatmo.api.common.model.DeviceType
 import io.rudolph.netatmo.api.common.model.Scale
 import io.rudolph.netatmo.api.common.model.ScaleType
@@ -12,24 +11,7 @@ import java.time.LocalDateTime
 import java.util.concurrent.CountDownLatch
 
 
-class EnergyTest {
-
-    /**
-     * for tests save credentials as json at /src/main/resources
-     */
-    private val testConfig = TestConfig.buildFromFile("/credentials.json")
-            ?: throw IllegalStateException("config file missing")
-
-    private val api = NetatmoApi(
-            clientId = testConfig.clientId,
-            clientSecret = testConfig.clientSecret,
-            userMail = testConfig.userMail,
-            userPassword = testConfig.userPassword,
-            scope = listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT),
-            accessToken = testConfig.accessToken,
-            refreshToken = testConfig.refreshToken,
-            debug = false
-    )
+class EnergyTest: BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT)) {
 
     @Test
     fun testAsyncHomeData() {

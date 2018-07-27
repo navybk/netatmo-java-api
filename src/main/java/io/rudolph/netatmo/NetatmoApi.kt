@@ -13,6 +13,7 @@ import io.rudolph.netatmo.oauth2.networkinterceptor.TimeoutInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import java.util.concurrent.TimeUnit
 
 
 class NetatmoApi(userMail: String? = null,
@@ -86,6 +87,8 @@ class NetatmoApi(userMail: String? = null,
                             refreshEndpoint = refreshEndpoint,
                             tokenStore = tokenStorage))
             .addInterceptor(TimeoutInterceptor(debug))
+            .readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
             .apply {
                 if (debug) {
                     val logging = HttpLoggingInterceptor().apply {
