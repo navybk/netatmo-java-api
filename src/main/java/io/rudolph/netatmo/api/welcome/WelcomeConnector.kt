@@ -61,7 +61,7 @@ class WelcomeConnector(api: Retrofit) : PresenceConnector(api) {
      * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/security/setpersonshome)
      *
      * @param homeId ID of the Home you're interested in
-     * @param personId Array of person_id
+     * @param personIds Array of person_id
      * @return an executable object to obtain the [BaseResult]
      */
     fun setPersonsAway(homeId: String, personIds: List<String>): PlainExecutable<BaseResult> {

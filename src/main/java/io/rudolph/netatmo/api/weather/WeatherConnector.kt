@@ -1,5 +1,6 @@
 package io.rudolph.netatmo.api.weather
 
+import io.rudolph.netatmo.api.aircare.model.AirCareBody
 import io.rudolph.netatmo.api.common.CommonConnector
 import io.rudolph.netatmo.api.weather.model.Station
 import io.rudolph.netatmo.api.weather.service.WeatherService
@@ -40,6 +41,13 @@ class WeatherConnector(api: Retrofit) : CommonConnector(api) {
                 required,
                 filter
         ).executable
+    }
+
+    fun getStationData(deviceId: String? = null,
+                       getFavourites: Boolean? = null): BodyResultExecutable<AirCareBody> {
+        return weatherService.getStationData("Empty",
+                deviceId,
+                getFavourites).executable
     }
 
 }

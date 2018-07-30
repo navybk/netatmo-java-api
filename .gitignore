@@ -42,7 +42,7 @@ gradle*
 
 #Secrets
 secret.properties
-credentials.json
+credentials*.json
 
 
 /*/out

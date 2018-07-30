@@ -1,0 +1,99 @@
+{
+  "status": "ok",
+  "time_server": 1532952525,
+  "body": {
+    "home": {
+      "modules": [
+        {
+          "id": "01",
+          "type": "NAPlug",
+          "rf_strength": 106,
+          "wifi_strength": 62
+        },
+        {
+          "id": "02",
+          "reachable": true,
+          "type": "NRV",
+          "firmware_revision": 51,
+          "rf_strength": 67,
+          "battery_level": 2691,
+          "bridge": "01",
+          "battery_state": "medium"
+        },
+        {
+          "id": "03",
+          "reachable": true,
+          "type": "NRV",
+          "firmware_revision": 51,
+          "rf_strength": 59,
+          "battery_level": 2793,
+          "bridge": "01",
+          "battery_state": "high"
+        },
+        {
+          "id": "04",
+          "reachable": true,
+          "type": "NRV",
+          "firmware_revision": 51,
+          "rf_strength": 72,
+          "battery_level": 2750,
+          "bridge": "01",
+          "battery_state": "high"
+        },
+        {
+          "id": "05",
+          "reachable": true,
+          "type": "NRV",
+          "firmware_revision": 51,
+          "rf_strength": 63,
+          "battery_level": 2830,
+          "bridge": "01",
+          "battery_state": "high"
+        }
+      ],
+      "rooms": [
+        {
+          "id": "r1",
+          "reachable": true,
+          "therm_measured_temperature": 27.5,
+          "heating_power_request": 0,
+          "therm_setpoint_temperature": 18,
+          "therm_setpoint_mode": "schedule",
+          "therm_setpoint_start_time": 1532924100,
+          "therm_setpoint_end_time": 0
+        },
+        {
+          "id": "r2",
+          "reachable": true,
+          "therm_measured_temperature": 28,
+          "heating_power_request": 0,
+          "therm_setpoint_temperature": 19,
+          "therm_setpoint_mode": "schedule",
+          "therm_setpoint_start_time": 1532930400,
+          "therm_setpoint_end_time": 0
+        },
+        {
+          "id": "r3",
+          "reachable": true,
+          "therm_measured_temperature": 27.5,
+          "heating_power_request": 0,
+          "therm_setpoint_temperature": 19,
+          "therm_setpoint_mode": "schedule",
+          "therm_setpoint_start_time": 1532930400,
+          "therm_setpoint_end_time": 0
+        },
+        {
+          "id": "r4",
+          "reachable": true,
+          "therm_measured_temperature": 28.5,
+          "heating_power_request": 0,
+          "therm_setpoint_temperature": 18,
+          "therm_setpoint_mode": "schedule",
+          "therm_setpoint_start_time": 1532930400,
+          "therm_setpoint_end_time": 0
+        }
+      ],
+      "id": "home1"
+    }
+  }
+}

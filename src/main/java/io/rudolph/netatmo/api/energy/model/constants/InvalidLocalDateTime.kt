@@ -4,5 +4,5 @@ import java.time.LocalDateTime
 
 
 object Constants {
-    val INVALID_LOCALDATETIME = LocalDateTime.MIN
+    val INVALID_LOCALDATETIME = LocalDateTime.MIN!!
 }

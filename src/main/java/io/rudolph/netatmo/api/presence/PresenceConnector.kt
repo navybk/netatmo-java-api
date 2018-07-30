@@ -136,7 +136,6 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/security/gethomedata)
      *
      * @param url ID of the Home you're interested in
-     * @param eventId Your request will retrieve all the events until this one
      * @return an executable object to obtain the [SecurityHome]
      */
     fun ping(url: String) = presenceService.ping(url).executable
@@ -157,7 +156,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
                     val newUrl = it.body()?.localUrl ?: return null
                     return presenceService.ping(newUrl)
                             .execute()
-                            .let { response ->
+                            .let {
                                 it.body()?.localUrl?.let { responseUrl ->
                                     if (responseUrl == newUrl) {
                                         responseUrl
@@ -249,7 +248,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
         getLocalUrlAsync(url, {
             success("$it/live/index_local.m3u8")
         }, {
-            success("$url/live/index_local.m3u8")
+            error("$url/live/index_local.m3u8")
         })
     }
 
@@ -258,7 +257,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
         getLocalUrlAsync(url, {
             success("$it/live/index_local.m3u8")
         }, {
-            success("$url/live/index_local.m3u8")
+            error("$url/live/index_local.m3u8")
         })
     }
 

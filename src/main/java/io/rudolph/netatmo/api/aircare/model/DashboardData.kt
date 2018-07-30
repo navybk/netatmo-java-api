@@ -10,7 +10,7 @@ data class DashboardData(
         private val timeUtc: Int? = null,
 
         @JsonProperty("Temperature")
-        private val temperature: Int? = null,
+        private val temperature: Float? = null,
 
         @JsonProperty("Noise")
         private val noise: Int? = null,
@@ -28,13 +28,13 @@ data class DashboardData(
         private val boilerOn: Int? = null,
 
         @JsonProperty("min_temp")
-        private val minTemp: Int? = null,
+        private val minTemp: Float? = null,
 
         @JsonProperty("Humidity")
         private val humidity: Int? = null,
 
         @JsonProperty("max_temp")
-        private val maxTemp: Int? = null,
+        private val maxTemp: Float? = null,
 
         @JsonProperty("sum_rain_24")
         private val sumRain24: Int? = null,
@@ -61,7 +61,7 @@ data class DashboardData(
         private val tempTrend: String? = null,
 
         @JsonProperty("Pressure")
-        private val pressure: Int? = null,
+        private val pressure: Float? = null,
 
         @JsonProperty("GustAngle")
         private val gustAngle: Int? = null,
@@ -79,7 +79,7 @@ data class DashboardData(
         private val healthIdx: Int? = null,
 
         @JsonProperty("AbsolutePressure")
-        private val absolutePressure: Int? = null,
+        private val absolutePressure: Float? = null,
 
         @JsonProperty("WindAngle")
         private val windAngle: Int? = null

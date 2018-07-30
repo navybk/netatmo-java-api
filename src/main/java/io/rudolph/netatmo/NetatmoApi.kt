@@ -34,18 +34,21 @@ class NetatmoApi(userMail: String? = null,
         const val AUTHENDPOINT = "https://api.netatmo.com/oauth2/token"
     }
 
-    var accessToken: String? = null
-        private set
+    private val tokenStorage = TokenStorage(accessToken, refreshToken, scope)
 
-    var refreshToken: String? = null
-        private set
-
-    private val tokenStorage = TokenStorage(accessToken, refreshToken, scope).apply {
-        onRefreshTokenUpdate = { accessToken: String, refreshToken: String, _: List<Scope> ->
-            this@NetatmoApi.accessToken = accessToken
-            this@NetatmoApi.refreshToken = refreshToken
-        }
+    fun settokenRefreshCallback(callback: TokenRefreshCallback) {
+        tokenStorage.onRefreshTokenUpdate = { accessToken: String, refreshToken: String, scopeList: List<Scope> -> callback.onTokenReceived(accessToken, refreshToken, scopeList) }
     }
+
+    fun setTokenRefreshFunction(function :(accessToken: String, refreshToken: String, scopeList: List<Scope>) -> Unit ) {
+        tokenStorage.onRefreshTokenUpdate = function
+    }
+
+    val accessToken: String?
+        get() = tokenStorage.accessToken
+
+    val refreshToken: String?
+        get() = tokenStorage.refreshToken
 
     constructor(userMail: String,
                 userPassword: String,

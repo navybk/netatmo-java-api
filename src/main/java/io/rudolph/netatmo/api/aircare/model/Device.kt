@@ -1,12 +1,13 @@
-package apiresults.aircare
+package io.rudolph.netatmo.api.aircare.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.rudolph.netatmo.api.aircare.model.DashboardData
 import io.rudolph.netatmo.api.aircare.model.Place
+import io.rudolph.netatmo.api.common.model.Module
 import java.time.LocalDateTime
 
 
-data class DevicesItem(
+data class Device(
         @JsonProperty("cipher_id")
         private val cipherId: String? = null,
 
@@ -20,7 +21,7 @@ data class DevicesItem(
         private val dateSetup: LocalDateTime? = null,
 
         @JsonProperty("last_setup")
-        private val lastSetup: Int? = null,
+        private val lastSetup: LocalDateTime? = null,
 
         @JsonProperty("last_upgrade")
         private val lastUpgrade: Int? = null,
@@ -68,5 +69,24 @@ data class DevicesItem(
          * Version of the software
          */
         @JsonProperty("firmware")
-        private val firmware: Int? = null
-)
+        private val firmware: Int? = null,
+
+        /**
+         * Name of module
+         */
+        @JsonProperty("module_name")
+        private val moduleName: String? = null,
+
+        /**
+         * Name of Station
+         */
+        @JsonProperty("station_name")
+        private val stationName: String? = null,
+
+        /**
+         * Name of Station
+         */
+        @JsonProperty("modules")
+        private val modules: List<Module>? = null
+
+        )

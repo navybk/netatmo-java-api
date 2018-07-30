@@ -17,4 +17,12 @@ class WeatherTest : BaseTest() {
                     assert(this != null)
                 }
     }
+
+    @Test
+    fun getStationData() {
+        connector.getStationData().executeSync().apply {
+                    assert(this != null)
+                }
+    }
+
 }

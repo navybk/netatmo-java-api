@@ -67,22 +67,22 @@ enum class EventType(val value: String, val product: List<String>) {
     NEW_MODULE("new_module", listOf("Welcome")),
 
     /**
-     * Module is connected with Welcome (after disconnection)
+     * EnergyModule is connected with Welcome (after disconnection)
      */
     MODULE_CONNECT("module_connect", listOf("Welcome")),
 
     /**
-     * Module lost its connection with Welcome
+     * EnergyModule lost its connection with Welcome
      */
     MODULE_DISCONNECT("module_disconnect", listOf("Welcome")),
 
     /**
-     * Module's battery is low
+     * EnergyModule's battery is low
      */
     MODULE_LOW_BATTERY("module_low_battery", listOf("Welcome")),
 
     /**
-     * Module's firmware update is over
+     * EnergyModule's firmware update is over
      */
     MODULE_END_UPDATE("module_end_update", listOf("Welcome")),
 

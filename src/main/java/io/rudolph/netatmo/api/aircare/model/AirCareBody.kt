@@ -1,13 +1,12 @@
 package io.rudolph.netatmo.api.aircare.model
 
 
-import apiresults.aircare.DevicesItem
 import com.fasterxml.jackson.annotation.JsonProperty
 
 
 data class AirCareBody(
         @JsonProperty("devices")
-        private val devices: List<DevicesItem>? = null,
+        private val devices: List<Device>? = null,
 
         /**
          * User related information

@@ -1,0 +1,144 @@
+{
+  "body": {
+    "devices": [
+      {
+        "_id": "d01",
+        "cipher_id": "cipher01",
+        "date_setup": 1388691569,
+        "last_setup": 1388691569,
+        "type": "NAMain",
+        "last_status_store": 1532954823,
+        "module_name": "Wohnzimmer",
+        "firmware": 134,
+        "last_upgrade": 1440428118,
+        "wifi_status": 64,
+        "co2_calibrating": false,
+        "station_name": "home",
+        "data_type": [
+          "Temperature",
+          "CO2",
+          "Humidity",
+          "Noise",
+          "Pressure"
+        ],
+        "place": {
+          "altitude": 34,
+          "city": "New York",
+          "country": "DE",
+          "timezone": "Europe\/Berlin",
+          "location": [
+            1.1,
+            5.1
+          ]
+        },
+        "dashboard_data": {
+          "time_utc": 1532954813,
+          "Temperature": 28.7,
+          "CO2": 468,
+          "Humidity": 58,
+          "Noise": 35,
+          "Pressure": 1016.6,
+          "AbsolutePressure": 1012.6,
+          "min_temp": 26.3,
+          "max_temp": 28.8,
+          "date_min_temp": 1532926924,
+          "date_max_temp": 1532953903,
+          "temp_trend": "stable",
+          "pressure_trend": "stable"
+        },
+        "modules": [
+          {
+            "_id": "m01",
+            "type": "NAModule1",
+            "module_name": "out",
+            "data_type": [
+              "Temperature",
+              "Humidity"
+            ],
+            "last_setup": 1388426994,
+            "dashboard_data": {
+              "time_utc": 1532954800,
+              "Temperature": 27.3,
+              "Humidity": 59,
+              "min_temp": 22.1,
+              "max_temp": 27.3,
+              "date_min_temp": 1532910200,
+              "date_max_temp": 1532954800,
+              "temp_trend": "stable"
+            },
+            "firmware": 44,
+            "last_message": 1532954819,
+            "last_seen": 1532954800,
+            "rf_status": 86,
+            "battery_vp": 5890,
+            "battery_percent": 95
+          },
+          {
+            "_id": "m02",
+            "type": "NAModule4",
+            "module_name": "room2",
+            "data_type": [
+              "Temperature",
+              "CO2",
+              "Humidity"
+            ],
+            "last_setup": 1395935461,
+            "dashboard_data": {
+              "time_utc": 1532954774,
+              "Temperature": 26.4,
+              "CO2": 531,
+              "Humidity": 56,
+              "min_temp": 24.9,
+              "max_temp": 26.4,
+              "date_min_temp": 1532922939,
+              "date_max_temp": 1532954774,
+              "temp_trend": "stable"
+            },
+            "firmware": 44,
+            "last_message": 1532954819,
+            "last_seen": 1532954774,
+            "rf_status": 75,
+            "battery_vp": 5780,
+            "battery_percent": 88
+          },
+          {
+            "_id": "m03",
+            "type": "NAModule3",
+            "module_name": "gauge",
+            "data_type": [
+              "Rain"
+            ],
+            "last_setup": 1436732631,
+            "dashboard_data": {
+              "time_utc": 1532954813,
+              "Rain": 0,
+              "sum_rain_24": 0,
+              "sum_rain_1": 0
+            },
+            "firmware": 8,
+            "last_message": 1532954819,
+            "last_seen": 1532954813,
+            "rf_status": 77,
+            "battery_vp": 5946,
+            "battery_percent": 98
+          }
+        ]
+      }
+    ],
+    "user": {
+      "mail": "mail",
+      "administrative": {
+        "country": "DE",
+        "reg_locale": "de-DE",
+        "lang": "de-DE",
+        "unit": 0,
+        "windunit": 0,
+        "pressureunit": 0,
+        "feel_like_algo": 0
+      }
+    }
+  },
+  "status": "ok",
+  "time_exec": 0.17176508903503,
+  "time_server": 1532955275
+}

@@ -1,0 +1,41 @@
+{
+  "status": "ok",
+  "time_server": 1532960710,
+  "body": {
+    "home": {
+      "modules": [
+        {
+          "id": "m01",
+          "type": "NAPlug",
+          "rf_strength": 108,
+          "wifi_strength": 45
+        },
+        {
+          "id": "m02",
+          "reachable": true,
+          "type": "NATherm1",
+          "firmware_revision": 65,
+          "rf_strength": 63,
+          "battery_level": 4443,
+          "boiler_valve_comfort_boost": false,
+          "boiler_status": false,
+          "anticipating": false,
+          "bridge": "m01",
+          "battery_state": "full"
+        }
+      ],
+      "rooms": [
+        {
+          "id": "r01",
+          "reachable": true,
+          "therm_measured_temperature": 26.8,
+          "therm_setpoint_temperature": 7,
+          "therm_setpoint_mode": "hg",
+          "therm_setpoint_start_time": 0,
+          "therm_setpoint_end_time": 0
+        }
+      ],
+      "id": "h01"
+    }
+  }
+}

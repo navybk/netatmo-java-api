@@ -1,5 +1,6 @@
 package io.rudolph.netatmo.api.weather.service
 
+import io.rudolph.netatmo.api.aircare.model.AirCareBody
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.api.weather.model.Station
 import retrofit2.Call
@@ -34,4 +35,20 @@ internal interface WeatherService {
             @Query("required_data") requried: String? = null,
             @Query("filter") filter: Boolean? = null
     ): Call<TypedBaseResult<List<Station>>>
+
+    @Headers("Content-Type:text/plain")
+    @GET("getstationsdata")
+    fun getStationData(
+            @Query("access_token") accessToken: String,
+            @Query("device_id") deviceId: String? = null,
+            @Query("get_favorites") getFavorites: Boolean? = null
+    ): Call<TypedBaseResult<AirCareBody>>
+
+    @Headers("Content-Type:text/plain")
+    @POST("getstationsdata")
+    fun getStationDataPost(
+            @Query("access_token") accessToken: String,
+            @Query("device_id") deviceId: String? = null,
+            @Query("get_favorites") getFavorites: Boolean? = null
+    ): Call<TypedBaseResult<AirCareBody>>
 }

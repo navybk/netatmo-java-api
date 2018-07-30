@@ -1,6 +1,5 @@
 package apitest
 
-import io.rudolph.netatmo.api.common.model.DeviceType
 import io.rudolph.netatmo.api.common.model.Scale
 import io.rudolph.netatmo.api.common.model.ScaleType
 import io.rudolph.netatmo.api.energy.model.HomeStatusBody
@@ -51,7 +50,7 @@ class EnergyTest: BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT)
 
     @Test
     fun testGetHomeStatus() {
-        api.energyApiConnector.getHomesData("1", listOf(DeviceType.UNKNOWN)).executeSync().apply {
+        api.energyApiConnector.getHomesData().executeSync().apply {
             assert(this != null)
         }?.homes
                 ?.get(0)
@@ -61,7 +60,7 @@ class EnergyTest: BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT)
                             .getHomeStatus(this)
                             .executeSync().apply {
                                 assert(this != null)
-                                return@apply
+                                return
                             }
                 }
 

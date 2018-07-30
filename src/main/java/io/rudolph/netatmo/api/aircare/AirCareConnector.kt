@@ -21,7 +21,7 @@ class AirCareConnector(api: Retrofit) : CommonConnector(api) {
      * @param deviceId Healthy Home Coach mac address
      * @return an executable object to obtain the [AirCareBody]
      */
-    fun Gethomecoachsdata(deviceId: String): BodyResultExecutable<AirCareBody> {
+    fun getHomeCoachsData(deviceId: String): BodyResultExecutable<AirCareBody> {
         return airCareService.getPublicData(
                 "Empty",
                 deviceId// will be replaced in Chain.proceed(accessToken: String)
