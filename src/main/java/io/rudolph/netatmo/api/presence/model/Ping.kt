@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class Ping(
         @JsonProperty("local_url")
-        var localUrl: String? = null,
+        val localUrl: String? = null,
 
         @JsonProperty("product_name")
-        var productName: String? = null
+        val productName: String? = null
 )

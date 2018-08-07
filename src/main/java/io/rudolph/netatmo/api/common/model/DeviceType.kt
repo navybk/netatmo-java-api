@@ -12,12 +12,14 @@ object Constant {
     const val RAINGAUGEMODULE_API_STRING = "NAModule3"
     const val INDOORMODULE_API_STRING = "NAModule4"
     const val THERMOSTAT_API_STRING = "NATherm1"
+    const val HOMECOACH_API_STRING = "NHC"
     const val UNKNOWN_API_STRING = "unknown"
 }
 
 enum class DeviceType(val value: String) {
     VALVE(Constant.VALVE_API_STRING),
     RELAY(Constant.RELAY_API_STRING),
+    HOMECOACH(Constant.HOMECOACH_API_STRING),
     WELCOME_CAMERA(Constant.WELCOME_CAMERA_API_STRING),
     PRESENCE_CAMERA(Constant.PRESENCE_CAMERA_API_STRING),
     BASESTATION(Constant.BASESTATION_API_STRING),

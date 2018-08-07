@@ -1,44 +1,45 @@
 package io.rudolph.netatmo.api.energy.model.module
 
+import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonProperty
 
-abstract class ValveBaseModule: EnergyModule () {
+abstract class ValveBaseModule : EnergyModule() {
     @JsonProperty("room_id")
-    var roomId: String? = null
+    val roomId: String? = null
 
     /**
      * id of Bridge
      */
     @JsonProperty("bridge")
-    var bridgeId: String? = null
+    val bridgeId: String? = null
 
     /**
      * Battery level
      */
-    @JsonProperty("battery_level")
-    var batteryLevel: Int? = null
+    @JsonAlias("battery_level", "battery_percent")
+    val batteryLevel: Int? = null
 
     /**
      * human readable battery state
      */
     @JsonProperty("battery_state")
-    var batteryState: String? = null
+    val batteryState: String? = null
 
     /**
      * Version of the firmware
      */
     @JsonProperty("firmware_revision")
-    var firmwareRevision: Int? = null
+    val firmwareRevision: Int? = null
 
     /**
      * False if none of the module of the room are reachable
      */
     @JsonProperty("reachable")
-    var isReachable: Boolean? = null
+    val isReachable: Boolean? = null
 
     /**
      * The module is currently heating to anticipate a schedule temperature
      */
     @JsonProperty("anticipating")
-    var anticipation: Boolean? = false
+    val anticipation: Boolean? = false
 }

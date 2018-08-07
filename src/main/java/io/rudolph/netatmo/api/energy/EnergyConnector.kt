@@ -2,6 +2,7 @@ package io.rudolph.netatmo.api.energy
 
 import io.rudolph.netatmo.api.common.CommonConnector
 import io.rudolph.netatmo.api.common.model.DeviceType
+import io.rudolph.netatmo.api.common.model.StationResults
 import io.rudolph.netatmo.api.energy.model.*
 import io.rudolph.netatmo.api.energy.service.EnergyService
 import io.rudolph.netatmo.executable
@@ -28,7 +29,8 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      */
     fun getHomesData(homeId: String? = null,
                      gatewayTypes: List<DeviceType>? = null): BodyResultExecutable<HomesDataBody> {
-        return energyService.getHomeData(homeId, gatewayTypes?.toMutableList()).executable
+        return energyService.getHomeData(homeId, gatewayTypes?.toMutableList())
+                .executable
     }
 
     /**
@@ -252,5 +254,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
                 .executable
     }
 
-
+    fun getThermostatData(homeId: String? = null, deviceId: String? = null): BodyResultExecutable<StationResults> {
+        return energyService.getThermostatsData(homeId, deviceId).executable
+    }
 }

@@ -10,7 +10,7 @@ import java.time.LocalDateTime
 import java.util.concurrent.CountDownLatch
 
 
-class EnergyTest: BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT)) {
+class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT)) {
 
     @Test
     fun testAsyncHomeData() {
@@ -28,7 +28,7 @@ class EnergyTest: BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT)
                 .executeAsync {
 
                     // second with callback interface
-                    api.energyApiConnector.getHomeStatus(it.homes?.get(0)?.id!!)
+                    api.energyApiConnector.getHomeStatus(it.homes[0].id)
                             .executeAsync(object : Executable.Callback<HomeStatusBody> {
                                 override fun onResult(value: HomeStatusBody) {
                                     result = true
@@ -74,8 +74,8 @@ class EnergyTest: BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT)
         }?.homes
                 ?.get(0)
                 ?.apply {
-                    val moduleId = modules?.get(1)?.id!!
-                    val deviceId = modules?.get(0)?.id!!
+                    val moduleId = modules[1].id!!
+                    val deviceId = modules[0].id!!
                     api.energyApiConnector
                             .getMeasure(moduleId = moduleId,
                                     deviceId = deviceId,
@@ -96,19 +96,14 @@ class EnergyTest: BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT)
                 ?.homes
                 ?.get(0)
                 ?.apply {
-                    val homeId = this.id ?: run {
-                        assert(false)
-                        return
-                    }
-
-                    val roomId = this.rooms?.get(0)?.id ?: run {
+                    val roomId = this.rooms[0].id ?: run {
                         assert(false)
                         return
                     }
 
                     val begin = LocalDateTime.parse("2018-01-01T00:00:00")
 
-                    api.energyApiConnector.getRoomMeasure(homeId = homeId,
+                    api.energyApiConnector.getRoomMeasure(homeId = this.id,
                             roomId = roomId,
                             scale = "1day",
                             dateBegin = begin,
@@ -130,12 +125,12 @@ class EnergyTest: BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT)
             assert(this != null)
         }?.homes?.get(0)?.apply {
 
-            val zones = thermSchedules?.get(0)?.zones!!
-            val timetable = schedules?.get(0)?.timetable!!
+            val zones = thermSchedules[0].zones!!
+            val timetable = schedules[0].timetable!!
             val name = "test"
             val hgTRemp = 8F
             val awayTemp = 16F
-            val homeId = id!!
+            val homeId = id
             api.energyApiConnector.createNewHomeSchedule(homeId = homeId,
                     awayTemp = awayTemp,
                     hgTemp = hgTRemp,
@@ -182,5 +177,12 @@ class EnergyTest: BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT)
                     }
         }
         assert(false)
+    }
+
+    @Test
+    fun testThermostatdata() {
+        api.energyApiConnector.getThermostatData().executeSync().apply {
+            assert(this != null)
+        }
     }
 }

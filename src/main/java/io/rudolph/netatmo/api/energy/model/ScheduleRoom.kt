@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class ScheduleRoom(
         @JsonProperty("id")
-        var id: String? = null,
+        val id: String? = null,
 
         @JsonProperty("therm_setpoint_temperature")
-        var thermSetpointTemperature: Int? = null
+        val thermSetpointTemperature: Int? = null
 )

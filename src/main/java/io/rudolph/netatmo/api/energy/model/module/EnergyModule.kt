@@ -1,26 +1,22 @@
 package io.rudolph.netatmo.api.energy.model.module
 
+import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.rudolph.netatmo.api.common.model.Module
 import java.time.LocalDateTime
 
-abstract class EnergyModule: Module() {
-    @JsonProperty("id")
-    override val id: String? = null
-
-    @JsonProperty("name")
-    override var moduleName: String? = null
+abstract class EnergyModule : Module() {
 
     @JsonProperty("setup_date")
-    var setupDate: LocalDateTime? = null
+    val setupDate: LocalDateTime? = null
 
-    @JsonProperty("rf_strength")
-    override var rfStrength: Int? = null
+    @JsonAlias("rf_strength", "rf_status")
+    override val rfStrength: Int? = null
 
     /**
      * 56 good
      * 86 poor
      */
     @JsonProperty("wifi_strength")
-    var wifiStrength: Int? = null
+    val wifiStrength: Int? = null
 }

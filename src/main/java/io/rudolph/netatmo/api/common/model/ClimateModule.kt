@@ -16,7 +16,7 @@ abstract class ClimateModule : Module() {
      * Version of the software
      */
     @JsonProperty("firmware")
-    private val firmware: Int? = null
+    val firmware: Int? = null
 
     @JsonProperty("last_message")
     val lastMessage: LocalDateTime? = null
@@ -25,11 +25,11 @@ abstract class ClimateModule : Module() {
     val lastSeen: LocalDateTime? = null
 
     @JsonProperty("battery_vp")
-    private val batteryVP: Int? = null
+    val batteryVP: Int? = null
 
     /**
      * Last data measured per device
      */
     @JsonProperty("dashboard_data")
-    private val dashboardData: DashboardData? = null
+    val dashboardData: DashboardData? = null
 }

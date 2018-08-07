@@ -5,5 +5,5 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class GlobalInfo(
         @JsonProperty("show_tags")
-        private val showTags: Boolean? = null
+        val showTags: Boolean? = null
 )

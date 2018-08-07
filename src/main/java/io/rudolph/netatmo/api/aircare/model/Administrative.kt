@@ -5,23 +5,23 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class Administrative(
         @JsonProperty("country")
-        private val country: String? = null,
+        val country: String? = null,
 
         @JsonProperty("unit")
-        private val unit: String? = null,
+        val unit: String? = null,
 
         @JsonProperty("reg_locale")
-        private val regLocale: String? = null,
+        val regLocale: String? = null,
 
         @JsonProperty("windunit")
-        private val windunit: String? = null,
+        val windunit: String? = null,
 
         @JsonProperty("feel_like_algo")
-        private val feelLikeAlgo: String? = null,
+        val feelLikeAlgo: String? = null,
 
         @JsonProperty("lang")
-        private val lang: String? = null,
+        val lang: String? = null,
 
         @JsonProperty("pressureunit")
-        private val pressureunit: String? = null
+        val pressureunit: String? = null
 )

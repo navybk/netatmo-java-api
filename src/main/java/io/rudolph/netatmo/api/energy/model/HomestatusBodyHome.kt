@@ -6,11 +6,11 @@ import io.rudolph.netatmo.api.common.model.Module
 
 data class HomestatusBodyHome(
         @JsonProperty("modules")
-        var modules: List<Module>? = null,
+        val modules: List<Module>? = null,
 
         @JsonProperty("rooms")
-        var rooms: List<HomeStatusRoom>? = null,
+        val rooms: List<HomeStatusRoom>? = null,
 
         @JsonProperty("id")
-        var id: String? = null
+        val id: String? = null
 )

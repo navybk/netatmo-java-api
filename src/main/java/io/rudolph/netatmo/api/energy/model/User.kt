@@ -5,26 +5,26 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class User(
         @JsonProperty("id")
-        var id: String? = null,
+        val id: String? = null,
 
         @JsonProperty("email")
-        var email: String? = null,
+        val email: String? = null,
 
         @JsonProperty("language")
-        var language: String? = null,
+        val language: String? = null,
 
         @JsonProperty("locale")
-        var locale: String? = null,
+        val locale: String? = null,
 
         @JsonProperty("feel_like_algorithm")
-        var feelLikeAlgorithm: Long? = null,
+        val feelLikeAlgorithm: Long? = null,
 
         @JsonProperty("unit_pressure")
-        var unitPressure: Long? = null,
+        val unitPressure: Long? = null,
 
         @JsonProperty("unit_system")
-        var unitSystem: Long? = null,
+        val unitSystem: Long? = null,
 
         @JsonProperty("unit_wind")
-        var unitWind: Long? = null
+        val unitWind: Long? = null
 )

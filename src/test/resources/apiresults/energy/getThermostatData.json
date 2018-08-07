@@ -1,0 +1,419 @@
+{
+  "body": {
+    "devices": [
+      {
+        "_id": "d01",
+        "firmware": 174,
+        "last_bilan": {
+          "y": 2018,
+          "m": 7
+        },
+        "last_setup": 1403204277,
+        "last_status_store": 1533663069,
+        "place": {
+          "altitude": 36,
+          "city": "Berlin",
+          "country": "DE",
+          "improveLocProposed": true,
+          "location": [
+            1,
+            5
+          ],
+          "timezone": "Europe/Berlin",
+          "trust_location": true
+        },
+        "plug_connected_boiler": 0,
+        "type": "NAPlug",
+        "udp_conn": true,
+        "wifi_status": 39,
+        "modules": [
+          {
+            "_id": "m01",
+            "module_name": "Badezimmer",
+            "type": "NATherm1",
+            "firmware": 65,
+            "last_message": 1533663061,
+            "rf_status": 60,
+            "battery_vp": 4442,
+            "therm_orientation": 3,
+            "therm_relay_cmd": 0,
+            "anticipating": false,
+            "battery_percent": 96,
+            "last_therm_seen": 1533663061,
+            "setpoint": {
+              "setpoint_mode": "hg"
+            },
+            "therm_program_list": [
+              {
+                "zones": [
+                  {
+                    "type": 0,
+                    "name": "Komfort",
+                    "id": 0,
+                    "temp": 22
+                  },
+                  {
+                    "type": 1,
+                    "name": "Nacht",
+                    "id": 1,
+                    "temp": 16
+                  },
+                  {
+                    "type": 5,
+                    "name": "Eco",
+                    "id": 5,
+                    "temp": 18
+                  },
+                  {
+                    "type": 2,
+                    "id": 2,
+                    "temp": 15
+                  },
+                  {
+                    "type": 3,
+                    "id": 3,
+                    "temp": 7
+                  }
+                ],
+                "timetable": [
+                  {
+                    "m_offset": 0,
+                    "id": 1
+                  },
+                  {
+                    "m_offset": 405,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 450,
+                    "id": 5
+                  },
+                  {
+                    "m_offset": 1350,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 1365,
+                    "id": 1
+                  },
+                  {
+                    "m_offset": 1845,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 1890,
+                    "id": 5
+                  },
+                  {
+                    "m_offset": 2790,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 2805,
+                    "id": 1
+                  },
+                  {
+                    "m_offset": 3285,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 3330,
+                    "id": 5
+                  },
+                  {
+                    "m_offset": 4230,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 4245,
+                    "id": 1
+                  },
+                  {
+                    "m_offset": 4725,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 4770,
+                    "id": 5
+                  },
+                  {
+                    "m_offset": 5670,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 5685,
+                    "id": 1
+                  },
+                  {
+                    "m_offset": 6165,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 6210,
+                    "id": 5
+                  },
+                  {
+                    "m_offset": 7110,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 7125,
+                    "id": 1
+                  },
+                  {
+                    "m_offset": 7710,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 7860,
+                    "id": 5
+                  },
+                  {
+                    "m_offset": 8520,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 8565,
+                    "id": 1
+                  },
+                  {
+                    "m_offset": 9150,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 9300,
+                    "id": 5
+                  },
+                  {
+                    "m_offset": 9960,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 10005,
+                    "id": 1
+                  }
+                ],
+                "name": "Winter",
+                "program_id": "p01",
+                "selected": true
+              }
+            ],
+            "measured": {
+              "time": 1533662846,
+              "temperature": 27.4,
+              "setpoint_temp": 7
+            }
+          }
+        ],
+        "station_name": "Badezimmer",
+        "last_plug_seen": 1533663069
+      },
+      {
+        "_id": "d02",
+        "firmware": 174,
+        "last_bilan": {
+          "y": 2018,
+          "m": 7
+        },
+        "last_setup": 1481489334,
+        "last_status_store": 1533665226,
+        "place": {
+          "altitude": 36,
+          "city": "Berlin",
+          "country": "DE",
+          "improveLocProposed": true,
+          "location": [
+            1,
+            5
+          ],
+          "timezone": "Europe/Berlin",
+          "trust_location": true
+        },
+        "plug_connected_boiler": 0,
+        "type": "NAPlug",
+        "udp_conn": true,
+        "wifi_status": 64,
+        "modules": [
+          {
+            "_id": "m02",
+            "module_name": "Wohnzimmer",
+            "type": "NATherm1",
+            "firmware": 65,
+            "last_message": 1533665224,
+            "rf_status": 62,
+            "battery_vp": 3987,
+            "therm_orientation": 3,
+            "therm_relay_cmd": 0,
+            "anticipating": false,
+            "battery_percent": 66,
+            "last_therm_seen": 1533665224,
+            "setpoint": {
+              "setpoint_mode": "off"
+            },
+            "therm_program_list": [
+              {
+                "zones": [
+                  {
+                    "type": 0,
+                    "name": "Komfort",
+                    "id": 0,
+                    "temp": 21
+                  },
+                  {
+                    "type": 1,
+                    "name": "Nacht",
+                    "id": 1,
+                    "temp": 16
+                  },
+                  {
+                    "type": 5,
+                    "name": "Eco",
+                    "id": 4,
+                    "temp": 16
+                  },
+                  {
+                    "type": 2,
+                    "id": 2,
+                    "temp": 15
+                  },
+                  {
+                    "type": 3,
+                    "id": 3,
+                    "temp": 7
+                  }
+                ],
+                "timetable": [
+                  {
+                    "m_offset": 0,
+                    "id": 1
+                  },
+                  {
+                    "m_offset": 390,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 435,
+                    "id": 4
+                  },
+                  {
+                    "m_offset": 1140,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 1350,
+                    "id": 1
+                  },
+                  {
+                    "m_offset": 1830,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 1875,
+                    "id": 4
+                  },
+                  {
+                    "m_offset": 2580,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 2790,
+                    "id": 1
+                  },
+                  {
+                    "m_offset": 3270,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 3315,
+                    "id": 4
+                  },
+                  {
+                    "m_offset": 4020,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 4230,
+                    "id": 1
+                  },
+                  {
+                    "m_offset": 4710,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 4755,
+                    "id": 4
+                  },
+                  {
+                    "m_offset": 5460,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 5670,
+                    "id": 1
+                  },
+                  {
+                    "m_offset": 6150,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 6195,
+                    "id": 4
+                  },
+                  {
+                    "m_offset": 6900,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 7110,
+                    "id": 1
+                  },
+                  {
+                    "m_offset": 7710,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 8580,
+                    "id": 1
+                  },
+                  {
+                    "m_offset": 9150,
+                    "id": 0
+                  },
+                  {
+                    "m_offset": 10020,
+                    "id": 1
+                  }
+                ],
+                "name": "Winter",
+                "program_id": "p02",
+                "selected": true
+              }
+            ],
+            "measured": {
+              "time": 1533664987,
+              "temperature": 27.7,
+              "setpoint_temp": 0
+            }
+          }
+        ],
+        "station_name": "Wohnzimmer",
+        "last_plug_seen": 1533665226
+      }
+    ],
+    "user": {
+      "mail": "invalid@invalid.invalid",
+      "administrative": {
+        "country": "DE",
+        "reg_locale": "de-DE",
+        "lang": "de-DE",
+        "unit": 0,
+        "windunit": 0,
+        "pressureunit": 0,
+        "feel_like_algo": 0
+      }
+    }
+  },
+  "status": "ok",
+  "time_exec": 0.12757110595703,
+  "time_server": 1533665975
+}

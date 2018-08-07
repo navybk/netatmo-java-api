@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class Place(
         @JsonProperty("country")
-        private val country: String? = null,
+        val country: String? = null,
 
         @JsonProperty("city")
-        private val city: String? = null,
+        val city: String? = null,
 
         @JsonProperty("timezone")
-        private val timezone: String? = null
+        val timezone: String? = null
 )

@@ -21,6 +21,6 @@ interface CommonService {
             @Query("date_end") dateEnd: Long? = null,
             @Query("limit") limit: Int? = null,
             @Query("optimize") optimize: Boolean? = null,
-            @Query("real_time") realTime: String? = null
+            @Query("real_time") realTime: Boolean? = null
     ): Call<TypedBaseResult<List<MeasureRequestResponse>>>
 }

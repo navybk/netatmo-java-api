@@ -6,39 +6,45 @@ import io.rudolph.netatmo.api.common.model.Module
 
 data class Home(
         @JsonProperty("id")
-        var id: String? = null,
+        val id: String,
 
         @JsonProperty("altitude")
-        var altitude: String? = null,
+        val altitude: String? = null,
 
         @JsonProperty("name")
-        var name: String? = null,
+        val name: String? = null,
 
         @JsonProperty("country")
-        var country: String? = null,
+        val country: String? = null,
 
         @JsonProperty("timezone")
-        var timezone: String? = null,
+        val timezone: String? = null,
 
         @JsonProperty("therm_mode")
-        var thermMode: ThermMode? = null,
+        val thermMode: ThermMode? = null,
 
         @JsonProperty("coordinates")
-        var coordinates: Coordinates? = null,
+        val coordinates: Coordinates? = null,
 
         @JsonProperty("therm_setpoint_default_duration")
-        var thermSetpointDefaultDuration: Long? = null,
+        val thermSetpointDefaultDuration: Long? = null,
 
         @JsonProperty("rooms")
-        var rooms: List<Room>? = null,
+        val rooms: List<Room> = listOf(),
 
         @JsonProperty("modules")
-        var modules: List<Module>? = null,
+        val modules: List<Module> = listOf(),
 
         @JsonProperty("therm_schedules")
-        var thermSchedules: List<Schedule>? = null,
+        val thermSchedules: List<Schedule> = listOf(),
 
         @JsonProperty("schedules")
-        var schedules: List<Schedule>? = null
-)
+        val schedules: List<Schedule> = listOf()
+) {
+
+    fun getRoomForModule(module: Module) =
+            rooms?.find {
+                it.moduleIds?.contains(module.id) ?: false
+            }
+}
 

@@ -11,23 +11,20 @@ data class Room(
          * Id of the room
          */
         @JsonProperty("id")
-        var id: String? = null,
+        val id: String? = null,
 
-        /**
-         * setpoint temprature
-         */
         @JsonProperty("name")
-        var name: String? = null,
+        val name: String? = null,
 
         @JsonProperty("type")
-        var type: String? = null,
+        val type: String? = null,
 
         @JsonProperty("module_ids")
-        var moduleIds: List<String>? = null,
+        val moduleIds: List<String>? = null,
 
         @JsonProperty("measure_offset_NAPlug_temperature")
-        var measureOffsetNAPlugTemperature: Int? = null,
+        val measureOffsetNAPlugTemperature: Int? = null,
 
         @JsonProperty("measure_offset_NAPlug_estimated_temperature")
-        var measureOffsetNAPlugEstimatedTemperature: Int? = null
+        val measureOffsetNAPlugEstimatedTemperature: Int? = null
 )

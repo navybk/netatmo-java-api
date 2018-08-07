@@ -1,6 +1,7 @@
 package io.rudolph.netatmo.api.presence.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.rudolph.netatmo.api.common.model.DeviceType
 
 
 data class Camera(
@@ -17,7 +18,7 @@ data class Camera(
         val id: String? = null,
 
         @JsonProperty("type")
-        val type: String? = null,
+        val type: DeviceType? = DeviceType.UNKNOWN,
 
         @JsonProperty("is_local")
         val isLocal: Boolean? = null,

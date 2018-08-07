@@ -7,13 +7,13 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class RoomMeasureBody(
         @JsonProperty("beg_time")
-        var begTime: Int? = null,
+        val begTime: Int? = null,
 
         @JsonProperty("step_time")
-        var stepTime: Int? = null,
+        val stepTime: Int? = null,
 
         @JsonAnySetter
-        var value: MutableMap<String, MutableList<Float>>? = mutableMapOf()
+        val value: MutableMap<String, MutableList<Float>>? = mutableMapOf()
 
 ) {
     @JsonAnyGetter

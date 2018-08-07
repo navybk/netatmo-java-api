@@ -1,0 +1,20 @@
+{
+  "body": {
+    "devices": [],
+    "user": {
+      "mail": "",
+      "administrative": {
+        "country": "DE",
+        "reg_locale": "de-DE",
+        "lang": "de-DE",
+        "unit": 0,
+        "windunit": 0,
+        "pressureunit": 0,
+        "feel_like_algo": 0
+      }
+    }
+  },
+  "status": "ok",
+  "time_exec": 0.084695816040039,
+  "time_server": 1533058721
+}

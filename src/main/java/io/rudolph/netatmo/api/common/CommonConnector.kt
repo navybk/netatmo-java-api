@@ -41,7 +41,7 @@ abstract class CommonConnector(api: Retrofit) {
             dateEnd: LocalDateTime? = null,
             limit: Int? = null,
             optimize: Boolean? = null,
-            realTime: String? = null
+            realTime: Boolean? = null
     ): BodyResultExecutable<List<MeasureRequestResponse>> {
         return apiService.getMeasure(
                 accessToken = "empty",

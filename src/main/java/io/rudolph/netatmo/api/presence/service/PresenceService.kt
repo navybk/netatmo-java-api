@@ -46,7 +46,7 @@ internal interface PresenceService {
     fun getHomeData(
             @Query("access_token") accessToken: String,
             @Query("home_id") homeId: String? = null,
-            @Query("size") eventId: String
+            @Query("size") eventId: String? = null
     ): Call<TypedBaseResult<SecurityHome>>
 
     @Headers("Content-Type:text/plain")
@@ -54,7 +54,7 @@ internal interface PresenceService {
     fun getHomeDataPost(
             @Query("access_token") accessToken: String,
             @Query("home_id") homeId: String? = null,
-            @Query("size") eventId: String
+            @Query("size") eventId: String? = null
     ): Call<TypedBaseResult<SecurityHome>>
 
     @Headers("Content-Type:text/plain")

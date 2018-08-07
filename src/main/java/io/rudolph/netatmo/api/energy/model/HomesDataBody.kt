@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class HomesDataBody(
         @JsonProperty("homes")
-        var homes: List<Home>? = null,
+        val homes: List<Home> = listOf(),
 
         @JsonProperty("user")
-        var user: User? = null
+        val user: User? = null
 )
 

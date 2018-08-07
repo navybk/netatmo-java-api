@@ -7,11 +7,11 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 data class SecurityHome(
         @JsonProperty("global_info")
-        private val globalInfo: GlobalInfo? = null,
+        val globalInfo: GlobalInfo? = null,
 
         @JsonProperty("homes")
-        private val homes: List<Home>? = null,
+        val homes: List<PresenceHome>? = null,
 
         @JsonProperty("user")
-        private val user: User? = null
+        val user: User? = null
 )

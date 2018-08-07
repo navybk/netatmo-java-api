@@ -40,7 +40,7 @@ class NetatmoApi(userMail: String? = null,
         tokenStorage.onRefreshTokenUpdate = { accessToken: String, refreshToken: String, scopeList: List<Scope> -> callback.onTokenReceived(accessToken, refreshToken, scopeList) }
     }
 
-    fun setTokenRefreshFunction(function :(accessToken: String, refreshToken: String, scopeList: List<Scope>) -> Unit ) {
+    fun setTokenRefreshFunction(function: (accessToken: String, refreshToken: String, scopeList: List<Scope>) -> Unit) {
         tokenStorage.onRefreshTokenUpdate = function
     }
 

@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class Snapshot(
         @JsonProperty("id")
-        private val id: String? = null,
+        val id: String? = null,
 
         @JsonProperty("version")
-        private val version: Int? = null,
+        val version: Int? = null,
 
         @JsonProperty("key")
-        private val key: String? = null
+        val key: String? = null
 )

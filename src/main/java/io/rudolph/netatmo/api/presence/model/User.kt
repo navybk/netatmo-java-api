@@ -5,8 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class User(
         @JsonProperty("reg_locale")
-        private val regLocale: String? = null,
+        val regLocale: String? = null,
 
         @JsonProperty("lang")
-        private val lang: String? = null
+        val lang: String? = null,
+
+        @JsonProperty("country")
+        val country: String? = null
 )

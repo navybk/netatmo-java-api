@@ -62,7 +62,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @param eventId Your request will retrieve all the events until this one
      * @return an executable object to obtain the [SecurityHome]
      */
-    fun getHomeData(homeId: String, eventId: String): BodyResultExecutable<SecurityHome> {
+    fun getHomeData(homeId: String? = null, eventId: String? = null): BodyResultExecutable<SecurityHome> {
         return presenceService.getHomeData(
                 accessToken = "",
                 homeId = homeId,

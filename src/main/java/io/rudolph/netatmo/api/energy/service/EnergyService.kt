@@ -1,6 +1,7 @@
 package io.rudolph.netatmo.api.energy.service
 
 import io.rudolph.netatmo.api.common.model.DeviceType
+import io.rudolph.netatmo.api.common.model.StationResults
 import io.rudolph.netatmo.api.energy.model.*
 import retrofit2.Call
 import retrofit2.http.*
@@ -163,5 +164,19 @@ internal interface EnergyService {
             @Query("schedule_id") scheduleId: String,
             @Query("home_id") homeId: String
     ): Call<BaseResult>
+
+    @Headers("Content-Type:text/plain")
+    @GET("getthermostatsdata")
+    fun getThermostatsData(
+            @Query("home_id") homeId: String? = null,
+            @Query("device_id") deviceId: String? = null
+    ): Call<TypedBaseResult<StationResults>>
+
+    @Headers("Content-Type:text/plain")
+    @POST("getthermostatsdata")
+    fun getThermostatsDataPost(
+            @Query("home_id") homeId: String? = null,
+            @Query("device_id") deviceId: String? = null
+    ): Call<TypedBaseResult<StationResults>>
 
 }

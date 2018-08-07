@@ -56,3 +56,4 @@ credentials*.json
 #assets only for testing
 /assets/develop/
 /captures
+/lib

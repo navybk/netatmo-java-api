@@ -5,29 +5,29 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class Schedule(
         @JsonProperty("timetable")
-        var timetable: List<Timetable>? = null,
+        val timetable: List<Timetable> = listOf(),
 
         @JsonProperty("id")
-        var id: String? = null,
+        val id: String,
 
         @JsonProperty("name")
-        var name: String? = null,
+        val name: String,
 
         @JsonProperty("away_temp")
-        var awayTemp: Int? = null,
+        val awayTemp: Int? = null,
 
         @JsonProperty("zones")
-        var zones: List<Zone>? = null,
+        val zones: List<Zone> = listOf(),
 
         @JsonProperty("hg_temp")
-        var hgTemp: Int? = null,
+        val hgTemp: Int? = null,
 
         @JsonProperty("selected")
-        var isSelected: Boolean? = null,
+        val isSelected: Boolean? = null,
 
         @JsonProperty("type")
-        var type: String? = null,
+        val type: String? = null,
 
         @JsonProperty("default")
-        var default: Boolean = false
+        val default: Boolean = false
 )
