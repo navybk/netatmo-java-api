@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
 import io.rudolph.netatmo.api.energy.model.module.RelayModule
 import io.rudolph.netatmo.api.energy.model.module.ThermostatModule
 import io.rudolph.netatmo.api.energy.model.module.ValveModule
+import io.rudolph.netatmo.api.presence.model.PresenceModule
 
 
 @JsonTypeInfo(
@@ -22,7 +23,8 @@ import io.rudolph.netatmo.api.energy.model.module.ValveModule
         Type(value = ClimateModule::class, name = Constant.INDOORMODULE_API_STRING),
         Type(value = ClimateModule::class, name = Constant.OUTDOORMODULE_API_STRING),
         Type(value = ClimateModule::class, name = Constant.RAINGAUGEMODULE_API_STRING),
-        Type(value = ClimateModule::class, name = Constant.WINDMODULE_API_STRING)
+        Type(value = ClimateModule::class, name = Constant.WINDMODULE_API_STRING),
+        Type(value = PresenceModule::class, name = Constant.CAM_DOOR_TAG_API_STRING)
 )
 abstract class Module {
 
@@ -36,6 +38,7 @@ abstract class Module {
      * 60 = full signal
      */
     @JsonProperty("rf_status")
+    @JsonAlias("rf", "rf_status")
     open val rfStrength: Int? = null
 
     /**

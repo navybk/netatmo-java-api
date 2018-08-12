@@ -13,6 +13,7 @@ object Constant {
     const val INDOORMODULE_API_STRING = "NAModule4"
     const val THERMOSTAT_API_STRING = "NATherm1"
     const val HOMECOACH_API_STRING = "NHC"
+    const val CAM_DOOR_TAG_API_STRING = "NACamDoorTag"
     const val UNKNOWN_API_STRING = "unknown"
 }
 
@@ -28,5 +29,6 @@ enum class DeviceType(val value: String) {
     RAINGAUGEMODULE(Constant.RAINGAUGEMODULE_API_STRING),
     INDOORMODULE(Constant.INDOORMODULE_API_STRING),
     THERMOSTAT(Constant.THERMOSTAT_API_STRING),
+    CAMDOORTAG(Constant.CAM_DOOR_TAG_API_STRING),
     UNKNOWN(Constant.UNKNOWN_API_STRING);
 }
