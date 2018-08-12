@@ -11,7 +11,8 @@ import java.time.LocalDateTime
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
-        property = "type")
+        property = "type",
+        visible = true)
 @JsonSubTypes(
         JsonSubTypes.Type(value = BaseDevice::class, name = Constant.VALVE_API_STRING),
         JsonSubTypes.Type(value = BaseDevice::class, name = Constant.THERMOSTAT_API_STRING),
@@ -19,7 +20,8 @@ import java.time.LocalDateTime
         JsonSubTypes.Type(value = BaseDevice::class, name = Constant.INDOORMODULE_API_STRING),
         JsonSubTypes.Type(value = BaseDevice::class, name = Constant.OUTDOORMODULE_API_STRING),
         JsonSubTypes.Type(value = BaseDevice::class, name = Constant.RAINGAUGEMODULE_API_STRING),
-        JsonSubTypes.Type(value = BaseDevice::class, name = Constant.WINDMODULE_API_STRING)
+        JsonSubTypes.Type(value = BaseDevice::class, name = Constant.WINDMODULE_API_STRING),
+        JsonSubTypes.Type(value = BaseDevice::class, name = Constant.BASESTATION_API_STRING)
 )
 abstract class Device {
     @JsonProperty("cipher_id")
@@ -76,7 +78,7 @@ abstract class Device {
     val dashboardData: DashboardData? = null
 
     @JsonProperty("last_status_store")
-    val lastStatusStore: Int? = null
+    val lastStatusStore: LocalDateTime? = null
 
     /**
      * Version of the software

@@ -5,7 +5,7 @@ import org.junit.Test
 
 class AirCareTest : BaseTest(listOf(Scope.READ_HOMECOACH)) {
 
-    val connector = api.airCareConnector
+    val connector = api.airCareApi
 
     @Test
     fun getPublicData() {

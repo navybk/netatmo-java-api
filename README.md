@@ -25,7 +25,7 @@ For debug information simply add the debug flag as boolean parameter to the cons
 For retreiving data, you have to specify the Netatmo Api Connector (weather, energy, aircare, etc.) and method.
 
 ```java
-Executable<HomesDataBody> getHomesDataExec = api.getEnergyApiConnector().getHomesData(null, null)
+Executable<HomesDataBody> getHomesDataExec = api.getEnergyApi().getHomesData(null, null)
 ```
 In return you get an executable with is capable of synchronous and/or asynchronous execution.
 
@@ -49,7 +49,7 @@ Executable.Callback<HomesDataBody> callback = new Executable.Callback<HomesDataB
 
     }
 };
-api.getEnergyApiConnector().getHomesData(null, null).executeAsync(callback);
+api.getEnergyApi().getHomesData(null, null).executeAsync(callback);
 ```
 
 The call will either return the object in the `onResult` function or an error in `OnError` function
@@ -58,7 +58,7 @@ Also lambdas are possible
 ```java
 {
     […]
-    api.getEnergyApiConnector().getHomesData(null, null)
+    api.getEnergyApi().getHomesData(null, null)
             .onError(this::onError)
             .executeAsync(this::onSuccess);
     […]

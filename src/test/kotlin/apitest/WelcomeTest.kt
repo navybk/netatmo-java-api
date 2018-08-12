@@ -11,7 +11,7 @@ class WelcomeTest : BaseTest(listOf(Scope.READ_CAMERA,
 
     @Test
     fun getLastEventOf() {
-        api.welcomeConnector.getLastEventOf("", "").executeSync().apply {
+        api.welcomeApi.getLastEventOf("", "").executeSync().apply {
             assert(this != null)
         }
     }

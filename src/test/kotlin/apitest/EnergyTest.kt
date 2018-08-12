@@ -20,7 +20,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
         var result = false
 
         // First with lambda
-        api.energyApiConnector
+        api.energyApi
                 .getHomesData()
                 .onError {
                     waitForeverLatch.countDown()
@@ -28,7 +28,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
                 .executeAsync {
 
                     // second with callback interface
-                    api.energyApiConnector.getHomeStatus(it.homes[0].id)
+                    api.energyApi.getHomeStatus(it.homes[0].id)
                             .executeAsync(object : Executable.Callback<HomeStatusBody> {
                                 override fun onResult(value: HomeStatusBody) {
                                     result = true
@@ -50,13 +50,13 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
 
     @Test
     fun testGetHomeStatus() {
-        api.energyApiConnector.getHomesData().executeSync().apply {
+        api.energyApi.getHomesData().executeSync().apply {
             assert(this != null)
         }?.homes
                 ?.get(0)
                 ?.id
                 ?.apply homeid@{
-                    api.energyApiConnector
+                    api.energyApi
                             .getHomeStatus(this)
                             .executeSync().apply {
                                 assert(this != null)
@@ -69,14 +69,14 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
 
     @Test
     fun gestMeasure() {
-        api.energyApiConnector.getHomesData().executeSync().apply {
+        api.energyApi.getHomesData().executeSync().apply {
             assert(this != null)
         }?.homes
                 ?.get(0)
                 ?.apply {
                     val moduleId = modules[1].id!!
                     val deviceId = modules[0].id!!
-                    api.energyApiConnector
+                    api.energyApi
                             .getMeasure(moduleId = moduleId,
                                     deviceId = deviceId,
                                     scale = Scale.DAY,
@@ -90,7 +90,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
 
     @Test
     fun testGetRoomMeasure() {
-        api.energyApiConnector.getHomesData().executeSync().apply {
+        api.energyApi.getHomesData().executeSync().apply {
             assert(this != null)
         }
                 ?.homes
@@ -103,7 +103,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
 
                     val begin = LocalDateTime.parse("2018-01-01T00:00:00")
 
-                    api.energyApiConnector.getRoomMeasure(homeId = this.id,
+                    api.energyApi.getRoomMeasure(homeId = this.id,
                             roomId = roomId,
                             scale = "1day",
                             dateBegin = begin,
@@ -121,17 +121,17 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
 
     @Test
     fun testCreateAndSyncAndRenameAnddDeleteSchedule() {
-        api.energyApiConnector.getHomesData().executeSync().apply {
+        api.energyApi.getHomesData().executeSync().apply {
             assert(this != null)
         }?.homes?.get(0)?.apply {
 
-            val zones = thermSchedules[0].zones!!
-            val timetable = schedules[0].timetable!!
+            val zones = thermSchedules[0].zones
+            val timetable = schedules[0].timetable
             val name = "test"
             val hgTRemp = 8F
             val awayTemp = 16F
             val homeId = id
-            api.energyApiConnector.createNewHomeSchedule(homeId = homeId,
+            api.energyApi.createNewHomeSchedule(homeId = homeId,
                     awayTemp = awayTemp,
                     hgTemp = hgTRemp,
                     name = name,
@@ -141,7 +141,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
                     .apply {
                         val scheduleId = this?.scheduleId!!
                         var result = true
-                        api.energyApiConnector.syncHomeSchedule(
+                        api.energyApi.syncHomeSchedule(
                                 scheduleId = scheduleId,
                                 timeTable = timetable,
                                 zones = zones,
@@ -156,7 +156,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
                                     }
                                 }
 
-                        api.energyApiConnector
+                        api.energyApi
                                 .renameHomeSchedule(scheduleId, "test2", homeId)
                                 .executeSync()
                                 .apply {
@@ -165,7 +165,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
                                     }
                                 }
 
-                        api.energyApiConnector
+                        api.energyApi
                                 .deleteHomeSchedule(scheduleId, homeId)
                                 .executeSync()
                                 .apply {
@@ -177,12 +177,5 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
                     }
         }
         assert(false)
-    }
-
-    @Test
-    fun testThermostatdata() {
-        api.energyApiConnector.getThermostatData().executeSync().apply {
-            assert(this != null)
-        }
     }
 }

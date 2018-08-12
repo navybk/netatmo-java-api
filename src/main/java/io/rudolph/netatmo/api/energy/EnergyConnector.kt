@@ -2,12 +2,11 @@ package io.rudolph.netatmo.api.energy
 
 import io.rudolph.netatmo.api.common.CommonConnector
 import io.rudolph.netatmo.api.common.model.DeviceType
-import io.rudolph.netatmo.api.common.model.StationResults
 import io.rudolph.netatmo.api.energy.model.*
 import io.rudolph.netatmo.api.energy.service.EnergyService
 import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.BodyResultExecutable
-import io.rudolph.netatmo.executable.Executable
+import io.rudolph.netatmo.executable.PlainExecutable
 import io.rudolph.netatmo.oauth2.toTimestamp
 import retrofit2.Retrofit
 import java.time.LocalDateTime
@@ -21,7 +20,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      *
      * required scope: read_thermostat
      *
-     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energy/homesdata)
+     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energyApi/homesdata)
      *
      * @param homeId Id of the home
      * @param gatewayTypes Array of desired gateway. For Energy app, use NAPlug
@@ -38,7 +37,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      *
      * required scope: read_thermostat
      *
-     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energy/homestatus)
+     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energyApi/homestatus)
      *
      * @param homeId id of home
      * @param deviceTypes Array of device type
@@ -55,7 +54,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      *
      * required scope: read_thermostat
      *
-     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energy/getroommeasure)
+     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energyApi/getroommeasure)
      *
      * @param homeId id of home
      * @param roomId id of room
@@ -94,7 +93,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      *
      * required scope: write_thermostat
      *
-     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energy/setthermmode)
+     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energyApi/setthermmode)
      *
      * @param homeId of home
      * @param thermMode Heating mode
@@ -103,7 +102,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      */
     fun setThermMode(homeId: String,
                      thermMode: Mode,
-                     endTime: LocalDateTime? = null): Executable<BaseResult, BaseResult> {
+                     endTime: LocalDateTime? = null): PlainExecutable<BaseResult> {
         return energyService.setRoomThermMode(homeId,
                 thermMode,
                 endTime.toTimestamp())
@@ -115,7 +114,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      *
      * required scope: write_thermostat
      *
-     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energy/setroomthermpoint)
+     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energyApi/setroomthermpoint)
      *
      * @param homeId id of home
      * @param roomId id of room
@@ -128,7 +127,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
                           roomId: String,
                           mode: ThermPointMode,
                           temperature: Float? = null,
-                          endTime: LocalDateTime? = null): Executable<BaseResult, BaseResult> {
+                          endTime: LocalDateTime? = null): PlainExecutable<BaseResult> {
         return energyService.setRoomThermPoint(homeId,
                 roomId,
                 mode,
@@ -142,13 +141,13 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      *
      * required scope: write_thermostat
      *
-     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energy/switchhomeschedule)
+     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energyApi/switchhomeschedule)
      *
      * @param scheduleId ID of the schedule to switch on
      * @param homeId id of home
      * @return a [BaseResult] or null
      */
-    fun switchHomeSchedule(scheduleId: String, homeId: String): Executable<BaseResult, BaseResult> {
+    fun switchHomeSchedule(scheduleId: String, homeId: String): PlainExecutable<BaseResult> {
         return energyService.setSwitchHomeSchedule(scheduleId, homeId)
                 .executable
     }
@@ -159,7 +158,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      *
      * required scope: write_thermostat
      *
-     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energy/synchomeschedule)
+     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energyApi/synchomeschedule)
      *
      * @param scheduleId ID of the schedule to switch on
      * @param timeTable Array describing the timetable.
@@ -176,7 +175,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
                          name: String,
                          homeId: String,
                          hgTemp: Float,
-                         awayTemp: Float): Executable<BaseResult, BaseResult> {
+                         awayTemp: Float): PlainExecutable<BaseResult> {
 
         val body = SetHomeScheduleBody(scheduleId,
                 timeTable,
@@ -194,7 +193,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      *
      * required scope: write_thermostat
      *
-     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energy/renamehomeschedule)
+     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energyApi/renamehomeschedule)
      *
      * @param scheduleId ID of the schedule to switch on
      * @param name Name you want to apply
@@ -203,7 +202,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      */
     fun renameHomeSchedule(scheduleId: String,
                            name: String,
-                           homeId: String): Executable<BaseResult, BaseResult> {
+                           homeId: String): PlainExecutable<BaseResult> {
         return energyService.postRenameHomeSchedule(scheduleId, name, homeId).executable
     }
 
@@ -212,14 +211,14 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      *
      * required scope: write_thermostat
      *
-     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energy/deletehomeschedule)
+     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energyApi/deletehomeschedule)
      *
      * @param scheduleId ID of the schedule to switch on
      * @param homeId id of home
      * @return a [BaseResult] or null
      */
     fun deleteHomeSchedule(scheduleId: String,
-                           homeId: String): Executable<BaseResult, BaseResult> {
+                           homeId: String): PlainExecutable<BaseResult> {
         return energyService.deleteHomeSchedule(scheduleId, homeId).executable
     }
 
@@ -228,7 +227,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      *
      * required scope: read_thermostat
      *
-     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energy/createnewhomeschedule)
+     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energyApi/createnewhomeschedule)
      *
      * @param homeId Id of the home
      * @param timeTable Array of timetable
@@ -252,9 +251,5 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
                 awayTemp)
         return energyService.createNewHomeSchedule(body)
                 .executable
-    }
-
-    fun getThermostatData(homeId: String? = null, deviceId: String? = null): BodyResultExecutable<StationResults> {
-        return energyService.getThermostatsData(homeId, deviceId).executable
     }
 }

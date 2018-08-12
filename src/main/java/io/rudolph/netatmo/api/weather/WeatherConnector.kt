@@ -12,7 +12,7 @@ class WeatherConnector(api: Retrofit) : CommonConnector(api) {
     private val weatherService = api.create(WeatherService::class.java)
 
     /**
-     * Retrieves publicly shared weather data from Outdoor Modules within a predefined area.
+     * Retrieves publicly shared weatherApi data from Outdoor Modules within a predefined area.
      *
      * required scope: none required
      *

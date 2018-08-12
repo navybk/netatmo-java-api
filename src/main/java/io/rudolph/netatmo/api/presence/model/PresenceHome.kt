@@ -1,6 +1,7 @@
 package io.rudolph.netatmo.api.presence.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.rudolph.netatmo.api.aircare.model.Place
 
 
 data class PresenceHome(

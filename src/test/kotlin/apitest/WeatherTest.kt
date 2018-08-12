@@ -4,7 +4,7 @@ import org.junit.Test
 
 class WeatherTest : BaseTest() {
 
-    val connector = api.weatherApiConnector
+    val connector = api.weatherApi
 
     @Test
     fun getPublicData() {

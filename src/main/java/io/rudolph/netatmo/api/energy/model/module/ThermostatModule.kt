@@ -2,7 +2,6 @@ package io.rudolph.netatmo.api.energy.model.module
 
 import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonProperty
-import io.rudolph.netatmo.api.common.model.DeviceType
 import java.time.LocalDateTime
 
 data class ThermostatModule(
@@ -49,6 +48,4 @@ data class ThermostatModule(
         val batteryVp: Int? = null
 
 
-) : ValveBaseModule() {
-    override val type = DeviceType.THERMOSTAT
-}
+) : ValveBaseModule()

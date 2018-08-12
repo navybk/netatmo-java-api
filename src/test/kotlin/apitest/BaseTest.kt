@@ -8,7 +8,7 @@ abstract class BaseTest(scope: List<Scope> = listOf()) {
     /**
      * for tests save credentials as json at /src/main/resources
      */
-    private val testConfig = TestConfig.buildFromFile("/credentialsmicha.json")
+    private val testConfig = TestConfig.buildFromFile("/credentials.json")
             ?: throw IllegalStateException("config file missing")
 
     protected val api = NetatmoApi(

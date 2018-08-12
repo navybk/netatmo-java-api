@@ -64,11 +64,27 @@ class WelcomeConnector(api: Retrofit) : PresenceConnector(api) {
      * @param personIds Array of person_id
      * @return an executable object to obtain the [BaseResult]
      */
-    fun setPersonsAway(homeId: String, personIds: List<String>): PlainExecutable<BaseResult> {
+    fun setPersonsHome(homeId: String, personIds: List<String>): PlainExecutable<BaseResult> {
         return welcomeService.setPersonsHome(
                 accessToken = "",
                 homeId = homeId,
                 personIds = personIds
         ).executable
     }
+
+    /**
+     * Sets a person as "Home"". The event will be added to the user’s timeline.
+     *
+     * required scope: write_camera
+     *
+     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/security/setpersonshome)
+     *
+     * @param homeId ID of the Home you're interested in
+     * @param personId id of person the home status to be set
+     * @return an executable object to obtain the [BaseResult]
+     */
+    fun setPersonsHome(homeId: String, personId: String): PlainExecutable<BaseResult> {
+        return setPersonsHome(homeId, listOf(personId))
+    }
+
 }

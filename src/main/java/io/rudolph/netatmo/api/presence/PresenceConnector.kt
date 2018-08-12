@@ -27,7 +27,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @param key Security key to access snapshots
      * @return an executable object to obtain the camera picture as jpg bytes wraped in [String] with size of  120x120
      */
-    fun getCameraPicture(imageId: String, key: String): Executable<String, String> {
+    fun getCameraPicture(imageId: String, key: String): PlainExecutable<String> {
         return presenceService.getCamerapPicture(imageId = imageId,
                 key = key).executable
     }

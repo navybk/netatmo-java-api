@@ -111,9 +111,9 @@ class NetatmoApi(userMail: String? = null,
             }
 
 
-    val energyApiConnector = EnergyConnector(api)
-    val weatherApiConnector = WeatherConnector(api)
-    val airCareConnector = AirCareConnector(api)
-    val presenceConnector = PresenceConnector(api)
-    val welcomeConnector = WelcomeConnector(api)
+    val energyApi = EnergyConnector(api)
+    val weatherApi = WeatherConnector(api)
+    val airCareApi = AirCareConnector(api)
+    val presenceApi = PresenceConnector(api)
+    val welcomeApi = WelcomeConnector(api)
 }
