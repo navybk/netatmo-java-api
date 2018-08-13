@@ -21,7 +21,7 @@ data class PresenceHome(
         val place: Place? = null,
 
         @JsonProperty("events")
-        val events: List<Event>? = null,
+        val events: List<BaseEvent>? = null,
 
         @JsonProperty("modules")
         val modules: List<PresenceModule>? = null

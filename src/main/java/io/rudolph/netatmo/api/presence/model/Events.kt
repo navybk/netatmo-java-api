@@ -5,5 +5,5 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class Events(
         @JsonProperty("events_list")
-        val eventsList: List<Event>? = null
+        val eventsList: List<BaseEvent>? = null
 )

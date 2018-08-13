@@ -12,7 +12,9 @@ import io.rudolph.netatmo.api.energy.model.TemperatureType
 import io.rudolph.netatmo.api.energy.model.ThermMode
 import io.rudolph.netatmo.api.energy.model.ZoneType
 import io.rudolph.netatmo.api.energy.model.transform.*
+import io.rudolph.netatmo.api.presence.model.AppType
 import io.rudolph.netatmo.api.presence.model.EventType
+import io.rudolph.netatmo.api.presence.transform.AppTypeDeserializer
 import io.rudolph.netatmo.api.presence.transform.EventTypeDeserializer
 import io.rudolph.netatmo.api.weather.model.Measure
 import io.rudolph.netatmo.api.weather.model.transform.MeasureDeserializer
@@ -36,6 +38,7 @@ internal object JacksonTransform {
             addDeserializer(Scale::class.java, ScaleDeserializer())
             addDeserializer(ScaleType::class.java, ScaleTypeDeserializer())
             addDeserializer(EventType::class.java, EventTypeDeserializer())
+            addDeserializer(AppType::class.java, AppTypeDeserializer())
 
             addSerializer(ThermMode::class.java, ThermModeSerializer())
             addSerializer(DeviceType::class.java, DeviceTypeSerializer())

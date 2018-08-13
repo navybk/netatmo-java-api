@@ -1,8 +1,10 @@
 package io.rudolph.netatmo.api.welcome
 
+import io.rudolph.netatmo.JacksonTransform
 import io.rudolph.netatmo.api.energy.model.BaseResult
 import io.rudolph.netatmo.api.presence.PresenceConnector
 import io.rudolph.netatmo.api.presence.model.Events
+import io.rudolph.netatmo.api.presence.model.PersonsEvent
 import io.rudolph.netatmo.api.welcome.service.WelcomeService
 import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.BodyResultExecutable
@@ -85,6 +87,15 @@ class WelcomeConnector(api: Retrofit) : PresenceConnector(api) {
      */
     fun setPersonsHome(homeId: String, personId: String): PlainExecutable<BaseResult> {
         return setPersonsHome(homeId, listOf(personId))
+    }
+
+    fun onExternalCameraEvent(jsonString: String): PersonsEvent? {
+        return try {
+            JacksonTransform.deserialize<PersonsEvent>(jsonString)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
 }
