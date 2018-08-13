@@ -11,5 +11,8 @@ data class User(
         val lang: String? = null,
 
         @JsonProperty("country")
-        val country: String? = null
+        val country: String? = null,
+
+        @JsonProperty("mail")
+        val mail: String
 )

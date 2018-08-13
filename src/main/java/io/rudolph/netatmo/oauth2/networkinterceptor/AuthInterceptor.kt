@@ -96,14 +96,21 @@ internal class AuthInterceptor(private val userMail: String?,
     }
 
     private fun proceedAuthRequest(chain: Interceptor.Chain, request: Request): String? {
-        return chain.proceed(request)?.body()?.string()?.let {
-            JacksonTransform.deserialize<AuthResponse>(it)
+        return chain.proceed(request)?.let {
+            if (!it.isSuccessful) {
+                return@let null
+            }
+            it.body()
+                    ?.string()
                     ?.let {
-                        if (!(it.scope.sortedBy { it.value }.toTypedArray() contentEquals tokenStore.scope.sortedBy { it.value }.toTypedArray())) {
-                            logger.warn("Scope from response does not match requested scope")
-                        }
-                        tokenStore.setTokens(it.accessToken, it.refreshToken, it.scope)
-                        it.accessToken
+                        JacksonTransform.deserialize<AuthResponse>(it)
+                                ?.let {
+                                    if (!(it.scope.sortedBy { it.value }.toTypedArray() contentEquals tokenStore.scope.sortedBy { it.value }.toTypedArray())) {
+                                        logger.warn("Scope from response does not match requested scope")
+                                    }
+                                    tokenStore.setTokens(it.accessToken, it.refreshToken, it.scope)
+                                    it.accessToken
+                                }
                     }
         }
     }
