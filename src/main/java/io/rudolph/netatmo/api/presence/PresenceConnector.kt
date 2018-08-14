@@ -10,7 +10,7 @@ import io.rudolph.netatmo.api.presence.service.PresenceService
 import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.BodyResultExecutable
 import io.rudolph.netatmo.executable.Executable
-import io.rudolph.netatmo.executable.PlainExecutable
+import io.rudolph.netatmo.executable.PlainCallExecutable
 import retrofit2.Retrofit
 
 open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
@@ -27,7 +27,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @param key Security key to access snapshots
      * @return an executable object to obtain the camera picture as jpg bytes wraped in [String] with size of  120x120
      */
-    fun getCameraPicture(imageId: String, key: String): PlainExecutable<String> {
+    fun getCameraPicture(imageId: String, key: String): PlainCallExecutable<String> {
         return presenceService.getCamerapPicture(imageId = imageId,
                 key = key).executable
     }
@@ -102,7 +102,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @param appTypes Webhooks are only available for Welcome and Presence, use app_security.
      * @return an executable object to obtain the [BaseResult]
      */
-    fun addWebHook(url: String, appTypes: String): PlainExecutable<BaseResult> {
+    fun addWebHook(url: String, appTypes: String): PlainCallExecutable<BaseResult> {
         return presenceService.addWebHook(
                 accessToken = "",
                 url = url,
@@ -120,7 +120,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @param appTypes For Welcome and Presence, use app_security
      * @return an executable object to obtain the [BaseResult]
      */
-    fun dropWebHook(appTypes: String): PlainExecutable<BaseResult> {
+    fun dropWebHook(appTypes: String): PlainCallExecutable<BaseResult> {
         return presenceService.dropWebHook(
                 accessToken = " ",
                 appTypes = appTypes

@@ -3,6 +3,10 @@ package apitest
 import io.rudolph.netatmo.api.common.model.Scale
 import io.rudolph.netatmo.api.common.model.ScaleType
 import io.rudolph.netatmo.api.energy.model.HomeStatusBody
+import io.rudolph.netatmo.api.energy.model.module.EnergyModule
+import io.rudolph.netatmo.api.energy.model.module.RelayModule
+import io.rudolph.netatmo.api.energy.model.module.ThermostatModule
+import io.rudolph.netatmo.api.energy.model.module.ValveModule
 import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.oauth2.model.Scope
 import org.junit.Test
@@ -177,5 +181,46 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
                     }
         }
         assert(false)
+    }
+
+    @Test
+    fun getJoinedModule() {
+        this.api.energyApi
+                .getHomesData()
+                .executeSync()
+                ?.homes
+                ?.forEach {
+                    val homeId = it.id
+
+                    it.modules
+                            .forEach { module ->
+                                assert(module is EnergyModule<*>)
+                                when (module) {
+                                    is ValveModule -> api.energyApi.getJoinedModule(homeId = homeId, module = module)
+                                    is ThermostatModule -> api.energyApi.getJoinedModule(homeId = homeId, module = module)
+                                    is RelayModule -> api.energyApi.getJoinedModule(homeId = homeId, module = module)
+                                    else -> null
+                                }?.apply {
+                                    assert(this.id == module.id)
+                                    assert(this.batteryLevelInPercent == module.batteryLevelInPercent)
+                                    assert(this.moduleName == module.moduleName)
+                                } ?: assert(false)
+                            }
+                } ?: assert(false)
+    }
+
+    @Test
+    fun getCombinedHome() {
+        val waitForeverLatch = CountDownLatch(1)
+        var test = true
+        api.energyApi.getCombinedHome().onError {
+            test = false
+            waitForeverLatch.countDown()
+        }.executeAsync {
+            waitForeverLatch.countDown()
+        }
+
+        waitForeverLatch.await()
+        assert(test)
     }
 }

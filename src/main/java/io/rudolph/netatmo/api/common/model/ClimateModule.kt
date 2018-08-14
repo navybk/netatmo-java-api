@@ -32,4 +32,23 @@ data class ClimateModule(
      */
     @JsonProperty("dashboard_data")
     val dashboardData: DashboardData? = null
-) : Module()
+) : Module() {
+
+    val getBatteryState: BatteryState
+    get() {
+        batteryVP?: return BatteryState.NO_DATA
+        val map = when (type) {
+            DeviceType.OUTDOORMODULE -> BatteryState.OUTDOOR
+            DeviceType.RAINGAUGEMODULE -> BatteryState.RAINGAUGE
+            DeviceType.INDOORMODULE -> BatteryState.INDOOR
+            DeviceType.WINDMODULE -> BatteryState.WIND
+            else -> return BatteryState.NO_DATA
+        }
+        map.keys.reversed().forEach {
+                if (batteryVP >= it) {
+                    return map.get(it)!!
+                }
+        }
+        return BatteryState.VERYLOW
+    }
+}

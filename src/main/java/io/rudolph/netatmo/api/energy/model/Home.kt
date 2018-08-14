@@ -2,6 +2,7 @@ package io.rudolph.netatmo.api.energy.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.rudolph.netatmo.api.common.model.Module
+import io.rudolph.netatmo.api.energy.model.module.EnergyModule
 
 
 data class Home(
@@ -43,7 +44,7 @@ data class Home(
 ) {
 
     fun getRoomForModule(module: Module) =
-            rooms?.find {
+            rooms.find {
                 it.moduleIds?.contains(module.id) ?: false
             }
 }

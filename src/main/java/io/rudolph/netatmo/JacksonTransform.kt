@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import io.rudolph.netatmo.api.common.model.BatteryState
 import io.rudolph.netatmo.api.common.model.DeviceType
 import io.rudolph.netatmo.api.common.model.Scale
 import io.rudolph.netatmo.api.common.model.ScaleType
@@ -39,6 +40,7 @@ internal object JacksonTransform {
             addDeserializer(ScaleType::class.java, ScaleTypeDeserializer())
             addDeserializer(EventType::class.java, EventTypeDeserializer())
             addDeserializer(AppType::class.java, AppTypeDeserializer())
+            addDeserializer(BatteryState::class.java, BatteryStateDeserializer())
 
             addSerializer(ThermMode::class.java, ThermModeSerializer())
             addSerializer(DeviceType::class.java, DeviceTypeSerializer())

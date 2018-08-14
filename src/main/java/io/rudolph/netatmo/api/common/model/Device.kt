@@ -103,4 +103,7 @@ abstract class Device {
      */
     @JsonProperty("modules")
     val modules: List<Module>? = null
+
+    val wifiLevel: WifiLevel
+        get() = WifiLevel.wifiLevelForSignalStrength(wifiStatus)
 }

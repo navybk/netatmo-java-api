@@ -3,7 +3,7 @@ package io.rudolph.netatmo.executable
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import retrofit2.Call
 
-class BodyResultExecutable<T>(call: Call<TypedBaseResult<T>>) : Executable<TypedBaseResult<T>, T>(call, { it.body!! }) {
+class BodyResultExecutable<T>(call: Call<TypedBaseResult<T>>) : CallExecutable<TypedBaseResult<T>, T>(call, { it.body!! }) {
 
     /**
      * execute the call synchronously

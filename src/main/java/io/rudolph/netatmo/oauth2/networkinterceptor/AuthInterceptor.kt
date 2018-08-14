@@ -4,10 +4,7 @@ import io.rudolph.netatmo.JacksonTransform
 import io.rudolph.netatmo.oauth2.*
 import io.rudolph.netatmo.oauth2.model.AuthResponse
 import io.rudolph.netatmo.oauth2.model.ErrorResult
-import okhttp3.FormBody
-import okhttp3.Interceptor
-import okhttp3.Request
-import okhttp3.Response
+import okhttp3.*
 
 internal class AuthInterceptor(private val userMail: String?,
                                private val userPassword: String?,
@@ -71,10 +68,10 @@ internal class AuthInterceptor(private val userMail: String?,
     }
 
     private fun login(chain: Interceptor.Chain): String? {
-        userMail ?: throw IllegalStateException("relogin with usermail not pssible")
-        userPassword ?: throw IllegalStateException("relogin with user password not pssible")
-        clientId ?: throw IllegalStateException("relogin with client id not pssible")
-        clientSecret ?: throw IllegalStateException("relogin with client secret not pssible")
+        userMail ?: throw IllegalStateException("relogin with usermail not possible")
+        userPassword ?: throw IllegalStateException("relogin with user password not possible")
+        clientId ?: throw IllegalStateException("relogin with client id not possible")
+        clientSecret ?: throw IllegalStateException("relogin with client secret not possible")
 
         val scopeList = tokenStore.scope.joinToString(" ") { it.value }
 

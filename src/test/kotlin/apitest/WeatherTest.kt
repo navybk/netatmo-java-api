@@ -1,5 +1,7 @@
 package apitest
 
+import io.rudolph.netatmo.api.common.model.BatteryState
+import io.rudolph.netatmo.api.common.model.ClimateModule
 import org.junit.Test
 
 class WeatherTest : BaseTest() {
@@ -20,9 +22,15 @@ class WeatherTest : BaseTest() {
 
     @Test
     fun getStationData() {
-        connector.getStationData().executeSync().apply {
-            assert(this != null)
+        connector.getStationData().executeSync()?.apply {
+            assert(this.user.mail != null)
+            devices[0].modules?.forEach {
+                val batteryLevel = (it as? ClimateModule)?.getBatteryState
+                assert(batteryLevel != BatteryState.NO_DATA)
+            }
+            return
         }
+        assert(false)
     }
 
 }

@@ -26,10 +26,10 @@ import io.rudolph.netatmo.api.presence.model.PresenceModule
         Type(value = ClimateModule::class, name = Constant.WINDMODULE_API_STRING),
         Type(value = PresenceModule::class, name = Constant.CAM_DOOR_TAG_API_STRING)
 )
-abstract class Module {
+abstract class Module internal constructor(
 
     @JsonAlias("id", "_id")
-    open val id: String? = null
+    open val id: String? = null,
 
     /**
      * 90 = low
@@ -38,21 +38,21 @@ abstract class Module {
      * 60 = full signal
      */
     @JsonProperty("rf_status")
-    @JsonAlias("rf", "rf_status")
-    open val rfStrength: Int? = null
+    @JsonAlias("rf", "rf_status", "rf_strength")
+    open val rfStrength: Int? = null,
 
     /**
      * Battery level
      */
     @JsonProperty("battery_percent")
-    open val batteryLevelInPercent: Int? = null
+    open val batteryLevelInPercent: Int? = null,
 
     /**
-     * Battery level
+     * Module Name
      */
     @JsonAlias("module_name", "name")
-    open val moduleName: String? = null
+    open val moduleName: String? = null,
 
     @JsonAlias("type")
     open val type: DeviceType = DeviceType.UNKNOWN
-}
+)
