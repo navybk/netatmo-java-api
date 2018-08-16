@@ -1,7 +1,11 @@
 package apitest
 
+import com.fasterxml.jackson.core.type.TypeReference
+import io.rudolph.netatmo.JacksonTransform
 import io.rudolph.netatmo.api.common.model.BatteryState
 import io.rudolph.netatmo.api.common.model.ClimateModule
+import io.rudolph.netatmo.api.energy.model.TypedBaseResult
+import io.rudolph.netatmo.api.weather.model.Forecast
 import org.junit.Test
 
 class WeatherTest : BaseTest() {
@@ -31,6 +35,14 @@ class WeatherTest : BaseTest() {
             return
         }
         assert(false)
+    }
+
+    @Test
+    fun parseForecastXML() {
+        val stream = Forecast::class.java.getResourceAsStream("/apiresults/weather/getSimpleForecast.json").bufferedReader()
+        val reference = object : TypeReference<TypedBaseResult<Forecast>>() {}
+        val forecast = JacksonTransform.mapper.readValue<TypedBaseResult<Forecast>>(stream, reference)
+        assert(forecast != null)
     }
 
 }

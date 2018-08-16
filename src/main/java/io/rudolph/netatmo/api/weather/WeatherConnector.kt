@@ -2,6 +2,7 @@ package io.rudolph.netatmo.api.weather
 
 import io.rudolph.netatmo.api.common.CommonConnector
 import io.rudolph.netatmo.api.common.model.StationResults
+import io.rudolph.netatmo.api.weather.model.Forecast
 import io.rudolph.netatmo.api.weather.model.Station
 import io.rudolph.netatmo.api.weather.service.WeatherService
 import io.rudolph.netatmo.executable
@@ -41,6 +42,10 @@ class WeatherConnector(api: Retrofit) : CommonConnector(api) {
                 required,
                 filter
         ).executable
+    }
+
+    fun getSimpleForecast(deviceId: String, moduleId: String): BodyResultExecutable<Forecast> {
+        return weatherService.getSimpleForecast(deviceId, moduleId).executable
     }
 
     fun getStationData(deviceId: String? = null,

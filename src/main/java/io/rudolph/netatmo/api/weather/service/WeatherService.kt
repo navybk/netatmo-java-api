@@ -2,6 +2,7 @@ package io.rudolph.netatmo.api.weather.service
 
 import io.rudolph.netatmo.api.common.model.StationResults
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
+import io.rudolph.netatmo.api.weather.model.Forecast
 import io.rudolph.netatmo.api.weather.model.Station
 import retrofit2.Call
 import retrofit2.http.GET
@@ -51,4 +52,14 @@ internal interface WeatherService {
             @Query("device_id") deviceId: String? = null,
             @Query("get_favorites") getFavorites: Boolean? = null
     ): Call<TypedBaseResult<StationResults>>
+
+    @Headers("Content-Type:text/plain")
+    @GET("simplifiedfuturemeasure")
+    fun getSimpleForecast(
+            @Query("device_id") devideId: String,
+            @Query("module_id") moduleId: String? = null,
+            @Query("app_version") appVersion: String? = "2.4.5."
+    ): Call<TypedBaseResult<Forecast>>
+
+
 }
