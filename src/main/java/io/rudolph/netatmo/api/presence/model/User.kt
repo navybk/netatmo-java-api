@@ -1,8 +1,10 @@
 package io.rudolph.netatmo.api.presence.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class User(
         @JsonProperty("reg_locale")
         val regLocale: String? = null,

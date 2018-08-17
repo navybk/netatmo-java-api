@@ -1,8 +1,9 @@
 package io.rudolph.netatmo.api.energy.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class User(
         @JsonProperty("id")
         val id: String? = null,

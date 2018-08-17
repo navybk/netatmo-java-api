@@ -11,11 +11,15 @@ abstract class BaseTest(scope: List<Scope> = listOf()) {
     private val testConfig = TestConfig.buildFromFile("/credentials_app_original.json")
             ?: throw IllegalStateException("config file missing")
 
+    private val userConfig = TestConfig.buildFromFile("/credentialsmicha.json")
+            ?: throw IllegalStateException("config file missing")
+
+
     protected val api = NetatmoApi(
             clientId = testConfig.clientId,
             clientSecret = testConfig.clientSecret,
-            userMail = testConfig.userMail,
-            userPassword = testConfig.userPassword,
+            userMail = userConfig.userMail,
+            userPassword = userConfig.userPassword,
             scope = scope,
             accessToken = testConfig.accessToken,
             refreshToken = testConfig.refreshToken,

@@ -1,10 +1,10 @@
 package io.rudolph.netatmo.api.energy.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.rudolph.netatmo.api.common.model.Module
-import io.rudolph.netatmo.api.energy.model.module.EnergyModule
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Home(
         @JsonProperty("id")
         val id: String,
