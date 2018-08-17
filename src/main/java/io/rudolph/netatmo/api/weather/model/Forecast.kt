@@ -14,42 +14,42 @@ data class Forecast(
         val airqdata: AirQualityData,
 
         @JsonProperty("time_day_begin")
-        val time_day_begin: LocalDateTime,
+        val timeDayBegin: LocalDateTime,
 
         @JsonProperty("time_day_end")
-        val time_day_end: LocalDateTime,
+        val timeDayEnd: LocalDateTime,
 
         @JsonProperty("last_time_ask")
-        val last_time_ask: LocalDateTime,
+        val lastTimeAsk: LocalDateTime,
 
         @JsonProperty("cityname")
         val cityname: String,
 
         @JsonProperty("current_symbol")
-        val current_symbol: String,
+        val currentSymbol: String,
 
         @JsonProperty("current_windgust")
-        val current_windgust: Int,
+        val currentWindgust: Int,
 
         @JsonProperty("current_windstrength")
-        val current_windstrength: String,
+        val currentWindstrength: String,
 
         @JsonProperty("time_current")
-        val time_current: LocalDateTime,
+        val currentTime: LocalDateTime,
 
         @JsonProperty("time_current_symbol")
-        val time_current_symbol: Int,
+        val currentTimeSymbol: Int,
 
         @JsonProperty("stationname")
         val stationname: String,
 
         @JsonProperty("from_cache")
-        val from_cache: Boolean,
+        val fromCache: Boolean,
 
         @JsonProperty("current_temp")
         val currentTemperature: Float,
 
         @JsonProperty("current_temp_time")
-        val current_temp_time: LocalDateTime
+        val currentTempTime: LocalDateTime
 
 )

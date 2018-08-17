@@ -9,6 +9,6 @@ data class AirQualitySubData(
         val beg_time: LocalDateTime,
 
         @JsonProperty("value")
-        val value: List<String>
+        val value: List<List<String>>
 
 )

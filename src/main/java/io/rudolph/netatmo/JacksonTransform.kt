@@ -17,7 +17,9 @@ import io.rudolph.netatmo.api.presence.model.AppType
 import io.rudolph.netatmo.api.presence.model.EventType
 import io.rudolph.netatmo.api.presence.transform.AppTypeDeserializer
 import io.rudolph.netatmo.api.presence.transform.EventTypeDeserializer
+import io.rudolph.netatmo.api.weather.model.DataPoint
 import io.rudolph.netatmo.api.weather.model.Measure
+import io.rudolph.netatmo.api.weather.model.transform.DataPointDeserializer
 import io.rudolph.netatmo.api.weather.model.transform.MeasureDeserializer
 import io.rudolph.netatmo.oauth2.model.Scope
 import retrofit2.converter.jackson.JacksonConverterFactory
@@ -41,6 +43,7 @@ internal object JacksonTransform {
             addDeserializer(EventType::class.java, EventTypeDeserializer())
             addDeserializer(AppType::class.java, AppTypeDeserializer())
             addDeserializer(BatteryState::class.java, BatteryStateDeserializer())
+            addDeserializer(DataPoint::class.java, DataPointDeserializer())
 
             addSerializer(ThermMode::class.java, ThermModeSerializer())
             addSerializer(DeviceType::class.java, DeviceTypeSerializer())

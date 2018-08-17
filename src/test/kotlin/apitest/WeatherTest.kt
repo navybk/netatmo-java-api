@@ -39,7 +39,7 @@ class WeatherTest : BaseTest() {
 
     @Test
     fun parseForecastXML() {
-        val stream = Forecast::class.java.getResourceAsStream("/apiresults/weather/getSimpleForecast.json").bufferedReader()
+        val stream = TestConfig::class.java.getResourceAsStream("/apiresults/weather/getSimpleForecast.json").bufferedReader()
         val reference = object : TypeReference<TypedBaseResult<Forecast>>() {}
         val forecast = JacksonTransform.mapper.readValue<TypedBaseResult<Forecast>>(stream, reference)
         assert(forecast != null)
