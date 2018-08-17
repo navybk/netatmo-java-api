@@ -3,12 +3,10 @@ package io.rudolph.netatmo.api.weather.service
 import io.rudolph.netatmo.api.common.model.StationResults
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.api.weather.model.Forecast
+import io.rudolph.netatmo.api.weather.model.ForecastRequestBody
 import io.rudolph.netatmo.api.weather.model.Station
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 
 internal interface WeatherService {
@@ -53,13 +51,10 @@ internal interface WeatherService {
             @Query("get_favorites") getFavorites: Boolean? = null
     ): Call<TypedBaseResult<StationResults>>
 
-    @Headers("Content-Type:text/plain")
-    @GET("simplifiedfuturemeasure")
-    fun getSimpleForecast(
-            @Query("device_id") devideId: String,
-            @Query("module_id") moduleId: String? = null,
-            @Query("app_version") appVersion: String? = "2.4.5."
-    ): Call<TypedBaseResult<Forecast>>
+    @Headers(value = ["User-Agent: NetatmoApp(Netatmo/v2.4.5.4/3204504) Android(5.0.2/unknown/Android SDK built for x86_64)",
+        "Content-Type:application/json"])
+    @POST("simplifiedfuturemeasure")
+    fun getSimpleForecast(@Body forecastBody: ForecastRequestBody): Call<TypedBaseResult<Forecast>>
 
 
 }

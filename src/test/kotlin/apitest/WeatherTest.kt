@@ -6,9 +6,10 @@ import io.rudolph.netatmo.api.common.model.BatteryState
 import io.rudolph.netatmo.api.common.model.ClimateModule
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.api.weather.model.Forecast
+import io.rudolph.netatmo.oauth2.model.Scope
 import org.junit.Test
 
-class WeatherTest : BaseTest() {
+class WeatherTest : BaseTest(listOf(Scope.READ_STATION, Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT)) {
 
     val connector = api.weatherApi
 
@@ -35,6 +36,17 @@ class WeatherTest : BaseTest() {
             return
         }
         assert(false)
+    }
+
+    @Test
+    fun getForecast() {
+        connector.getStationData().executeSync()?.apply {
+            val deviceId = devices[0].id!!
+            val moduleId = devices[0]?.modules?.get(0)?.id!!
+            connector.getSimpleForecast(deviceId, moduleId).executeSyncWrapped().apply {
+                assert(this != null)
+            }
+        }
     }
 
     @Test

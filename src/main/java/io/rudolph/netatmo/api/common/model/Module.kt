@@ -28,31 +28,37 @@ import io.rudolph.netatmo.api.presence.model.PresenceModule
 )
 abstract class Module internal constructor(
 
-    @JsonAlias("id", "_id")
-    open val id: String? = null,
+        @JsonProperty("id")
+        @field:JsonAlias("id", "_id")
+        @param:JsonAlias("id", "_id")
+        open val id: String? = null,
 
-    /**
-     * 90 = low
-     * 80 = medium
-     * 70 = high
-     * 60 = full signal
-     */
-    @JsonProperty("rf_status")
-    @JsonAlias("rf", "rf_status", "rf_strength")
-    open val rfStrength: Int? = null,
+        /**
+         * 90 = low
+         * 80 = medium
+         * 70 = high
+         * 60 = full signal
+         */
+        @JsonProperty("rf_status")
+        @field:JsonAlias("rf", "rf_status", "rf_strength")
+        @param:JsonAlias("rf", "rf_status", "rf_strength")
+        open val rfStrength: Int? = null,
 
-    /**
-     * Battery level
-     */
-    @JsonProperty("battery_percent")
-    open val batteryLevelInPercent: Int? = null,
+        /**
+         * Battery level
+         */
+        @field:JsonProperty("battery_percent")
+        @param:JsonProperty("battery_percent")
+        open val batteryLevelInPercent: Int? = null,
 
-    /**
-     * Module Name
-     */
-    @JsonAlias("module_name", "name")
-    open val moduleName: String? = null,
+        /**
+         * Module Name
+         */
+        @field: JsonAlias("module_name", "name")
+        @param: JsonAlias("module_name", "name")
+        open val moduleName: String? = null,
 
-    @JsonAlias("type")
-    open val type: DeviceType = DeviceType.UNKNOWN
+        @field:JsonAlias("type")
+        @param:JsonAlias("type")
+        open val type: DeviceType = DeviceType.UNKNOWN
 )
