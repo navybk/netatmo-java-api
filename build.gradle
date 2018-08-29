@@ -15,7 +15,7 @@ plugins {
 }
 
 group 'io.rudolph.netatmo'
-version '0.4.0'
+version '0.4.1'
 
 repositories {
     mavenCentral()
@@ -82,6 +82,11 @@ jar {
     }
 }
 
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
 task customFatJar(type: Jar) {
 
     manifest {
@@ -94,4 +99,9 @@ task customFatJar(type: Jar) {
     baseName = 'all-in-one-jar'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }

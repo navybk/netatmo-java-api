@@ -57,7 +57,7 @@ abstract class ValveBaseModule<T> constructor(
         override val wifiStrength: Int? = null,
 
         @JsonAlias("id", "_id")
-        override val id: String? = null,
+        override val id: String,
 
         /**
          * 90 = low
@@ -83,4 +83,4 @@ abstract class ValveBaseModule<T> constructor(
 
         @JsonAlias("type")
         override val type: DeviceType = DeviceType.UNKNOWN
-) : EnergyModule<T>()
+) : EnergyModule<T>(id = id)

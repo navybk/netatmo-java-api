@@ -1,32 +1,67 @@
 package io.rudolph.netatmo.api.energy.model
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import java.time.LocalDateTime
 
 
-/**
- * Room status definition
- */
-@JsonIgnoreProperties(ignoreUnknown = true)
 data class Room(
+
         /**
          * Id of the room
          */
         @JsonProperty("id")
-        val id: String? = null,
+        val id: String,
 
-        @JsonProperty("name")
-        val name: String? = null,
+        /**
+         * False if none of the module of the room are reachable
+         */
+        @JsonProperty("reachable")
+        val isReachable: Boolean? = null,
 
-        @JsonProperty("type")
-        val type: String? = null,
+        /**
+         * Ambient temperature
+         */
+        @JsonProperty("therm_measured_temperature")
+        val thermMeasuredTemperature: Float? = null,
 
-        @JsonProperty("module_ids")
-        val moduleIds: List<String>? = null,
+        /**
+         * Only if room has valves
+         */
+        @JsonProperty("heating_power_request")
+        val heatingPowerRequest: Float? = null,
 
-        @JsonProperty("measure_offset_NAPlug_temperature")
-        val measureOffsetNAPlugTemperature: Int? = null,
+        /**
+         * setpoint temperature
+         */
+        @JsonProperty("therm_setpoint_temperature")
+        val thermSetpointTemperature: Float? = null,
 
-        @JsonProperty("measure_offset_NAPlug_estimated_temperature")
-        val measureOffsetNAPlugEstimatedTemperature: Int? = null
+        /**
+         * manual
+         * max
+         * off
+         * schedule
+         * away
+         * hg
+         */
+        @JsonProperty("therm_setpoint_mode")
+        val thermSetpointMode: ThermMode? = null,
+
+        /**
+         * Start time for a manual setpoint
+         */
+        @JsonProperty("therm_setpoint_start_time")
+        val thermSetpointStartTime: LocalDateTime? = null,
+
+        /**
+         * End time for a manual setpoint
+         */
+        @JsonProperty("therm_setpoint_end_time")
+        val thermSetpointEndTime: LocalDateTime? = null,
+
+        @JsonProperty("anticipating")
+        val anticipating: Boolean = false,
+
+        @JsonProperty("open_window")
+        val openWindow: Boolean = false
 )

@@ -78,8 +78,8 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
         }?.homes
                 ?.get(0)
                 ?.apply {
-                    val moduleId = modules[1].id!!
-                    val deviceId = modules[0].id!!
+                    val moduleId = modules[1].id
+                    val deviceId = modules[0].id
                     api.energyApi
                             .getMeasure(moduleId = moduleId,
                                     deviceId = deviceId,
@@ -207,6 +207,16 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
                                 } ?: assert(false)
                             }
                 } ?: assert(false)
+    }
+
+    @Test
+    fun getCombinedModule() {
+        val result = api.energyApi.getCombinedHome().executeSync()
+        val home = result?.homes?.get(0)!!
+        val module = home.modules.get(2)
+        api.energyApi.getCombinedModule(home.id, module.id).executeSync()?.let {
+            assert(true)
+        }!!
     }
 
     @Test

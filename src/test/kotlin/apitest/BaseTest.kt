@@ -21,8 +21,8 @@ abstract class BaseTest(scope: List<Scope> = listOf()) {
             userMail = userConfig.userMail,
             userPassword = userConfig.userPassword,
             scope = scope,
-            accessToken = testConfig.accessToken,
-            refreshToken = testConfig.refreshToken,
+            accessToken = userConfig.accessToken,
+            refreshToken = userConfig.refreshToken,
             debug = true
     )
 }

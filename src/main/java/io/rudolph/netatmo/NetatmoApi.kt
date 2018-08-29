@@ -30,8 +30,8 @@ class NetatmoApi(userMail: String? = null,
 ) {
 
     private companion object {
-        const val BASEAPIENDPOINT = "https://app.netatmo.net/api/"
-        const val AUTHENDPOINT = "https://app.netatmo.net/oauth2/token"
+        const val BASEAPIENDPOINT = "https://api.netatmo.com/api/"
+        const val AUTHENDPOINT = "https://api.netatmo.com/oauth2/token"
     }
 
     private val tokenStorage = TokenStorage(accessToken, refreshToken, scope)

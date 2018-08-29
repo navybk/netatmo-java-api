@@ -11,8 +11,14 @@ class AsyncFunctionExecutable<T, E>(private val function: () -> T,
     @Suppress("UNCHECKED_CAST")
     override fun executeAsync(resultFunction: (E) -> Unit) {
         launch {
-            val functionResult = function()
-            val result: E? = transForm?.invoke(functionResult) ?: functionResult as? E
+            val functionResult = function() ?: run {
+                runBlocking {
+                    errorFunction?.invoke("Empty object not expected")
+                }
+                return@launch
+            }
+
+            val result: E? = transForm?.invoke(functionResult)
 
             runBlocking {
                 result?.apply {
@@ -22,4 +28,5 @@ class AsyncFunctionExecutable<T, E>(private val function: () -> T,
             }
         }
     }
+
 }

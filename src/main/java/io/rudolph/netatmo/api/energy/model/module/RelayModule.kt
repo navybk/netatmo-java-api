@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class RelayModule(
         @JsonProperty("id")
-        override val id: String? = null,
+        override val id: String,
 
         @JsonProperty("modules_bridged")
         val modulesBridged: List<String>? = null,
@@ -48,7 +48,7 @@ data class RelayModule(
 
         @JsonAlias("type")
         override val type: DeviceType = DeviceType.RELAY
-) : EnergyModule<RelayModule>() {
+) : EnergyModule<RelayModule>(id = id) {
 
     override fun join(module: RelayModule): RelayModule =
             RelayModule(id = id ?: module.id,

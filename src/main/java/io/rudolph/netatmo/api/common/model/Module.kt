@@ -31,7 +31,7 @@ abstract class Module internal constructor(
         @JsonProperty("id")
         @field:JsonAlias("id", "_id")
         @param:JsonAlias("id", "_id")
-        open val id: String? = null,
+        open val id: String = "notset",
 
         /**
          * 90 = low

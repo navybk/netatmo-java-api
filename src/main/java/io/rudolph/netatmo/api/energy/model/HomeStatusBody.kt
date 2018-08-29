@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class HomeStatusBody(
         @JsonProperty("home")
-        val home: MutableList<HomestatusBodyHome>? = null
+        val homes: List<HomestatusBodyHome> = listOf()
 )
 
 

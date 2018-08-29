@@ -2,6 +2,7 @@ package io.rudolph.netatmo.api.energy
 
 import io.rudolph.netatmo.api.common.CommonConnector
 import io.rudolph.netatmo.api.common.model.DeviceType
+import io.rudolph.netatmo.api.common.model.Module
 import io.rudolph.netatmo.api.energy.model.*
 import io.rudolph.netatmo.api.energy.model.module.EnergyModule
 import io.rudolph.netatmo.api.energy.model.module.RelayModule
@@ -10,7 +11,6 @@ import io.rudolph.netatmo.api.energy.model.module.ValveModule
 import io.rudolph.netatmo.api.energy.service.EnergyService
 import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.BodyResultExecutable
-import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.executable.PlainCallExecutable
 import io.rudolph.netatmo.executable.PlainFunctionExecutable
 import io.rudolph.netatmo.oauth2.toTimestamp
@@ -337,31 +337,56 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
                 .executable
     }
 
+    fun getCombinedModule(homeId: String, moduleId: String): PlainFunctionExecutable<Module?> {
+        val func = inner@{
+            val module = getHomesData(homeId).executeSync()
+                    ?.homes
+                    ?.find { it.id == homeId }
+                    ?.modules
+                    ?.find { it.id == moduleId }
+                    ?: return@inner null
+
+            getHomeStatus(homeId, module.type).executeSync()
+                    ?.homes
+                    ?.find { it.id == homeId }
+                    ?.modules
+                    ?.find { it.id == moduleId }
+                    ?.let {
+                        when (module) {
+                            is ValveModule -> module.join(it as ValveModule)
+                            is RelayModule -> module.join(it as RelayModule)
+                            is ThermostatModule -> module.join(it as ThermostatModule)
+                            else -> module
+                        }
+                    }
+        }
+        return PlainFunctionExecutable(func)
+    }
 
     fun getCombinedHome(homeId: String? = null): PlainFunctionExecutable<HomesDataBody?> {
-        val func = {
-            getHomesData(homeId).executeSync()
-                    ?.let { origin ->
-                        val home = origin.homes.mapNotNull { home ->
-                            val status = getHomeStatus(home.id).executeSync()
-                                    ?.home
-                                    ?.find { it.id == home.id }
-                                    ?.modules ?: return@mapNotNull null
-                            val modules = home.modules.mapNotNull { module ->
-                                status.find { it.id == module.id }
-                                        ?.let {
-                                            when (module) {
-                                                is ValveModule -> module.join(it as ValveModule)
-                                                is RelayModule -> module.join(it as RelayModule)
-                                                is ThermostatModule -> module.join(it as ThermostatModule)
-                                                else -> module
-                                            }
+        val func = inner@{
+            val origin = getHomesData(homeId).executeSync()
+            return@inner origin?.homes
+                    ?.mapNotNull { home ->
+                        val status = getHomeStatus(home.id).executeSync()
+                                ?.homes
+                                ?.find { it.id == home.id }
+                                ?.modules ?: return@mapNotNull null
+                        val modules = home.modules.mapNotNull { module ->
+                            status.find { it.id == module.id }
+                                    ?.let {
+                                        when (module) {
+                                            is ValveModule -> module.join(it as ValveModule)
+                                            is RelayModule -> module.join(it as RelayModule)
+                                            is ThermostatModule -> module.join(it as ThermostatModule)
+                                            else -> module
                                         }
-                            }
-                            home.copy(modules = modules)
+                                    }
                         }
-                        origin.copy(homes = home)
-                    }
+                        home.copy(modules = modules)
+                    }?.let {
+                        origin.copy(homes = it)
+                    } ?: origin
         }
         return PlainFunctionExecutable(func)
     }
@@ -383,10 +408,10 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
     @Suppress("UNCHECKED_CAST")
     fun <T : EnergyModule<T>> getModuleStatus(homeId: String, module: T): T? {
         getHomeStatus(homeId = homeId, deviceType = module.type).executeSync()
-                ?.home
+                ?.homes
                 ?.forEach { home ->
                     home.modules
-                            ?.find { it.id == module.id }
+                            .find { it.id == module.id }
                             ?.let { module ->
                                 return module as? T
                             }

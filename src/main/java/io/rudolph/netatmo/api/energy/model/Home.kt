@@ -31,7 +31,7 @@ data class Home(
         val thermSetpointDefaultDuration: Long? = null,
 
         @JsonProperty("rooms")
-        val rooms: List<Room> = listOf(),
+        val rooms: List<BaseRoom> = listOf(),
 
         @JsonProperty("modules")
         val modules: List<Module> = listOf(),
@@ -47,5 +47,7 @@ data class Home(
             rooms.find {
                 it.moduleIds?.contains(module.id) ?: false
             }
+
+    fun getActiveSchedule() = schedules.find { it.isSelected == true }
 }
 

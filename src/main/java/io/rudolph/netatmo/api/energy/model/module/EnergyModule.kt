@@ -7,7 +7,7 @@ import io.rudolph.netatmo.api.common.model.Module
 import io.rudolph.netatmo.api.common.model.WifiLevel
 import java.time.LocalDateTime
 
-abstract class EnergyModule <T> internal constructor(
+abstract class EnergyModule<T> internal constructor(
 
         @JsonProperty("setup_date")
         open val setupDate: LocalDateTime? = null,
@@ -20,7 +20,7 @@ abstract class EnergyModule <T> internal constructor(
         open val wifiStrength: Int? = null,
 
         @JsonAlias("id", "_id")
-        override val id: String? = null,
+        override val id: String,
 
         /**
          * 90 = low
@@ -46,7 +46,7 @@ abstract class EnergyModule <T> internal constructor(
 
         @JsonAlias("type")
         override val type: DeviceType = DeviceType.UNKNOWN
-) : Module() {
+) : Module(id = id) {
 
     val wifiLevel: WifiLevel
         get() = WifiLevel.wifiLevelForSignalStrength(wifiStrength)

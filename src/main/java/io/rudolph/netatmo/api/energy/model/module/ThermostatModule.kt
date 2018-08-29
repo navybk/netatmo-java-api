@@ -6,6 +6,10 @@ import io.rudolph.netatmo.api.common.model.DeviceType
 import java.time.LocalDateTime
 
 data class ThermostatModule(
+
+        @JsonAlias("id", "_id")
+        override val id: String,
+
         @JsonProperty("modules_bridged")
         val modulesBridged: List<String>? = null,
 
@@ -63,7 +67,7 @@ data class ThermostatModule(
 
         @JsonAlias("type")
         override val type: DeviceType = DeviceType.THERMOSTAT
-) : ValveBaseModule<ThermostatModule>() {
+) : ValveBaseModule<ThermostatModule>(id = id) {
 
     override fun join(module: ThermostatModule): ThermostatModule =
             copy(modulesBridged = modulesBridged ?: module.modulesBridged,

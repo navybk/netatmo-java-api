@@ -28,22 +28,12 @@ fun Interceptor.Chain.proceed(accessToken: String): Response {
                 .build()
     } ?: request().url()
 
-    return this.request()
+    return proceed(this.request()
             .newBuilder()
             .url(url)
             .removeHeader("Authorization")
             .addHeader("Authorization", "Bearer $accessToken")
-
-            .build().let {
-                proceed(it)
-            }.let {
-                if (it.isSuccessful) {
-                    it
-                } else {
-                    val error = it.createErrorBody()
-                    errorbuilder(it.code(), error)
-                }
-            }
+            .build())
 }
 
 fun Response.createErrorBody(): ErrorResult.Error {

@@ -4,7 +4,10 @@ import io.rudolph.netatmo.JacksonTransform
 import io.rudolph.netatmo.oauth2.*
 import io.rudolph.netatmo.oauth2.model.AuthResponse
 import io.rudolph.netatmo.oauth2.model.ErrorResult
-import okhttp3.*
+import okhttp3.FormBody
+import okhttp3.Interceptor
+import okhttp3.Request
+import okhttp3.Response
 
 internal class AuthInterceptor(private val userMail: String?,
                                private val userPassword: String?,
@@ -28,9 +31,17 @@ internal class AuthInterceptor(private val userMail: String?,
             val error = response.createErrorBody()
             return if (response.code() == 403) {
                 when (error.code) {
-                    2 -> {
+                    3, 2 -> {
                         val accToken = refresh(chain) ?: return chain.errorbuilder(response.code(), error)
-                        chain.proceed(accToken)
+                        tokenStore.accessToken = accToken
+                        chain.proceed(accToken).let {
+                            if (it.isSuccessful) {
+                                it
+                            } else {
+                                val error = it.createErrorBody()
+                                chain.errorbuilder(it.code(), error)
+                            }
+                        }
                     }
                     13 -> {
                         chain.errorbuilder(response.code(), error)

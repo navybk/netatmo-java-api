@@ -10,7 +10,7 @@ import java.time.LocalDateTime
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ValveModule(
         @JsonProperty("id")
-        override val id: String? = null,
+        override val id: String,
 
         @JsonProperty("room_id")
         override val roomId: String? = null,
@@ -66,17 +66,17 @@ data class ValveModule(
 
         @JsonAlias("type")
         override val type: DeviceType = DeviceType.VALVE
-) : ValveBaseModule<ValveModule>() {
+) : ValveBaseModule<ValveModule>(id = id) {
 
     override fun join(module: ValveModule): ValveModule =
-            copy(rfStrength = rfStrength ?: module.rfStrength,
+            copy(rfStrength = module.rfStrength ?: rfStrength,
                     moduleName = moduleName ?: module.moduleName,
                     setupDate = setupDate ?: module.setupDate,
-                    batteryLevel = batteryLevel ?: module.batteryLevel,
-                    batteryState = batteryState ?: module.batteryState,
-                    bridgeId = bridgeId ?: module.bridgeId,
-                    firmware = firmware ?: module.firmware,
-                    isReachable = isReachable ?: module.isReachable,
+                    batteryLevel = module.batteryLevel ?: batteryLevel,
+                    batteryState = module.batteryState ?: batteryState,
+                    bridgeId = module.bridgeId ?: bridgeId,
+                    firmware = module.firmware ?: firmware,
+                    isReachable = module.isReachable ?: isReachable,
                     roomId = roomId ?: module.roomId)
 
 }
