@@ -13,4 +13,11 @@ class PresenceTest : BaseTest(listOf(Scope.READ_CAMERA, Scope.ACCESS_CAMERA, Sco
             assert(this != null)
         }
     }
+
+    @Test
+    fun liveSnapshotURLTest() {
+        val result = connector.getHomeData().executeSync()!!
+        val camera = result.homes!![0].cameras!![0]
+        val url = connector.getLiveSnapshotUrl(camera)!!
+    }
 }
