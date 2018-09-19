@@ -58,6 +58,16 @@ internal object JacksonTransform {
         registerKotlinModule()
     }
 
+    var debug: Boolean = false
+        set (value) {
+            field = value
+            if (value) {
+                mapper.enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            } else {
+                mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            }
+        }
+
     val jacksonConverterFactory = JacksonConverterFactory.create(mapper)
             ?: throw IllegalStateException("Was not able to instantiate converter")
 

@@ -116,4 +116,8 @@ class NetatmoApi(userMail: String? = null,
     val airCareApi = AirCareConnector(api)
     val presenceApi = PresenceConnector(api)
     val welcomeApi = WelcomeConnector(api)
+
+    init {
+        JacksonTransform.debug = debug
+    }
 }

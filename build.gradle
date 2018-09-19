@@ -9,7 +9,6 @@ buildscript {
 
 }
 
-
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.2.51'
 }
@@ -21,7 +20,6 @@ repositories {
     mavenCentral()
 }
 
-
 apply plugin: 'kotlin'
 apply plugin: 'org.jetbrains.dokka'
 
@@ -30,7 +28,6 @@ kotlin {
         coroutines 'enable'
     }
 }
-
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
@@ -58,8 +55,8 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-sourceSets.test {
-    resources.srcDirs = ["src/test/resources"]
+subprojects {
+    junitPlatformTest.dependsOn processTestResources
 }
 
 dokka {
@@ -105,3 +102,9 @@ artifacts {
     archives sourcesJar
     archives javadocJar
 }
+
+task copyTestResources(type: Copy) {
+    from "${projectDir}/src/test/resources"
+    into "${projectDir}/out/test/classes/apitest/"
+}
+processTestResources.dependsOn copyTestResources
