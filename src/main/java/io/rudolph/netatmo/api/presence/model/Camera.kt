@@ -2,6 +2,7 @@ package io.rudolph.netatmo.api.presence.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.rudolph.netatmo.api.common.model.DeviceType
+import java.time.LocalDateTime
 
 
 data class Camera(
@@ -27,5 +28,13 @@ data class Camera(
         val vpnUrl: String? = null,
 
         @JsonProperty("status")
-        val status: String? = null
+        val status: String? = null,
+
+        @JsonProperty("last_setup")
+        val lastSetup: LocalDateTime? = null,
+
+        //TODO: Evaluate for enum usage
+        @JsonProperty("light_mode_status")
+        val lastModeStatus: String? = null
+
 )

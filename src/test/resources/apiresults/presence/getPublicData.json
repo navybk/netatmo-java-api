@@ -1,0 +1,191 @@
+{
+  "body": {
+    "homes": [
+      {
+        "id": "1",
+        "name": "Haus",
+        "persons": [],
+        "place": {
+          "city": "XXX",
+          "country": "DE",
+          "timezone": "Europe\/Berlin"
+        },
+        "cameras": [
+          {
+            "id": "c1",
+            "type": "NOC",
+            "status": "on",
+            "vpn_url": "https:\/\/v8.netatmo.net\/restricted\/10.255.10.199\/0abcdefghijklmno_pqrstuvwxyz1,",
+            "is_local": false,
+            "sd_status": "on",
+            "alim_status": "on",
+            "name": "Garten",
+            "last_setup": 1512292266,
+            "light_mode_status": "auto"
+          }
+        ],
+        "smokedetectors": [],
+        "events": [
+          {
+            "id": "e1",
+            "type": "outdoor",
+            "time": 1537445640,
+            "camera_id": "c1",
+            "device_id": "c1",
+            "video_id": "vid1",
+            "video_status": "available",
+            "event_list": [
+              {
+                "type": "human",
+                "time": 1537445640,
+                "offset": 14,
+                "id": "aaaaaaaa-bbbb-aaaa-bbbb-aaaaaaaaaaaaa1",
+                "message": "Person erfasst",
+                "snapshot": {
+                  "id": "aaaaaaaaaaaaaaaaaaaaaaa0",
+                  "version": 1,
+                  "key": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                  "url": "https:\/\/netatmocameraimage.blob.core.windows.net\/production\/ccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+                },
+                "vignette": {
+                  "id": "aaaaaaaaaaaaaaaaaaaaaa1",
+                  "version": 1,
+                  "key": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab",
+                  "url": "https:\/\/netatmocameraimage.blob.core.windows.net\/production\/ddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+                }
+              }
+            ]
+          },
+          {
+            "id": "111111111111111111111111",
+            "type": "outdoor",
+            "time": 1537445441,
+            "camera_id": "c1",
+            "device_id": "c1",
+            "video_id": "vid2",
+            "video_status": "available",
+            "event_list": [
+              {
+                "type": "human",
+                "time": 1537445441,
+                "offset": 0,
+                "id": "baaaaaaaaaaaaaaaaaaaaaaaaa2",
+                "message": "Person erfasst",
+                "snapshot": {
+                  "id": "aaaaaaaaaaaaaaaaaaaaaaaaa3",
+                  "version": 1,
+                  "key": "fffffffffffffffffffffffffffffffffffff",
+                  "url": "https:\/\/netatmocameraimage.blob.core.windows.net\/production\/fffffffffffffffffffffffffff"
+                },
+                "vignette": {
+                  "id": "bbbbbbbbbbbbbbbbbbbbbb",
+                  "version": 1,
+                  "key": "ddddddddddddddddddddddddddddddddddd",
+                  "url": "https:\/\/netatmocameraimage.blob.core.windows.net\/production\/dddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+                }
+              },
+              {
+                "time": 1537445445,
+                "offset": 12,
+                "id": "222222222222222222222",
+                "type": "human",
+                "message": "Person erfasst",
+                "snapshot": {
+                  "filename": "vod\/ffffffff-ffff-ffff-ffff-ffffffffffff\/events\/ffffffff-ffffffffffff\/snapshot_ffffffffffffff-ffffffffffff.jpg"
+                },
+                "vignette": {
+                  "filename": "vod\/ffffffffffff-ffffffffffff\/events\/ffffffff-ffff-ffff-ffff-ffffffffffff\/vignette_fffffffffffff.jpg"
+                }
+              }
+            ]
+          },
+          {
+            "id": "ddddddddddddddddddddddddd",
+            "type": "outdoor",
+            "time": 1537436553,
+            "camera_id": "70:ee",
+            "device_id": "70:ee",
+            "video_id": "dddddddddddddddddddddddddddd",
+            "video_status": "available",
+            "event_list": [
+              {
+                "type": "human",
+                "time": 1537436553,
+                "offset": 0,
+                "id": "eeeeeeeeeeeeeeeeeeeeeeeee",
+                "message": "Person erfasst",
+                "snapshot": {
+                  "id": "eeeeeeeeeeeeeeeeeeeeeeeee",
+                  "version": 1,
+                  "key": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                  "url": "https:\/\/netatmocameraimage.blob.core.windows.net\/production\/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+                },
+                "vignette": {
+                  "id": "eeeeeeeeeeeeeeeeeeeeeeee",
+                  "version": 1,
+                  "key": "eeeeeeeeeeeeeeeeeeeeeeeeeee",
+                  "url": "https:\/\/netatmocameraimage.blob.core.windows.net\/production\/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+                }
+              }
+            ]
+          },
+          {
+            "id": "hhhhhhhhhhhh",
+            "type": "outdoor",
+            "time": 1537422804,
+            "camera_id": "70:4",
+            "device_id": "70:e44",
+            "video_id": "hhhhhhhhhhhhhhhhhhh",
+            "video_status": "available",
+            "event_list": [
+              {
+                "type": "human",
+                "time": 1537422804,
+                "offset": 0,
+                "id": "hhhhhhhhhhhhh",
+                "message": "Person erfasst",
+                "snapshot": {
+                  "id": "hhhhhhhh",
+                  "version": 1,
+                  "key": "hhhhhhhhhhhhhhhhhhhhhhhhhh",
+                  "url": "https:\/\/netatmocameraimage.blob.core.windows.net\/production\/hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+                },
+                "vignette": {
+                  "id": "hhhhhhhhhhhhh",
+                  "version": 1,
+                  "key": "hhhhh",
+                  "url": "https:\/\/netatmocameraimage.blob.core.windows.net\/production\/hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+                }
+              },
+              {
+                "time": 1537422806,
+                "offset": 10,
+                "id": "e95c4083108",
+                "type": "human",
+                "message": "Person erfasst",
+                "snapshot": {
+                  "filename": "vod\/hhhhhhhhhhhhhhhh\/events\/hhhhhhhh-hhhhhhhhhh\/snapshot_hhhhhhhhhhhhh-hhhhhhhhhhhh.jpg"
+                },
+                "vignette": {
+                  "filename": "vod\/hhhhhhhhhhhhhh\/events\/hhhhhhhh-hhhh-hhhh-hhhhhh\/vignette_hhhhhhhh-hhhh-hhhhhh.jpg"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "user": {
+      "reg_locale": "de-DE",
+      "lang": "de-DE",
+      "country": "DE_DE",
+      "mail": "dd@invalid.invalid"
+    },
+    "global_info": {
+      "show_tags": true
+    }
+  },
+  "status": "ok",
+  "time_exec": 0.14028787612915,
+  "time_server": 1537449424
+}

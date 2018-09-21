@@ -11,5 +11,11 @@ data class Snapshot(
         val version: Int? = null,
 
         @JsonProperty("key")
-        val key: String? = null
+        val key: String? = null,
+
+        @JsonProperty("url")
+        val url: String? = null,
+
+        @JsonProperty("filename")
+        val filename: String? = null
 )

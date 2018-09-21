@@ -2,6 +2,7 @@ package io.rudolph.netatmo.api.presence.model
 
 import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonProperty
+import java.time.LocalDateTime
 
 
 abstract class Event {
@@ -36,7 +37,7 @@ abstract class Event {
      * Time of occurence of event
      */
     @JsonProperty("time")
-    val time: Int? = null
+    val time: LocalDateTime? = null
 
     /**
      * Type of events.
@@ -74,4 +75,23 @@ abstract class Event {
      */
     @JsonProperty("video_id")
     val videoId: String? = null
+
+    /**
+     * TODO: evaluate purpose
+     */
+    @JsonProperty("device_id")
+    val deviceId: String? = null
+
+    /**
+     * TODO: evaluate purpose
+     */
+    @JsonProperty("offset")
+    val offset: Int? = null
+
+    /**
+     * TODO: evaluate purpose
+     */
+    @JsonProperty("vignette")
+    val vignette: Snapshot? = null
+
 }

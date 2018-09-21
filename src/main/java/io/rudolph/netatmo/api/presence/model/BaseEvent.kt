@@ -9,5 +9,10 @@ data class BaseEvent(
          */
         @JsonProperty("id")
         @JsonAlias("id", "event_id")
-        override val id: String? = null)
-    : Event()
+        override val id: String? = null,
+
+        /**
+         * TODO: evaluate purpose
+         */
+        @JsonProperty("event_list")
+        val eventList: List<BaseEvent>? = null) : Event()
