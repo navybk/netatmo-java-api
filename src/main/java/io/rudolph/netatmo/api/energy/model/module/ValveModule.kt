@@ -24,7 +24,7 @@ data class ValveModule(
         /**
          * Battery level
          */
-        @JsonAlias("battery_level")
+        @field:JsonAlias("battery_level")
         override val batteryLevel: Int? = null,
 
         /**
@@ -55,16 +55,16 @@ data class ValveModule(
          * 60 = full signal
          */
         @JsonProperty("rf_status")
-        @JsonAlias("rf_strength")
+        @field:JsonAlias("rf_strength")
         override val rfStrength: Int? = null,
 
         /**
          * Module Name
          */
-        @JsonAlias("name")
+        @field:JsonAlias("name")
         override val moduleName: String? = null,
 
-        @JsonAlias("type")
+        @field:JsonAlias("type")
         override val type: DeviceType = DeviceType.VALVE
 ) : ValveBaseModule<ValveModule>(id = id) {
 

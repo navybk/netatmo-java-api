@@ -30,7 +30,7 @@ abstract class Event {
      * Identifier of the event
      */
     @JsonProperty("id")
-    @JsonAlias("id", "event_id")
+    @field:JsonAlias("id", "event_id")
     open val id: String? = null
 
     /**
@@ -43,7 +43,7 @@ abstract class Event {
      * Type of events.
      */
     @JsonProperty("type")
-    @JsonAlias("event_type", "type")
+    @field:JsonAlias("event_type", "type")
     val type: EventType? = null
 
     /**

@@ -2,7 +2,10 @@ package apitest
 
 import io.rudolph.netatmo.api.common.model.Scale
 import io.rudolph.netatmo.api.common.model.ScaleType
+import io.rudolph.netatmo.api.common.model.StationResults
 import io.rudolph.netatmo.api.energy.model.HomeStatusBody
+import io.rudolph.netatmo.api.energy.model.HomesDataBody
+import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.api.energy.model.module.EnergyModule
 import io.rudolph.netatmo.api.energy.model.module.RelayModule
 import io.rudolph.netatmo.api.energy.model.module.ThermostatModule
@@ -15,6 +18,16 @@ import java.util.concurrent.CountDownLatch
 
 
 class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT)) {
+
+    @Test
+    fun parsingTest() {
+        readFileForClass<TypedBaseResult<HomesDataBody>>("/apiresults/energy/HomesDataEmptyResponse.json")!!
+        readFileForClass<TypedBaseResult<HomesDataBody>>("/apiresults/energy/HomesDataResponse.json")!!
+        readFileForClass<TypedBaseResult<HomesDataBody>>("/apiresults/energy/HomesDataResponseThermostat.json")!!
+        readFileForClass<TypedBaseResult<HomeStatusBody>>("/apiresults/energy/HomeStatusResponse.json")!!
+        readFileForClass<TypedBaseResult<HomeStatusBody>>("/apiresults/energy/HomeStatusResponseThermostat.json")!!
+        readFileForClass<TypedBaseResult<StationResults>>("/apiresults/energy/getThermostatData.json")!!
+    }
 
     @Test
     fun testAsyncHomeData() {
@@ -214,9 +227,11 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
         val result = api.energyApi.getCombinedHome().executeSync()
         val home = result?.homes?.get(0)!!
         val module = home.modules.get(2)
-        api.energyApi.getCombinedModule(home.id, module.id).executeSync()?.let {
+        api.energyApi
+                .getCombinedModule("", module.id)
+                .executeSync()?.let {
             assert(true)
-        }!!
+                }
     }
 
     @Test

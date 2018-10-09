@@ -8,7 +8,7 @@ data class BaseEvent(
          * Identifier of the event
          */
         @JsonProperty("id")
-        @JsonAlias("id", "event_id")
+        @field:JsonAlias("id", "event_id")
         override val id: String? = null,
 
         /**

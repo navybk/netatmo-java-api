@@ -26,8 +26,7 @@ class NetatmoApi(userMail: String? = null,
                  scope: List<Scope>,
                  accessToken: String? = null,
                  refreshToken: String? = null,
-                 debug: Boolean = false
-) {
+                 debug: Boolean = false) {
 
     private companion object {
         const val BASEAPIENDPOINT = "https://api.netatmo.com/api/"
@@ -71,6 +70,24 @@ class NetatmoApi(userMail: String? = null,
                 userPassword: String,
                 clientId: String,
                 clientSecret: String,
+                scope: List<Scope>,
+                accessToken: String?,
+                refreshToken: String?,
+                debug: Boolean)
+            : this(userMail = userMail,
+            userPassword = userPassword,
+            clientId = clientId,
+            clientSecret = clientSecret,
+            scope = scope,
+            accessToken = accessToken,
+            refreshToken = refreshToken,
+            apiEndpoint = BASEAPIENDPOINT,
+            debug = debug)
+
+    constructor(userMail: String,
+                userPassword: String,
+                clientId: String,
+                clientSecret: String,
                 scope: List<Scope>)
             : this(userMail = userMail,
             userPassword = userPassword,
@@ -94,9 +111,8 @@ class NetatmoApi(userMail: String? = null,
             .connectTimeout(60, TimeUnit.SECONDS)
             .apply {
                 if (debug) {
-                    val logging = HttpLoggingInterceptor().apply {
-                        level = HttpLoggingInterceptor.Level.BODY
-                    }
+                    val logging = HttpLoggingInterceptor()
+                    logging.level = HttpLoggingInterceptor.Level.BODY
                     addInterceptor(logging)
                 }
             }

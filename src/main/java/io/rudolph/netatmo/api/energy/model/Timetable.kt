@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 data class Timetable(
         @param: JsonProperty("zone_id")
         @field: JsonProperty("zone_id")
-        @JsonAlias("zone_id", "id")
+        @field:JsonAlias("zone_id", "id")
         val zoneId: Int? = null,
 
         @param: JsonProperty("m_offset")

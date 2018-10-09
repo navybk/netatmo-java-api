@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 
 data class ThermostatModule(
 
-        @JsonAlias("id", "_id")
+        @field:JsonAlias("id", "_id")
         override val id: String,
 
         @JsonProperty("modules_bridged")
@@ -35,9 +35,10 @@ data class ThermostatModule(
         val measure: Measure? = null,
 
         @JsonProperty("firmware_revision")
+        @field:JsonAlias("firmware")
         override val firmware: Int? = null,
 
-        @JsonAlias("last_seen", "last_therm_seen")
+        @field:JsonAlias("last_seen", "last_therm_seen")
         val lastSeen: LocalDateTime? = null,
 
         @JsonProperty("last_message")
@@ -62,10 +63,10 @@ data class ThermostatModule(
          * 60 = full signal
          */
         @JsonProperty("rf_status")
-        @JsonAlias("rf_strength")
+        @field:JsonAlias("rf_strength")
         override val rfStrength: Int? = null,
 
-        @JsonAlias("type")
+        @field:JsonAlias("type")
         override val type: DeviceType = DeviceType.THERMOSTAT
 ) : ValveBaseModule<ThermostatModule>(id = id) {
 

@@ -38,13 +38,17 @@ internal class AuthInterceptor(private val userMail: String?,
                             if (it.isSuccessful) {
                                 it
                             } else {
-                                val error = it.createErrorBody()
-                                chain.errorbuilder(it.code(), error)
+                                val innererror = it.createErrorBody()
+                                chain.errorbuilder(it.code(), innererror).apply {
+                                    it.close()
+                                }
                             }
                         }
                     }
                     13 -> {
-                        chain.errorbuilder(response.code(), error)
+                        chain.errorbuilder(response.code(), error).apply {
+                            response.close()
+                        }
                     }
                     else -> {
                         response
@@ -106,6 +110,7 @@ internal class AuthInterceptor(private val userMail: String?,
     private fun proceedAuthRequest(chain: Interceptor.Chain, request: Request): String? {
         return chain.proceed(request)?.let {
             if (!it.isSuccessful) {
+                it.close()
                 return@let null
             }
             it.body()

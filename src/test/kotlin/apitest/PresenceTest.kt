@@ -12,6 +12,11 @@ class PresenceTest : BaseTest(listOf(Scope.READ_CAMERA, Scope.ACCESS_CAMERA, Sco
     val connector = api.presenceApi
 
     @Test
+    fun parsingTest() {
+        readFileForClass<TypedBaseResult<SecurityHome>>("/apiresults/presence/getPublicData.json")!!
+    }
+
+    @Test
     fun getPublicData() {
         connector.getHomeData().executeSync().apply {
             assert(this != null)

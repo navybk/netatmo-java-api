@@ -1,17 +1,25 @@
 package apitest
 
-import com.fasterxml.jackson.core.type.TypeReference
-import io.rudolph.netatmo.JacksonTransform
 import io.rudolph.netatmo.api.common.model.BatteryState
 import io.rudolph.netatmo.api.common.model.ClimateModule
+import io.rudolph.netatmo.api.common.model.StationResults
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.api.weather.model.Forecast
+import io.rudolph.netatmo.api.weather.model.Station
 import io.rudolph.netatmo.oauth2.model.Scope
 import org.junit.Test
 
 class WeatherTest : BaseTest(listOf(Scope.READ_STATION, Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT)) {
 
     val connector = api.weatherApi
+
+    @Test
+    fun parsingTest() {
+        readFileForClass<TypedBaseResult<List<Station>>>("/apiresults/weather/getPublicData.json")!!
+        readFileForClass<TypedBaseResult<Forecast>>("/apiresults/weather/getSimpleForecast.json")!!
+        readFileForClass<TypedBaseResult<StationResults>>("/apiresults/weather/StationDataResponse.json")!!
+    }
+
 
     @Test
     fun getPublicData() {
@@ -48,13 +56,4 @@ class WeatherTest : BaseTest(listOf(Scope.READ_STATION, Scope.WRITE_THERMOSTAT, 
             }
         }
     }
-
-    @Test
-    fun parseForecastXML() {
-        val stream = TestConfig::class.java.getResourceAsStream("/apiresults/weather/getSimpleForecast.json").bufferedReader()
-        val reference = object : TypeReference<TypedBaseResult<Forecast>>() {}
-        val forecast = JacksonTransform.mapper.readValue<TypedBaseResult<Forecast>>(stream, reference)
-        assert(forecast != null)
-    }
-
 }

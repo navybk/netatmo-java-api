@@ -6,7 +6,7 @@ import retrofit2.Call
 
 class AsyncCallExecutable<T, E>(private val call: Call<T>,
                                 private val errorFunction: ((String) -> Unit)? = null,
-                                private val transForm: ((T) -> E)? = null) : AsyncExecutable<E> {
+                                private val transForm: ((T) -> E?)? = null) : AsyncExecutable<E> {
 
 
     @Suppress("UNCHECKED_CAST")

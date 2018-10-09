@@ -19,7 +19,7 @@ abstract class EnergyModule<T> internal constructor(
         @JsonProperty("wifi_strength")
         open val wifiStrength: Int? = null,
 
-        @JsonAlias("id", "_id")
+        @field:JsonAlias("id", "_id")
         override val id: String,
 
         /**
@@ -29,7 +29,7 @@ abstract class EnergyModule<T> internal constructor(
          * 60 = full signal
          */
         @JsonProperty("rf_status")
-        @JsonAlias("rf_strength")
+        @field:JsonAlias("rf_strength")
         override val rfStrength: Int? = null,
 
         /**
@@ -41,10 +41,10 @@ abstract class EnergyModule<T> internal constructor(
         /**
          * Module Name
          */
-        @JsonAlias("module_name", "name")
+        @field:JsonAlias("module_name", "name")
         override val moduleName: String? = null,
 
-        @JsonAlias("type")
+        @field:JsonAlias("type")
         override val type: DeviceType = DeviceType.UNKNOWN
 ) : Module(id = id) {
 

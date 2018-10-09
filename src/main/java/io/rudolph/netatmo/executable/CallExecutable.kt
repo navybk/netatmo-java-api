@@ -4,7 +4,7 @@ import retrofit2.Call
 
 
 @Suppress("UNCHECKED_CAST")
-abstract class CallExecutable<T, E>(internal val call: Call<T>, private val transForm: (T) -> E = { (it as? E)!! }): Executable<E> {
+abstract class CallExecutable<T, E>(internal val call: Call<T>, private val transForm: (T) -> E? = { it as? E }) : Executable<E> {
 
     override fun onError(errorFunction: (String) -> Unit): AsyncCallExecutable<T, E> {
         return AsyncCallExecutable(call, errorFunction, transForm)

@@ -1,0 +1,18 @@
+{
+  "body": {
+    "homes": [],
+    "user": {
+      "email": "1",
+      "language": "de-DE",
+      "locale": "de-DE",
+      "feel_like_algorithm": 0,
+      "unit_pressure": 0,
+      "unit_system": 0,
+      "unit_wind": 0,
+      "id": "userid"
+    }
+  },
+  "status": "ok",
+  "time_exec": 0.066663026809692,
+  "time_server": 1532952521
+}

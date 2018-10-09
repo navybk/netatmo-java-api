@@ -3,8 +3,8 @@
   "body": {
     "devices": [
       {
-        "_id": "string",
-        "cipher_id": "string",
+        "_id": "string1",
+        "cipher_id": "string2",
         "last_status_store": 0,
         "place": {
           "city": "string",
@@ -18,7 +18,7 @@
           "timezone": "string",
           "trust_location": true
         },
-        "type": "string",
+        "type": "NAModule2",
         "dashboard_data": {
           "time_utc": 0,
           "device_id": 0,
