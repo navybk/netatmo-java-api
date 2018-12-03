@@ -76,7 +76,7 @@ internal interface PresenceService {
     ): Call<TypedBaseResult<Events>>
 
     @Headers("Content-Type:text/plain")
-    @GET("/command/ping")
+    @GET
     fun ping(
             @Url url: String
     ): Call<Ping>

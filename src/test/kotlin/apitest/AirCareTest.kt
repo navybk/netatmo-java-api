@@ -7,13 +7,15 @@ import org.junit.Test
 
 class AirCareTest : BaseTest(listOf(Scope.READ_HOMECOACH)) {
 
-    val connector = api.airCareApi
+    private val connector = api.airCareApi
 
     @Test
     fun getPublicData() {
-        connector.getHomeCoachsData().executeSync().apply {
-            assert(this != null)
-        }
+        connector.getHomeCoachsData()
+                .executeSync()
+                .apply {
+                    assert(this != null)
+                }
     }
 
     @Test

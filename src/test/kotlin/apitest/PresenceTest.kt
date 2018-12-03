@@ -26,9 +26,12 @@ class PresenceTest : BaseTest(listOf(Scope.READ_CAMERA, Scope.ACCESS_CAMERA, Sco
     @Test
     fun liveSnapshotURLTest() {
         val stream = PresenceTest::class.java.getResourceAsStream("/apiresults/presence/getPublicData.json").bufferedReader()
-        val res = JacksonTransform.mapper.readValue<TypedBaseResult<SecurityHome>>(stream, object : TypeReference<TypedBaseResult<SecurityHome>>() {}).body!!
+        val res = JacksonTransform.mapper
+                .readValue<TypedBaseResult<SecurityHome>>(stream, object : TypeReference<TypedBaseResult<SecurityHome>>() {})
+                .body!!
         val result = connector.getHomeData().executeSync()!!
         val camera = res.homes!![0].cameras!![0]
-        val url = connector.getLiveSnapshotUrl(camera)!!
+        assert(camera.vpnUrl == "https://v8.netatmo.net/restricted/10.255.10.199/0abcdefghijklmno_pqrstuvwxyz1,")
+        //val url = connector.getLiveSnapshotUrl(camera)!!
     }
 }

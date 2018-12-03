@@ -85,7 +85,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
     }
 
     @Test
-    fun gestMeasure() {
+    fun getMeasure() {
         api.energyApi.getHomesData().executeSync().apply {
             assert(this != null)
         }?.homes
@@ -226,7 +226,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
     fun getCombinedModule() {
         val result = api.energyApi.getCombinedHome().executeSync()
         val home = result?.homes?.get(0)!!
-        val module = home.modules.get(2)
+        val module = home.modules[2]
         api.energyApi
                 .getCombinedModule("", module.id)
                 .executeSync()?.let {
