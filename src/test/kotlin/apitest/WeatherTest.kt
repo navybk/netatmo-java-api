@@ -50,7 +50,7 @@ class WeatherTest : BaseTest(listOf(Scope.READ_STATION, Scope.WRITE_THERMOSTAT, 
     fun getForecast() {
         connector.getStationData().executeSync()?.apply {
             val deviceId = devices[0].id!!
-            val moduleId = devices[0]?.modules?.get(0)?.id!!
+            val moduleId = devices[0].modules?.get(0)?.id!!
             connector.getSimpleForecast(deviceId, moduleId).executeSyncWrapped().apply {
                 assert(this != null)
             }

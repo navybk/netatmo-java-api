@@ -1,19 +1,21 @@
 package io.rudolph.netatmo.executable
 
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
+import io.rudolph.netatmo.oauth2.model.BackendError
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class AsyncFunctionExecutable<T, E>(private val function: () -> T,
-                                    private val errorFunction: ((String) -> Unit)? = null,
+                                    private val errorFunction: ((BackendError) -> Unit)? = null,
                                     private val transForm: ((T) -> E)? = null) : AsyncExecutable<E> {
 
 
     @Suppress("UNCHECKED_CAST")
     override fun executeAsync(resultFunction: (E) -> Unit) {
-        launch {
+        GlobalScope.launch {
             val functionResult = function() ?: run {
                 runBlocking {
-                    errorFunction?.invoke("Empty object not expected")
+                    errorFunction?.invoke(BackendError(0, "Empty object not expected"))
                 }
                 return@launch
             }
@@ -24,7 +26,8 @@ class AsyncFunctionExecutable<T, E>(private val function: () -> T,
                 result?.apply {
                     resultFunction(this)
                 } ?: errorFunction?.invoke(
-                        "Empty object not expected")
+                        BackendError(0, "Empty object not expected")
+                )
             }
         }
     }

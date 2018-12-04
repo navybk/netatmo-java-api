@@ -1,23 +1,30 @@
 package io.rudolph.netatmo.executable
 
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
+import io.rudolph.netatmo.JacksonTransform
+import io.rudolph.netatmo.oauth2.model.BackendError
+import io.rudolph.netatmo.oauth2.model.ErrorResult
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 
 class AsyncCallExecutable<T, E>(private val call: Call<T>,
-                                private val errorFunction: ((String) -> Unit)? = null,
+                                private val errorFunction: ((BackendError) -> Unit)? = null,
                                 private val transForm: ((T) -> E?)? = null) : AsyncExecutable<E> {
 
 
     @Suppress("UNCHECKED_CAST")
     override fun executeAsync(resultFunction: (E) -> Unit) {
-        launch {
+        GlobalScope.launch {
             call.execute().apply {
                 if (isSuccessful) {
 
-                    val body: T = body() ?: let {
+                    val body: T = body() ?: run {
                         errorFunction?.invoke(
-                                "${code()}: Empty body not expected")
+                                JacksonTransform.deserialize<ErrorResult>(errorBody().toString())
+                                        ?.error
+                                        ?: BackendError(0, "${code()}: Empty body not expected")
+                        )
                         return@launch
                     }
                     val result: E? = transForm?.invoke(body) ?: body as? E
@@ -26,14 +33,14 @@ class AsyncCallExecutable<T, E>(private val call: Call<T>,
                         result?.apply {
                             resultFunction(this)
                         } ?: errorFunction?.invoke(
-                                "${code()}: Empty body not expected")
+                                BackendError(0, "${code()}: Empty body not expected"))
                     }
                     return@launch
                 }
 
                 runBlocking {
                     errorFunction?.invoke(
-                            "${code()}: ${message()}")
+                            BackendError(0, "${code()}: ${message()}"))
                 }
             }
         }
