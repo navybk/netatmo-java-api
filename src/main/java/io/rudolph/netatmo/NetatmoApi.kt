@@ -1,6 +1,6 @@
 package io.rudolph.netatmo
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import io.rudolph.netatmo.api.aircare.AirCareConnector
 import io.rudolph.netatmo.api.energy.EnergyConnector
 import io.rudolph.netatmo.api.presence.PresenceConnector
@@ -16,17 +16,17 @@ import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
 
-class NetatmoApi(userMail: String? = null,
-                 userPassword: String? = null,
-                 clientId: String? = null,
-                 clientSecret: String? = null,
-                 apiEndpoint: String = BASEAPIENDPOINT,
-                 authEndpoint: String = AUTHENDPOINT,
-                 refreshEndpoint: String = AUTHENDPOINT,
-                 scope: List<Scope>,
-                 accessToken: String? = null,
-                 refreshToken: String? = null,
-                 debug: Boolean = false) {
+class NetatmoApi @JvmOverloads constructor(userMail: String? = null,
+                                           userPassword: String? = null,
+                                           clientId: String? = null,
+                                           clientSecret: String? = null,
+                                           apiEndpoint: String = BASEAPIENDPOINT,
+                                           authEndpoint: String = AUTHENDPOINT,
+                                           refreshEndpoint: String = AUTHENDPOINT,
+                                           scope: List<Scope>,
+                                           accessToken: String? = null,
+                                           refreshToken: String? = null,
+                                           debug: Boolean = false) {
 
     private companion object {
         const val BASEAPIENDPOINT = "https://api.netatmo.com/api/"
@@ -83,19 +83,6 @@ class NetatmoApi(userMail: String? = null,
             refreshToken = refreshToken,
             apiEndpoint = BASEAPIENDPOINT,
             debug = debug)
-
-    constructor(userMail: String,
-                userPassword: String,
-                clientId: String,
-                clientSecret: String,
-                scope: List<Scope>)
-            : this(userMail = userMail,
-            userPassword = userPassword,
-            clientId = clientId,
-            clientSecret = clientSecret,
-            scope = scope,
-            apiEndpoint = BASEAPIENDPOINT,
-            debug = false)
 
     private val api = OkHttpClient.Builder()
             .addInterceptor(

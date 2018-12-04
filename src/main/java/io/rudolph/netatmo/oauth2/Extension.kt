@@ -1,6 +1,7 @@
 package io.rudolph.netatmo.oauth2
 
 import io.rudolph.netatmo.JacksonTransform
+import io.rudolph.netatmo.oauth2.model.BackendError
 import io.rudolph.netatmo.oauth2.model.ErrorResult
 import mu.KotlinLogging
 import okhttp3.*
@@ -9,7 +10,7 @@ import java.time.ZoneId
 
 internal val logger = KotlinLogging.logger("Netamo Api")
 
-fun Interceptor.Chain.errorbuilder(code: Int = 0, error: ErrorResult.Error): Response {
+fun Interceptor.Chain.errorbuilder(code: Int = 0, error: BackendError): Response {
     val message = "${error.message}"
     return Response.Builder().request(this.request())
             .protocol(Protocol.HTTP_1_1)
@@ -36,10 +37,10 @@ fun Interceptor.Chain.proceed(accessToken: String): Response {
             .build())
 }
 
-fun Response.createErrorBody(): ErrorResult.Error {
+fun Response.createErrorBody(): BackendError {
     return body()?.string()?.let {
-        JacksonTransform.parse<ErrorResult>(it)?.error ?: ErrorResult.Error(0, it)
-    } ?: ErrorResult.Error(0, "empty body")
+        JacksonTransform.parse<ErrorResult>(it)?.error ?: BackendError(0, it)
+    } ?: BackendError(0, "empty body")
 }
 
 fun LocalDateTime?.toTimestamp() = this?.let {

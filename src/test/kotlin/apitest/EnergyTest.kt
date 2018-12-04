@@ -11,6 +11,7 @@ import io.rudolph.netatmo.api.energy.model.module.RelayModule
 import io.rudolph.netatmo.api.energy.model.module.ThermostatModule
 import io.rudolph.netatmo.api.energy.model.module.ValveModule
 import io.rudolph.netatmo.executable.Executable
+import io.rudolph.netatmo.oauth2.model.BackendError
 import io.rudolph.netatmo.oauth2.model.Scope
 import org.junit.Test
 import java.time.LocalDateTime
@@ -52,7 +53,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
                                     waitForeverLatch.countDown()
                                 }
 
-                                override fun onError(error: String) {
+                                override fun onError(error: BackendError) {
                                     println(error)
 
                                     waitForeverLatch.countDown()
@@ -75,6 +76,9 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
                 ?.apply homeid@{
                     api.energyApi
                             .getHomeStatus(this)
+                            .onError {
+                                println(it)
+                            }
                             .executeSync().apply {
                                 assert(this != null)
                                 return
@@ -189,8 +193,6 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
                                     assert(result && this?.status == "ok")
                                     return
                                 }
-
-                        return
                     }
         }
         assert(false)

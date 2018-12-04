@@ -11,6 +11,7 @@ import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.BodyResultExecutable
 import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.executable.PlainCallExecutable
+import io.rudolph.netatmo.oauth2.model.BackendError
 import retrofit2.Retrofit
 
 open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
@@ -168,17 +169,14 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
                 }
     }
 
-    fun getLocalUrlAsync(camera: Camera, success: (String) -> Unit, error: (String) -> Unit) {
-        val url = camera.vpnUrl ?: let {
-            error("no vpn url given")
-            return
-        }
+    fun getLocalUrlAsync(camera: Camera, success: (String) -> Unit, error: (BackendError) -> Unit) {
+        val url = camera.vpnUrl ?: error("no vpn url given")
         getLocalUrlAsync(url, success, error)
     }
 
     fun getLocalUrlAsync(camera: Camera, callback: Executable.Callback<String>) {
         val url = camera.vpnUrl ?: let {
-            callback.onError("no vpn url given")
+            callback.onError(BackendError(0, "no vpn url given"))
             return
         }
         getLocalUrlAsync(url, {
@@ -188,13 +186,10 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
         })
     }
 
-    fun getLocalUrlAsync(url: String, success: (String) -> Unit, error: (String) -> Unit) {
+    fun getLocalUrlAsync(url: String, success: (String) -> Unit, error: (BackendError) -> Unit) {
         ping(url).apply {
             onError(error).executeAsync {
-                val newurl = it.localUrl ?: let {
-                    error("no new url retreived")
-                    return@executeAsync
-                }
+                val newurl = it.localUrl ?: error("no new url retreived")
                 ping(newurl).onError {
                     kotlin.error("cannot access camera")
                 }.executeAsync {
@@ -224,7 +219,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
         }
     }
 
-    fun getLiveSnapshotUrlAsync(camera: Camera, success: (String) -> Unit, error: (String) -> Unit) {
+    fun getLiveSnapshotUrlAsync(camera: Camera, success: (String) -> Unit, error: (BackendError) -> Unit) {
         getLocalUrlAsync(camera, success, error)
     }
 
@@ -270,7 +265,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
     }
 
     fun getStreamingUrlAsync(camera: Camera, callback: Executable.Callback<String>) {
-        getLocalUrlAsync(camera, { value: String -> callback.onResult(value) }, { value: String -> callback.onError(value) })
+        getLocalUrlAsync(camera, { value: String -> callback.onResult(value) }, { value: BackendError -> callback.onError(value) })
     }
 
 
@@ -280,7 +275,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
         }
     }
 
-    fun getVodUrlAsnyc(camera: Camera, videoId: String, success: (String) -> Unit, error: (String) -> Unit) {
+    fun getVodUrlAsnyc(camera: Camera, videoId: String, success: (String) -> Unit, error: (BackendError) -> Unit) {
         getLocalUrlAsync(camera, {
             success("$this/camera_url/vod/$videoId/index_local.m3u8")
         }, error)

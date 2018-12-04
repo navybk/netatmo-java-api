@@ -51,7 +51,7 @@ data class RelayModule(
 ) : EnergyModule<RelayModule>(id = id) {
 
     override fun join(module: RelayModule): RelayModule =
-            RelayModule(id = id ?: module.id,
+            RelayModule(id = id,
                     wifiStrength = wifiStrength ?: module.wifiStrength,
                     setupDate = setupDate ?: module.setupDate,
                     connectedToBoiler = connectedToBoiler ?: module.connectedToBoiler,

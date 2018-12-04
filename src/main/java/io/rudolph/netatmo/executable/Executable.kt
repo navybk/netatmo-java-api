@@ -1,5 +1,7 @@
 package io.rudolph.netatmo.executable
 
+import io.rudolph.netatmo.oauth2.model.BackendError
+
 
 @Suppress("UNCHECKED_CAST")
 interface Executable<T> {
@@ -20,7 +22,7 @@ interface Executable<T> {
          *
          * @param error a readable error reason
          */
-        fun onError(error: String)
+        fun onError(error: BackendError)
     }
 
     /**
@@ -29,7 +31,7 @@ interface Executable<T> {
      * @param errorFunction a lambda with a error representing String as parameter
      * @return an [AsyncCallExecutable] which provides the async execution of the given call
      */
-    fun onError(errorFunction: (String) -> Unit): AsyncExecutable<T>
+    fun onError(errorFunction: (BackendError) -> Unit): Executable<T>
 
     /**
      * execute the call synchronously
@@ -45,5 +47,11 @@ interface Executable<T> {
      */
     fun executeAsync(callback: Executable.Callback<T>)
 
+    /**
+     * execute the call asynchronously with a callback object for return values
+     *
+     * @param resultFunction the function which includes the success object
+     */
+    fun executeAsync(resultFunction: (T) -> Unit)
 
 }
