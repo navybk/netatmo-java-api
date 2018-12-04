@@ -77,17 +77,17 @@ Be aware of the return types (caused by Kotlin <-> Java interface )
 For the most convinient usage, Kotlin is advised
 
 ## Used libraries
-
-* [Kotlin Coroutines 0.23.4](https://github.com/Kotlin/kotlinx.coroutines)
-* [Kotlin Logging 1.5.4](https://github.com/MicroUtils/kotlin-logging)
-* [Kotlin Coroutine (Experimental) Adapter 1.0.0](https://github.com/JakeWharton/retrofit2-kotlin-coroutines-adapter)
-*  [Retrofit 2.4.0](https://github.com/square/retrofit)
-*  [Jackson Converter 2.4.0](https://github.com/square/retrofit/tree/master/retrofit-converters/jackson)
-*  [Jackson Core 2.9.6](https://github.com/FasterXML/jackson-core)
-*  [Jackson Annotations 2.9.6](https://github.com/FasterXML/jackson-annotations)
-* [Jackson Kotlin Module 2.9.6](https://github.com/FasterXML/jackson-module-kotlin)
-* [OkHttp 3.11.0](https://github.com/square/okhttp)
-* [OkHttp Loggin Interceptor 3.11.0](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)
+* [Kotlin 1.3](https://github.com/JetBrains/kotlin/)
+* [Kotlin Coroutines 1.0.1](https://github.com/Kotlin/kotlinx.coroutines)
+* [Kotlin Logging 1.6.22](https://github.com/MicroUtils/kotlin-logging)
+* [Kotlin Coroutine Adapter 0.9.2](https://github.com/JakeWharton/retrofit2-kotlin-coroutines-adapter)
+*  [Retrofit 2.5.0](https://github.com/square/retrofit)
+*  [Jackson Converter 2.5.0](https://github.com/square/retrofit/tree/master/retrofit-converters/jackson)
+*  [Jackson Core 2.9.7](https://github.com/FasterXML/jackson-core)
+*  [Jackson Annotations 2.9.7](https://github.com/FasterXML/jackson-annotations)
+* [Jackson Kotlin Module 2.9.7](https://github.com/FasterXML/jackson-module-kotlin)
+* [OkHttp 3.12.0](https://github.com/square/okhttp)
+* [OkHttp Loggin Interceptor 3.12.0](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)
 
 ## Authors
 
