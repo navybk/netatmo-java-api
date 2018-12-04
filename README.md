@@ -45,7 +45,7 @@ Executable.Callback<HomesDataBody> callback = new Executable.Callback<HomesDataB
     }
 
     @Override
-    public void onError(String s) {
+    public void onError(BackendError s) {
 
     }
 };
@@ -64,7 +64,7 @@ Also lambdas are possible
     […]
 }
 
-public Unit onError(String error){
+public Unit onError(BackendError error){
     return null;
 }
 
