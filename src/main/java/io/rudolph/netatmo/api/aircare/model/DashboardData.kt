@@ -1,13 +1,14 @@
 package io.rudolph.netatmo.api.aircare.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import java.time.LocalDateTime
 
 /**
  * Last data measured per device
  */
 data class DashboardData(
         @JsonProperty("time_utc")
-        val timeUtc: Int? = null,
+        val timeUtc: LocalDateTime? = null,
 
         @JsonProperty("Temperature")
         val temperature: Float? = null,

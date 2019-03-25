@@ -18,6 +18,7 @@ import java.time.LocalDateTime
         JsonSubTypes.Type(value = BaseDevice::class, name = Constant.THERMOSTAT_API_STRING),
         JsonSubTypes.Type(value = RelayDevice::class, name = Constant.RELAY_API_STRING),
         JsonSubTypes.Type(value = BaseDevice::class, name = Constant.INDOORMODULE_API_STRING),
+        JsonSubTypes.Type(value = BaseDevice::class, name = Constant.HOMECOACH_API_STRING),
         JsonSubTypes.Type(value = BaseDevice::class, name = Constant.OUTDOORMODULE_API_STRING),
         JsonSubTypes.Type(value = BaseDevice::class, name = Constant.RAINGAUGEMODULE_API_STRING),
         JsonSubTypes.Type(value = BaseDevice::class, name = Constant.WINDMODULE_API_STRING),

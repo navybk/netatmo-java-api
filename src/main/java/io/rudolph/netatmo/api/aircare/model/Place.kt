@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Place(
         @JsonProperty("altitude")
-        val altitude: Int? = null,
+        val altitude: Float? = null,
 
         @JsonProperty("country")
         val country: String? = null,
