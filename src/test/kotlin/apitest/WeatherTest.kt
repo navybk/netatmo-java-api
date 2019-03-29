@@ -15,9 +15,9 @@ class WeatherTest : BaseTest(listOf(Scope.READ_STATION, Scope.WRITE_THERMOSTAT, 
 
     @Test
     fun parsingTest() {
-        readFileForClass<TypedBaseResult<List<Station>>>("/apiresults/weather/getPublicData.json")!!
-        readFileForClass<TypedBaseResult<Forecast>>("/apiresults/weather/getSimpleForecast.json")!!
-        readFileForClass<TypedBaseResult<StationResults>>("/apiresults/weather/StationDataResponse.json")!!
+        readFileForClass<TypedBaseResult<List<Station>>>("apiresults/weather/getPublicData.json")!!
+        readFileForClass<TypedBaseResult<Forecast>>("apiresults/weather/getSimpleForecast.json")!!
+        readFileForClass<TypedBaseResult<StationResults>>("apiresults/weather/StationDataResponse.json")!!
     }
 
 

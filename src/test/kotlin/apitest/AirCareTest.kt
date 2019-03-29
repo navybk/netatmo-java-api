@@ -20,8 +20,8 @@ class AirCareTest : BaseTest(listOf(Scope.READ_HOMECOACH)) {
 
     @Test
     fun parsingTest() {
-        readFileForClass<TypedBaseResult<StationResults>>("/apiresults/aircare/getHomeCoachLive.json")!!
-        readFileForClass<TypedBaseResult<StationResults>>("/apiresults/aircare/gethomecoachsdata.json")!!
+        readFileForClass<TypedBaseResult<StationResults>>("apiresults/aircare/getHomeCoachLive.json")!!
+        readFileForClass<TypedBaseResult<StationResults>>("apiresults/aircare/gethomecoachsdata.json")!!
     }
 
 }

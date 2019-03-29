@@ -22,12 +22,12 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
 
     @Test
     fun parsingTest() {
-        readFileForClass<TypedBaseResult<HomesDataBody>>("/apiresults/energy/HomesDataEmptyResponse.json")!!
-        readFileForClass<TypedBaseResult<HomesDataBody>>("/apiresults/energy/HomesDataResponse.json")!!
-        readFileForClass<TypedBaseResult<HomesDataBody>>("/apiresults/energy/HomesDataResponseThermostat.json")!!
-        readFileForClass<TypedBaseResult<HomeStatusBody>>("/apiresults/energy/HomeStatusResponse.json")!!
-        readFileForClass<TypedBaseResult<HomeStatusBody>>("/apiresults/energy/HomeStatusResponseThermostat.json")!!
-        readFileForClass<TypedBaseResult<StationResults>>("/apiresults/energy/getThermostatData.json")!!
+        readFileForClass<TypedBaseResult<HomesDataBody>>("apiresults/energy/HomesDataEmptyResponse.json")!!
+        val test = readFileForClass<TypedBaseResult<HomesDataBody>>("apiresults/energy/HomesDataResponse.json")!!
+        readFileForClass<TypedBaseResult<HomesDataBody>>("apiresults/energy/HomesDataResponseThermostat.json")!!
+        readFileForClass<TypedBaseResult<HomeStatusBody>>("apiresults/energy/HomeStatusResponse.json")!!
+        readFileForClass<TypedBaseResult<HomeStatusBody>>("apiresults/energy/HomeStatusResponseThermostat.json")!!
+        readFileForClass<TypedBaseResult<StationResults>>("apiresults/energy/getThermostatData.json")!!
     }
 
     @Test

@@ -13,7 +13,7 @@ class PresenceTest : BaseTest(listOf(Scope.READ_CAMERA, Scope.ACCESS_CAMERA, Sco
 
     @Test
     fun parsingTest() {
-        readFileForClass<TypedBaseResult<SecurityHome>>("/apiresults/presence/getPublicData.json")!!
+        readFileForClass<TypedBaseResult<SecurityHome>>("apiresults/presence/getPublicData.json")!!
     }
 
     @Test
@@ -25,7 +25,7 @@ class PresenceTest : BaseTest(listOf(Scope.READ_CAMERA, Scope.ACCESS_CAMERA, Sco
 
     @Test
     fun liveSnapshotURLTest() {
-        val stream = PresenceTest::class.java.getResourceAsStream("/apiresults/presence/getPublicData.json").bufferedReader()
+        val stream = PresenceTest::class.java.getResourceAsStream("apiresults/presence/getPublicData.json").bufferedReader()
         val res = JacksonTransform.mapper
                 .readValue<TypedBaseResult<SecurityHome>>(stream, object : TypeReference<TypedBaseResult<SecurityHome>>() {})
                 .body!!

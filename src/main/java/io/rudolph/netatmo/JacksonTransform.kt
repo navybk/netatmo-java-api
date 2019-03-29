@@ -9,6 +9,7 @@ import io.rudolph.netatmo.api.common.model.DeviceType
 import io.rudolph.netatmo.api.common.model.Scale
 import io.rudolph.netatmo.api.common.model.ScaleType
 import io.rudolph.netatmo.api.common.transform.*
+import io.rudolph.netatmo.api.energy.model.RoomType
 import io.rudolph.netatmo.api.energy.model.TemperatureType
 import io.rudolph.netatmo.api.energy.model.ThermMode
 import io.rudolph.netatmo.api.energy.model.ZoneType
@@ -35,6 +36,7 @@ internal object JacksonTransform {
             addDeserializer(ThermMode::class.java, ThermModeDeserializer())
             addDeserializer(DeviceType::class.java, DeviceTypeDeserializer())
             addDeserializer(TemperatureType::class.java, TemperaturTypeDeserializer())
+            addDeserializer(RoomType::class.java, RoomTypeDeserializer())
             addDeserializer(ZoneType::class.java, ZoneTypeDeserializer())
             addDeserializer(LocalDateTime::class.java, LocalDateTimeDeserializer())
             addDeserializer(Measure::class.java, MeasureDeserializer())

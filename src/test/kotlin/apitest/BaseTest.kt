@@ -11,7 +11,7 @@ abstract class BaseTest(scope: List<Scope> = listOf()) {
      * for tests save credentials as json at /src/main/resources and run task "copyTestResources"
      * after changes OR create a custom object
      */
-    private val testConfig = TestConfig.buildFromFile("/credentialsmicha.json")
+    private val testConfig = TestConfig.buildFromFile("credentialsmicha.json")
             ?: throw IllegalStateException("config file missing")
 
     protected val api = NetatmoApi(
