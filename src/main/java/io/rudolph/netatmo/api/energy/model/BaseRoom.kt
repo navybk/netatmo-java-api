@@ -19,7 +19,7 @@ data class BaseRoom(
         val name: String? = null,
 
         @JsonProperty("type")
-        val type: RoomType? = null,
+        val type: RoomType,
 
         @JsonProperty("module_ids")
         val moduleIds: List<String>? = null,
