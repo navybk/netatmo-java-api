@@ -3,7 +3,6 @@ package io.rudolph.netatmo.api.welcome.service
 import io.rudolph.netatmo.api.energy.model.BaseResult
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.api.presence.model.Events
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
@@ -14,52 +13,52 @@ internal interface WelcomeService {
 
     @Headers("Content-Type:text/plain")
     @GET("getlasteventof")
-    fun getLastEventOf(
+    suspend fun getLastEventOf(
             @Query("access_token") accessToken: String,
             @Query("home_id") homeId: String,
             @Query("person_id") personId: String,
             @Query("offset") offset: Int? = null
-    ): Call<TypedBaseResult<Events>>
+    ): TypedBaseResult<Events>
 
     @Headers("Content-Type:text/plain")
     @POST("getlasteventof")
-    fun getLastEventOfPost(
+    suspend fun getLastEventOfPost(
             @Query("access_token") accessToken: String,
             @Query("home_id") homeId: String,
             @Query("person_id") personId: String,
             @Query("offset") offset: Int? = null
-    ): Call<TypedBaseResult<Events>>
+    ): TypedBaseResult<Events>
 
     @Headers("Content-Type:text/plain")
     @GET("setpersonsaway")
-    fun setPersonsAwayGet(
+    suspend fun setPersonsAwayGet(
             @Query("access_token") accessToken: String,
             @Query("home_id") homeId: String,
             @Query("person_id") personId: String? = null
-    ): Call<BaseResult>
+    ): BaseResult
 
     @Headers("Content-Type:text/plain")
     @POST("setpersonsaway")
-    fun setPersonsAway(
+    suspend fun setPersonsAway(
             @Query("access_token") accessToken: String,
             @Query("home_id") homeId: String,
             @Query("person_id") personId: String? = null
-    ): Call<BaseResult>
+    ): BaseResult
 
     @Headers("Content-Type:text/plain")
     @GET("setpersonshome")
-    fun setPersonsHomeGet(
+    suspend fun setPersonsHomeGet(
             @Query("access_token") accessToken: String,
             @Query("home_id") homeId: String,
             @Query("person_ids") personIds: List<String>
-    ): Call<BaseResult>
+    ): BaseResult
 
     @Headers("Content-Type:text/plain")
     @POST("setpersonshome")
-    fun setPersonsHome(
+    suspend fun setPersonsHome(
             @Query("access_token") accessToken: String,
             @Query("home_id") homeId: String,
             @Query("person_ids") personIds: List<String>
-    ): Call<BaseResult>
+    ): BaseResult
 
 }

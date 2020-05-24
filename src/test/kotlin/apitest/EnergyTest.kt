@@ -23,7 +23,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
     @Test
     fun parsingTest() {
         readFileForClass<TypedBaseResult<HomesDataBody>>("apiresults/energy/HomesDataEmptyResponse.json")!!
-        val test = readFileForClass<TypedBaseResult<HomesDataBody>>("apiresults/energy/HomesDataResponse.json")!!
+        readFileForClass<TypedBaseResult<HomesDataBody>>("apiresults/energy/HomesDataResponse.json")!!
         readFileForClass<TypedBaseResult<HomesDataBody>>("apiresults/energy/HomesDataResponseThermostat.json")!!
         readFileForClass<TypedBaseResult<HomeStatusBody>>("apiresults/energy/HomeStatusResponse.json")!!
         readFileForClass<TypedBaseResult<HomeStatusBody>>("apiresults/energy/HomeStatusResponseThermostat.json")!!
@@ -230,9 +230,9 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
         val home = result?.homes?.get(0)!!
         val module = home.modules[2]
         api.energyApi
-                .getCombinedModule("", module.id)
+                .getCombinedModule(home.id, module.id)
                 .executeSync()?.let {
-            assert(true)
+                    assert(true)
                 }
     }
 

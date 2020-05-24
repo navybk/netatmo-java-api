@@ -28,32 +28,25 @@ internal class AuthInterceptor(private val userMail: String?,
             if (response.isSuccessful) {
                 return response
             }
-            return if (response.code() == 403) {
+            return if (response.code == 403) {
                 val error = response.createErrorBody()
                 when (error.code) {
                     3, 2 -> {
-                        val accToken = refresh(chain) ?: return chain.errorbuilder(response.code(), error)
+                        val accToken = refresh(chain) ?: return chain.errorbuilder(response.code, error)
                         tokenStore.accessToken = accToken
                         chain.proceed(accToken).let {
                             if (it.isSuccessful) {
                                 it
                             } else {
                                 val innererror = it.createErrorBody()
-                                chain.errorbuilder(it.code(), innererror).apply {
+                                chain.errorbuilder(it.code, innererror).apply {
                                     it.close()
                                 }
                             }
                         }
                     }
-                    13 -> {
-                        chain.errorbuilder(response.code(), error).apply {
-                            response.close()
-                        }
-                    }
                     else -> {
-                        chain.errorbuilder(response.code(), error).apply {
-                            response.close()
-                        }
+                        response
                     }
                 }
             } else {
@@ -115,7 +108,7 @@ internal class AuthInterceptor(private val userMail: String?,
                 mainResponse.close()
                 return@let null
             }
-            mainResponse.body()
+            mainResponse.body
                     ?.string()
                     ?.let { response ->
                         JacksonTransform.deserialize<AuthResponse>(response)

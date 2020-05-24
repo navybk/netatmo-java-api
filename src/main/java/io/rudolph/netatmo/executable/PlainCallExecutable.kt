@@ -1,5 +1,3 @@
 package io.rudolph.netatmo.executable
 
-import retrofit2.Call
-
-class PlainCallExecutable<T>(call: Call<T>) : CallExecutable<T, T>(call)
+class PlainCallExecutable<T>(call: suspend () -> T) : SafeCallExecutable<T, T>(call)

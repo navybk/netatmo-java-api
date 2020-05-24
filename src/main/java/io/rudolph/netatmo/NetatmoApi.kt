@@ -1,6 +1,5 @@
 package io.rudolph.netatmo
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import io.rudolph.netatmo.api.aircare.AirCareConnector
 import io.rudolph.netatmo.api.energy.EnergyConnector
 import io.rudolph.netatmo.api.presence.PresenceConnector
@@ -107,7 +106,6 @@ class NetatmoApi @JvmOverloads constructor(userMail: String? = null,
             .let {
                 Retrofit.Builder()
                         .addConverterFactory(JacksonTransform.jacksonConverterFactory)
-                        .addCallAdapterFactory(CoroutineCallAdapterFactory())
                         .baseUrl(apiEndpoint)
                         .client(it)
                         .build()

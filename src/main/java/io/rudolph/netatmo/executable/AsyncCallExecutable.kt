@@ -3,12 +3,13 @@ package io.rudolph.netatmo.executable
 import io.rudolph.netatmo.JacksonTransform
 import io.rudolph.netatmo.oauth2.model.BackendError
 import io.rudolph.netatmo.oauth2.model.ErrorResult
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import retrofit2.Call
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
-class AsyncCallExecutable<T, E>(private val call: Call<T>,
+class AsyncCallExecutable<T, E>(private val call: suspend () -> T,
                                 private val errorFunction: ((BackendError) -> Unit)? = null,
                                 private val transForm: ((T) -> E?)? = null) : AsyncExecutable<E> {
 
@@ -16,32 +17,25 @@ class AsyncCallExecutable<T, E>(private val call: Call<T>,
     @Suppress("UNCHECKED_CAST")
     override fun executeAsync(resultFunction: (E) -> Unit) {
         GlobalScope.launch {
-            call.execute().apply {
-                if (isSuccessful) {
+            try {
+                call()?.apply {
+                    val result: E? = transForm?.invoke(this) ?: this as? E
 
-                    val body: T = body() ?: run {
-                        errorFunction?.invoke(
-                                JacksonTransform.deserialize<ErrorResult>(errorBody().toString())
-                                        ?.error
-                                        ?: BackendError(0, "${code()}: Empty body not expected")
-                        )
-                        return@launch
-                    }
-                    val result: E? = transForm?.invoke(body) ?: body as? E
-
-                    runBlocking {
+                    withContext(Dispatchers.Unconfined) {
                         result?.apply {
                             resultFunction(this)
                         } ?: errorFunction?.invoke(
-                                BackendError(0, "${code()}: Empty body not expected"))
+                                BackendError(0, "Transform failed"))
                     }
-                    return@launch
                 }
-
-                runBlocking {
-                    errorFunction?.invoke(
-                            BackendError(0, "${code()}: ${message()}"))
-                }
+            } catch (httpException: HttpException) {
+                errorFunction?.invoke(
+                        JacksonTransform.deserialize<ErrorResult>(httpException.message())
+                                ?.error
+                                ?: BackendError(0, "${httpException.code()}: Empty body not expected"))
+            } catch (exception: Exception) {
+                errorFunction?.invoke(
+                        BackendError(0, "unexpected result"))
             }
         }
     }

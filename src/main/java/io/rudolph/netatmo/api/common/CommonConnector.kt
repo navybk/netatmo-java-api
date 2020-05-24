@@ -4,7 +4,6 @@ import io.rudolph.netatmo.api.common.model.MeasureRequestResponse
 import io.rudolph.netatmo.api.common.model.Scale
 import io.rudolph.netatmo.api.common.model.ScaleType
 import io.rudolph.netatmo.api.common.service.CommonService
-import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.BodyResultExecutable
 import io.rudolph.netatmo.oauth2.toTimestamp
 import retrofit2.Retrofit
@@ -43,17 +42,18 @@ abstract class CommonConnector(api: Retrofit) {
             optimize: Boolean? = null,
             realTime: Boolean? = null
     ): BodyResultExecutable<List<MeasureRequestResponse>> {
-        return apiService.getMeasure(
-                accessToken = "empty",
-                moduleId = moduleId,
-                deviceId = deviceId,
-                scale = scale.value,
-                type = type.value,
-                dateBegin = dateBegin.toTimestamp(),
-                dateEnd = dateEnd.toTimestamp(),
-                limit = limit,
-                optimize = optimize,
-                realTime = realTime
-        ).executable
+        return BodyResultExecutable {
+            apiService.getMeasure(
+                    accessToken = "empty",
+                    moduleId = moduleId,
+                    deviceId = deviceId,
+                    scale = scale.value,
+                    type = type.value,
+                    dateBegin = dateBegin.toTimestamp(),
+                    dateEnd = dateEnd.toTimestamp(),
+                    limit = limit,
+                    optimize = optimize,
+                    realTime = realTime)
+        }
     }
 }

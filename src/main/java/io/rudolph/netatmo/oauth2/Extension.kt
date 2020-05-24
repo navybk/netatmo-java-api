@@ -4,7 +4,11 @@ import io.rudolph.netatmo.JacksonTransform
 import io.rudolph.netatmo.oauth2.model.BackendError
 import io.rudolph.netatmo.oauth2.model.ErrorResult
 import mu.KotlinLogging
-import okhttp3.*
+import okhttp3.Interceptor
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.Protocol
+import okhttp3.Response
+import okhttp3.ResponseBody.Companion.toResponseBody
 import java.time.LocalDateTime
 import java.time.ZoneId
 
@@ -15,19 +19,19 @@ fun Interceptor.Chain.errorbuilder(code: Int = 0, error: BackendError): Response
     return Response.Builder().request(this.request())
             .protocol(Protocol.HTTP_1_1)
             .code(code)
-            .body(ResponseBody.create(MediaType.parse("text/plain"), message))
+            .body(message.toResponseBody("text/plain".toMediaTypeOrNull()))
             .message(message)
             .build()
 }
 
 fun Interceptor.Chain.proceed(accessToken: String): Response {
-    val url = request().url().queryParameter("access_token")?.let {
-        request().url()
+    val url = request().url.queryParameter("access_token")?.let {
+        request().url
                 .newBuilder()
                 .removeAllEncodedQueryParameters("access_token")
                 .addEncodedQueryParameter("access_token", accessToken)
                 .build()
-    } ?: request().url()
+    } ?: request().url
 
     return proceed(this.request()
             .newBuilder()
@@ -38,7 +42,7 @@ fun Interceptor.Chain.proceed(accessToken: String): Response {
 }
 
 fun Response.createErrorBody(): BackendError {
-    return body()?.string()?.let {
+    return body?.string()?.let {
         JacksonTransform.parse<ErrorResult>(it)?.error ?: BackendError(0, it)
     } ?: BackendError(0, "empty body")
 }

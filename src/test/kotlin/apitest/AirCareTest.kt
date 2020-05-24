@@ -11,7 +11,7 @@ class AirCareTest : BaseTest(listOf(Scope.READ_HOMECOACH)) {
 
     @Test
     fun getPublicData() {
-        connector.getHomeCoachsData()
+        connector.getHomeCoachData()
                 .executeSync()
                 .apply {
                     assert(this != null)

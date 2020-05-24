@@ -7,7 +7,6 @@ import io.rudolph.netatmo.api.presence.model.Event
 import io.rudolph.netatmo.api.presence.model.Events
 import io.rudolph.netatmo.api.presence.model.SecurityHome
 import io.rudolph.netatmo.api.presence.service.PresenceService
-import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.BodyResultExecutable
 import io.rudolph.netatmo.executable.Executable
 import io.rudolph.netatmo.executable.PlainCallExecutable
@@ -29,8 +28,10 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @return an executable object to obtain the camera picture as jpg bytes wraped in [String] with size of  120x120
      */
     fun getCameraPicture(imageId: String, key: String): PlainCallExecutable<String> {
-        return presenceService.getCamerapPicture(imageId = imageId,
-                key = key).executable
+        return PlainCallExecutable {
+            presenceService.getCamerapPicture(imageId = imageId,
+                    key = key)
+        }
     }
 
     /**
@@ -45,11 +46,12 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @return an executable object to obtain the List of [Event]
      */
     fun getEventsUntil(homeId: String, eventId: String): BodyResultExecutable<Events> {
-        return presenceService.getEventsUntil(
-                accessToken = "",
-                homeId = homeId,
-                eventId = eventId
-        ).executable
+        return BodyResultExecutable {
+            presenceService.getEventsUntil(
+                    accessToken = "",
+                    homeId = homeId,
+                    eventId = eventId)
+        }
     }
 
     /**
@@ -64,11 +66,12 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @return an executable object to obtain the [SecurityHome]
      */
     fun getHomeData(homeId: String? = null, eventId: String? = null): BodyResultExecutable<SecurityHome> {
-        return presenceService.getHomeData(
-                accessToken = "",
-                homeId = homeId,
-                eventId = eventId
-        ).executable
+        return BodyResultExecutable {
+            presenceService.getHomeData(
+                    accessToken = "",
+                    homeId = homeId,
+                    eventId = eventId)
+        }
     }
 
     /**
@@ -84,12 +87,14 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @return an executable object to obtain the List of [Event]
      */
     fun getNextEvents(homeId: String, eventId: String, size: Int? = null): BodyResultExecutable<Events> {
-        return presenceService.getNextEvents(
-                accessToken = "",
-                homeId = homeId,
-                eventId = eventId,
-                size = size
-        ).executable
+        return BodyResultExecutable {
+            presenceService.getNextEvents(
+                    accessToken = "",
+                    homeId = homeId,
+                    eventId = eventId,
+                    size = size
+            )
+        }
     }
 
     /**
@@ -104,11 +109,12 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @return an executable object to obtain the [BaseResult]
      */
     fun addWebHook(url: String, appTypes: String): PlainCallExecutable<BaseResult> {
-        return presenceService.addWebHook(
-                accessToken = "",
-                url = url,
-                appTypes = appTypes
-        ).executable
+        return PlainCallExecutable {
+            presenceService.addWebHook(
+                    accessToken = "",
+                    url = url,
+                    appTypes = appTypes)
+        }
     }
 
     /**
@@ -122,10 +128,11 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @return an executable object to obtain the [BaseResult]
      */
     fun dropWebHook(appTypes: String): PlainCallExecutable<BaseResult> {
-        return presenceService.dropWebHook(
-                accessToken = " ",
-                appTypes = appTypes
-        ).executable
+        return PlainCallExecutable {
+            presenceService.dropWebHook(
+                    accessToken = " ",
+                    appTypes = appTypes)
+        }
     }
 
 
@@ -139,7 +146,7 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
      * @param url ID of the Home you're interested in
      * @return an executable object to obtain the [SecurityHome]
      */
-    fun ping(url: String) = presenceService.ping(url).executable
+    fun ping(url: String) = PlainCallExecutable { presenceService.ping(url) }
 
     private fun getLocalUrl(camera: Camera): String? {
         return camera.vpnUrl?.let {
@@ -148,17 +155,12 @@ open class PresenceConnector(api: Retrofit) : CommonConnector(api) {
     }
 
     private fun getLocalUrl(url: String): String? {
-        presenceService.ping(url)
-                .execute()
-                .let {
-                    if (!it.isSuccessful) {
-                        return null
-                    }
-                    val newUrl = it.body()?.localUrl ?: return null
-                    return presenceService.ping(newUrl)
-                            .execute()
-                            .let {
-                                it.body()?.localUrl?.let { responseUrl ->
+        return ping(url).executeSync()
+                ?.let {
+                    val newUrl = it.localUrl ?: return null
+                    ping(newUrl).executeSync()
+                            ?.let { ping ->
+                                ping.localUrl?.let { responseUrl ->
                                     if (responseUrl == newUrl) {
                                         responseUrl
                                     } else {

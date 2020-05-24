@@ -6,7 +6,6 @@ import io.rudolph.netatmo.api.weather.model.Forecast
 import io.rudolph.netatmo.api.weather.model.ForecastRequestBody
 import io.rudolph.netatmo.api.weather.model.Station
 import io.rudolph.netatmo.api.weather.service.WeatherService
-import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.BodyResultExecutable
 import retrofit2.Retrofit
 
@@ -34,27 +33,32 @@ class WeatherConnector(api: Retrofit) : CommonConnector(api) {
                       longitudeSouthWest: Float,
                       required: String? = null,
                       filter: Boolean? = null): BodyResultExecutable<List<Station>> {
-        return weatherService.getPublicData(
-                "Empty", // will be replaced in Chain.proceed(accessToken: String)
-                latitudeNorthEast,
-                longitudeNorthEast,
-                latitudeSouthWest,
-                longitudeSouthWest,
-                required,
-                filter
-        ).executable
+        return BodyResultExecutable {
+            weatherService.getPublicData(
+                    "Empty", // will be replaced in Chain.proceed(accessToken: String)
+                    latitudeNorthEast,
+                    longitudeNorthEast,
+                    latitudeSouthWest,
+                    longitudeSouthWest,
+                    required,
+                    filter)
+        }
     }
 
     fun getSimpleForecast(deviceId: String, moduleId: String): BodyResultExecutable<Forecast> {
         val body = ForecastRequestBody(devideId = deviceId, moduleId = moduleId)
-        return weatherService.getSimpleForecast(body).executable
+        return BodyResultExecutable {
+            weatherService.getSimpleForecast(body)
+        }
     }
 
     fun getStationData(deviceId: String? = null,
                        getFavourites: Boolean? = null): BodyResultExecutable<StationResults> {
-        return weatherService.getStationData("Empty",
-                deviceId,
-                getFavourites).executable
+        return BodyResultExecutable {
+            weatherService.getStationData("Empty",
+                    deviceId,
+                    getFavourites)
+        }
     }
 
 }

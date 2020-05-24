@@ -1,6 +1,7 @@
 package io.rudolph.netatmo.api.energy.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.rudolph.netatmo.api.common.model.Module
 
 
 data class HomesDataBody(
@@ -8,6 +9,9 @@ data class HomesDataBody(
         val homes: List<Home> = listOf(),
 
         @JsonProperty("user")
-        val user: User? = null
+        val user: User? = null,
+
+        @JsonProperty("modules")
+        val modules: List<Module> = listOf()
 )
 

@@ -9,7 +9,6 @@ import io.rudolph.netatmo.api.energy.model.module.RelayModule
 import io.rudolph.netatmo.api.energy.model.module.ThermostatModule
 import io.rudolph.netatmo.api.energy.model.module.ValveModule
 import io.rudolph.netatmo.api.energy.service.EnergyService
-import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.BodyResultExecutable
 import io.rudolph.netatmo.executable.PlainCallExecutable
 import io.rudolph.netatmo.executable.PlainFunctionExecutable
@@ -31,8 +30,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      * @return an executable object to obtain the [HomesDataBody]
      */
     fun getHomesData(): BodyResultExecutable<HomesDataBody> {
-        return energyService.getHomeData()
-                .executable
+        return BodyResultExecutable { energyService.getHomeData() }
     }
 
     /**
@@ -46,8 +44,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      * @return an executable object to obtain the [HomesDataBody]
      */
     fun getHomesData(homeId: String? = null): BodyResultExecutable<HomesDataBody> {
-        return energyService.getHomeData(homeId)
-                .executable
+        return BodyResultExecutable { energyService.getHomeData(homeId) }
     }
 
     /**
@@ -63,8 +60,9 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      */
     fun getHomesData(homeId: String? = null,
                      gatewayTypes: List<DeviceType>? = null): BodyResultExecutable<HomesDataBody> {
-        return energyService.getHomeData(homeId, gatewayTypes?.toMutableList())
-                .executable
+        return BodyResultExecutable {
+            energyService.getHomeData(homeId, gatewayTypes?.toMutableList())
+        }
     }
 
     /**
@@ -80,8 +78,9 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      */
     fun getHomesData(homeId: String? = null,
                      gatewayType: DeviceType? = null): BodyResultExecutable<HomesDataBody> {
-        return energyService.getHomeData(homeId, gatewayType?.let { mutableListOf(it) })
-                .executable
+        return BodyResultExecutable {
+            energyService.getHomeData(homeId, gatewayType?.let { mutableListOf(gatewayType) })
+        }
     }
 
     /**
@@ -95,8 +94,9 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      * @return The requested [HomeStatusBody] or null
      */
     fun getHomeStatus(homeId: String): BodyResultExecutable<HomeStatusBody> {
-        return energyService.getHomeStatus(homeId)
-                .executable
+        return BodyResultExecutable {
+            energyService.getHomeStatus(homeId)
+        }
     }
 
     /**
@@ -112,8 +112,9 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      */
     fun getHomeStatus(homeId: String,
                       deviceTypes: List<DeviceType>? = null): BodyResultExecutable<HomeStatusBody> {
-        return energyService.getHomeStatus(homeId, deviceTypes?.toMutableList())
-                .executable
+        return BodyResultExecutable {
+            energyService.getHomeStatus(homeId, deviceTypes?.toMutableList())
+        }
     }
 
     /**
@@ -129,8 +130,9 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      */
     fun getHomeStatus(homeId: String,
                       deviceType: DeviceType? = null): BodyResultExecutable<HomeStatusBody> {
-        return energyService.getHomeStatus(homeId, deviceType?.let { mutableListOf(it) })
-                .executable
+        return BodyResultExecutable {
+            energyService.getHomeStatus(homeId, deviceType?.let { mutableListOf(it) })
+        }
     }
 
     /**
@@ -160,16 +162,17 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
                        limit: Int? = null,
                        optimize: Boolean = false,
                        realTime: Boolean = false): BodyResultExecutable<RoomMeasureBody> {
-        return energyService.getRoomMeasure(homeId,
-                roomId,
-                scale,
-                temperatureType,
-                dateBegin.toTimestamp(),
-                dateEnd.toTimestamp(),
-                limit,
-                optimize,
-                realTime)
-                .executable
+        return BodyResultExecutable {
+            energyService.getRoomMeasure(homeId,
+                    roomId,
+                    scale,
+                    temperatureType,
+                    dateBegin.toTimestamp(),
+                    dateEnd.toTimestamp(),
+                    limit,
+                    optimize,
+                    realTime)
+        }
     }
 
     /**
@@ -187,10 +190,11 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
     fun setThermMode(homeId: String,
                      thermMode: Mode,
                      endTime: LocalDateTime? = null): PlainCallExecutable<BaseResult> {
-        return energyService.setRoomThermMode(homeId,
-                thermMode,
-                endTime.toTimestamp())
-                .executable
+        return PlainCallExecutable {
+            energyService.setRoomThermMode(homeId,
+                    thermMode,
+                    endTime.toTimestamp())
+        }
     }
 
     /**
@@ -212,12 +216,13 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
                           mode: ThermPointMode,
                           temperature: Float? = null,
                           endTime: LocalDateTime? = null): PlainCallExecutable<BaseResult> {
-        return energyService.setRoomThermPoint(homeId,
-                roomId,
-                mode,
-                temperature,
-                endTime.toTimestamp())
-                .executable
+        return PlainCallExecutable {
+            energyService.setRoomThermPoint(homeId,
+                    roomId,
+                    mode,
+                    temperature,
+                    endTime.toTimestamp())
+        }
     }
 
     /**
@@ -232,8 +237,9 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      * @return a [BaseResult] or null
      */
     fun switchHomeSchedule(scheduleId: String, homeId: String): PlainCallExecutable<BaseResult> {
-        return energyService.setSwitchHomeSchedule(scheduleId, homeId)
-                .executable
+        return PlainCallExecutable {
+            energyService.setSwitchHomeSchedule(scheduleId, homeId)
+        }
     }
 
 
@@ -268,8 +274,9 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
                 homeId,
                 hgTemp,
                 awayTemp)
-        return energyService.setSyncHomeSchedule(body)
-                .executable
+        return PlainCallExecutable {
+            energyService.setSyncHomeSchedule(body)
+        }
     }
 
     /**
@@ -287,7 +294,9 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
     fun renameHomeSchedule(scheduleId: String,
                            name: String,
                            homeId: String): PlainCallExecutable<BaseResult> {
-        return energyService.postRenameHomeSchedule(scheduleId, name, homeId).executable
+        return PlainCallExecutable {
+            energyService.postRenameHomeSchedule(scheduleId, name, homeId)
+        }
     }
 
     /**
@@ -303,7 +312,9 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      */
     fun deleteHomeSchedule(scheduleId: String,
                            homeId: String): PlainCallExecutable<BaseResult> {
-        return energyService.deleteHomeSchedule(scheduleId, homeId).executable
+        return PlainCallExecutable {
+            energyService.deleteHomeSchedule(scheduleId, homeId)
+        }
     }
 
     /**
@@ -333,8 +344,9 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
                 name,
                 hgTemp,
                 awayTemp)
-        return energyService.createNewHomeSchedule(body)
-                .executable
+        return BodyResultExecutable {
+            energyService.createNewHomeSchedule(body)
+        }
     }
 
     fun getCombinedModule(homeId: String, moduleId: String): PlainFunctionExecutable<Module?> {

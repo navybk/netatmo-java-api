@@ -3,11 +3,12 @@ package io.rudolph.netatmo.executable
 import io.rudolph.netatmo.JacksonTransform
 import io.rudolph.netatmo.oauth2.model.BackendError
 import io.rudolph.netatmo.oauth2.model.ErrorResult
-import retrofit2.Call
+import kotlinx.coroutines.runBlocking
+import retrofit2.HttpException
 
 
 @Suppress("UNCHECKED_CAST")
-abstract class CallExecutable<T, E>(internal val call: Call<T>, private val transForm: (T) -> E? = { it as? E }) : Executable<E> {
+abstract class SafeCallExecutable<T, E>(internal val call: suspend () -> T, private val transForm: (T) -> E? = { it as? E }) : Executable<E> {
 
     private var errorFunction: ((BackendError) -> Unit)? = null
 
@@ -32,15 +33,18 @@ abstract class CallExecutable<T, E>(internal val call: Call<T>, private val tran
 
 
     override fun executeSync(): E? {
-        return call.execute().let {
-            it.errorBody()?.apply {
-                val error = JacksonTransform.deserialize<ErrorResult>(this.string())
+        return runBlocking {
+            try {
+                transForm(call())
+            } catch (httpException: HttpException) {
+                val error = httpException.response()
+                        ?.errorBody()
+                        ?.string()?.let {
+                            JacksonTransform.deserialize<ErrorResult>(it)
+                        }
                 errorFunction?.invoke(error?.error ?: BackendError(0, "unknown"))
+                null
             }
-            it.body()
-                    ?.let { body ->
-                        transForm(body)
-                    }
         }
     }
 }

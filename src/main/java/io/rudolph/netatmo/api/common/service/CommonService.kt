@@ -2,7 +2,6 @@ package io.rudolph.netatmo.api.common.service
 
 import io.rudolph.netatmo.api.common.model.MeasureRequestResponse
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -11,7 +10,7 @@ interface CommonService {
 
     @Headers("Content-Type:text/plain")
     @GET("getmeasure")
-    fun getMeasure(
+    suspend fun getMeasure(
             @Query("access_token") accessToken: String,
             @Query("device_id") deviceId: String,
             @Query("module_id") moduleId: String,
@@ -22,5 +21,5 @@ interface CommonService {
             @Query("limit") limit: Int? = null,
             @Query("optimize") optimize: Boolean? = null,
             @Query("real_time") realTime: Boolean? = null
-    ): Call<TypedBaseResult<List<MeasureRequestResponse>>>
+    ): TypedBaseResult<List<MeasureRequestResponse>>
 }

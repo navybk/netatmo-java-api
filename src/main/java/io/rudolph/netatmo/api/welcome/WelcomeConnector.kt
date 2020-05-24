@@ -6,7 +6,6 @@ import io.rudolph.netatmo.api.presence.PresenceConnector
 import io.rudolph.netatmo.api.presence.model.Events
 import io.rudolph.netatmo.api.presence.model.PersonsEvent
 import io.rudolph.netatmo.api.welcome.service.WelcomeService
-import io.rudolph.netatmo.executable
 import io.rudolph.netatmo.executable.BodyResultExecutable
 import io.rudolph.netatmo.executable.PlainCallExecutable
 import retrofit2.Retrofit
@@ -28,12 +27,13 @@ class WelcomeConnector(api: Retrofit) : PresenceConnector(api) {
     fun getLastEventOf(homeId: String,
                        personId: String,
                        offset: Int? = null): BodyResultExecutable<Events> {
-        return welcomeService.getLastEventOf(
-                accessToken = "",
-                homeId = homeId,
-                personId = personId,
-                offset = offset
-        ).executable
+        return BodyResultExecutable {
+            welcomeService.getLastEventOf(
+                    accessToken = "",
+                    homeId = homeId,
+                    personId = personId,
+                    offset = offset)
+        }
     }
 
     /**
@@ -48,11 +48,13 @@ class WelcomeConnector(api: Retrofit) : PresenceConnector(api) {
      * @return an executable object to obtain the [BaseResult]
      */
     fun setPersonsAway(homeId: String, personId: String? = null): PlainCallExecutable<BaseResult> {
-        return welcomeService.setPersonsAway(
-                accessToken = "",
-                homeId = homeId,
-                personId = personId
-        ).executable
+        return PlainCallExecutable {
+            welcomeService.setPersonsAway(
+                    accessToken = "",
+                    homeId = homeId,
+                    personId = personId
+            )
+        }
     }
 
     /**
@@ -67,11 +69,12 @@ class WelcomeConnector(api: Retrofit) : PresenceConnector(api) {
      * @return an executable object to obtain the [BaseResult]
      */
     fun setPersonsHome(homeId: String, personIds: List<String>): PlainCallExecutable<BaseResult> {
-        return welcomeService.setPersonsHome(
-                accessToken = "",
-                homeId = homeId,
-                personIds = personIds
-        ).executable
+        return PlainCallExecutable {
+            welcomeService.setPersonsHome(
+                    accessToken = "",
+                    homeId = homeId,
+                    personIds = personIds)
+        }
     }
 
     /**
