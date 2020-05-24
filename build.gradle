@@ -73,12 +73,13 @@ task customFatJar(type: Jar) {
     manifest {
         attributes 'NetatmoApi': 'app.MainKt'
     }
-    from("$projectDir") {
-        include 'lib/**'
-    }
 
-    baseName = 'all-in-one-jar'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    baseName = project.name
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
     with jar
 }
 
