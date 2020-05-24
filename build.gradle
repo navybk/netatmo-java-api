@@ -25,6 +25,8 @@ repositories {
 
 apply plugin: 'org.jetbrains.kotlin.jvm'
 apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7'
@@ -48,7 +50,7 @@ dokka {
     outputDirectory = "$buildDir/javadoc"
 }
 
-task javadocJar(type: Jar, dependsOn: dokka) {
+task javadocJarDokka(type: Jar, dependsOn: dokka) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
@@ -83,13 +85,134 @@ task customFatJar(type: Jar) {
     with jar
 }
 
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-}
-
 task copyTestResources(type: Copy) {
     from "${projectDir}/src/test/resources"
     into "${projectDir}/out/test/classes/apitest/"
 }
 processTestResources.dependsOn copyTestResources
+
+task sourceJar(type: Jar) {
+    classifier "sources"
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier "javadoc"
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives jar
+    archives sourceJar
+    archives javadocJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            customizePom(pom)
+            from components.java
+
+            // create the sign pom artifact
+            pom.withXml {
+                def pomFile = file("${project.buildDir}/generated-pom.xml")
+                writeTo(pomFile)
+                def pomAscFile = signing.sign(pomFile).signatureFiles[0]
+                artifact(pomAscFile) {
+                    classifier = null
+                    extension = 'pom.asc'
+                }
+            }
+
+            artifact(sourceJar) {
+                classifier = 'sources'
+            }
+            artifact(javadocJar) {
+                classifier = 'javadoc'
+            }
+
+            // create the signed artifacts
+            project.tasks.signArchives.signatureFiles.each {
+                artifact(it) {
+                    def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
+                    if (matcher.find()) {
+                        classifier = matcher.group(1)
+                    } else {
+                        classifier = null
+                    }
+                    extension = 'jar.asc'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            credentials {
+                username sonatypeUsername
+                password sonatypePassword
+            }
+        }
+    }
+}
+
+def customizePom(pom) {
+    pom.withXml {
+        def root = asNode()
+
+        // eliminate test-scoped dependencies (no need in maven central POMs)
+        root.dependencies.removeAll { dep ->
+            dep.scope == "test"
+        }
+
+        // add all items necessary for maven central publication
+        root.children().last() + {
+            resolveStrategy = Closure.DELEGATE_FIRST
+
+            description 'API Service for Netatmo'
+            name 'Netatmo Java API'
+            url 'https://github.com/navybk/netatmo-java-api'
+            organization {
+                name 'com.github.navybk'
+                url 'https://github.com/navybk'
+            }
+            issueManagement {
+                system 'GitHub'
+                url 'https://github.com/navybk/netatmo-java-api/issues'
+            }
+            licenses {
+                license {
+                    name 'MIT License'
+                    url 'https://opensource.org/licenses/MIT'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                url 'https://github.com/navybk/netatmo-java-api'
+                connection 'scm:git:git://github.com/navybk/netatmo-java-api.git'
+                developerConnection 'scm:git:ssh://git@github.com/navybk/netatmo-java-api.git'
+            }
+            developers {
+                developer {
+                    name 'navybk'
+                }
+            }
+        }
+    }
+}
+
+model {
+    tasks.generatePomFileForMavenJavaPublication {
+        destination = file("$buildDir/generated-pom.xml")
+    }
+    tasks.publishMavenJavaPublicationToMavenLocal {
+        dependsOn project.tasks.signArchives
+    }
+    tasks.publishMavenJavaPublicationToMavenRepository {
+        dependsOn project.tasks.signArchives
+    }
+}
