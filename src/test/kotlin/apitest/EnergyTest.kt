@@ -141,7 +141,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
     }
 
     @Test
-    fun testCreateAndSyncAndRenameAnddDeleteSchedule() {
+    fun testCreateAndSyncAndRenameAndDeleteSchedule() {
         api.energyApi.getHomesData().executeSync().apply {
             assert(this != null)
         }?.homes?.get(0)?.apply {
@@ -158,9 +158,9 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
                     name = name,
                     timeTable = timetable,
                     zones = zones
-            ).executeSync()
+            ).executeSync()!!
                     .apply {
-                        val scheduleId = this?.scheduleId!!
+                        val scheduleId = this.scheduleId!!
                         var result = true
                         api.energyApi.syncHomeSchedule(
                                 scheduleId = scheduleId,

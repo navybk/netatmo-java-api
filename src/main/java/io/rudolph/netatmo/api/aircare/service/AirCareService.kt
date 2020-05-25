@@ -14,11 +14,4 @@ internal interface AirCareService {
             @Query("access_token") accessToken: String,
             @Query("device_id") deviceId: String? = null
     ): TypedBaseResult<StationResults>
-
-    @Headers("Content-Type:text/plain")
-    @POST("gethomecoachsdata")
-    suspend fun getHomeCoachsDataPost(
-            @Query("access_token") accessToken: String,
-            @Query("device_id") deviceId: String
-    ): TypedBaseResult<StationResults>
 }

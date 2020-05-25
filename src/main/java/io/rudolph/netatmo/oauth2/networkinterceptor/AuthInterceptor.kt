@@ -38,8 +38,8 @@ internal class AuthInterceptor(private val userMail: String?,
                             if (it.isSuccessful) {
                                 it
                             } else {
-                                val innererror = it.createErrorBody()
-                                chain.errorbuilder(it.code, innererror).apply {
+                                val innerError = it.createErrorBody()
+                                chain.errorbuilder(it.code, innerError).apply {
                                     it.close()
                                 }
                             }

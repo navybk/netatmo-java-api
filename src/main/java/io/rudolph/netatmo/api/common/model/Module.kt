@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
 import io.rudolph.netatmo.api.energy.model.module.RelayModule
 import io.rudolph.netatmo.api.energy.model.module.ThermostatModule
 import io.rudolph.netatmo.api.energy.model.module.ValveModule
-import io.rudolph.netatmo.api.presence.model.PresenceModule
+import io.rudolph.netatmo.api.security.model.PresenceModule
 
 
 @JsonTypeInfo(
@@ -29,8 +29,7 @@ import io.rudolph.netatmo.api.presence.model.PresenceModule
 abstract class Module internal constructor(
 
         @JsonProperty("id")
-        @field:JsonAlias("id", "_id")
-        @param:JsonAlias("id", "_id")
+        @JsonAlias("id", "_id")
         open val id: String = "notset",
 
         /**
@@ -40,25 +39,21 @@ abstract class Module internal constructor(
          * 60 = full signal
          */
         @JsonProperty("rf_status")
-        @field:JsonAlias("rf", "rf_status", "rf_strength")
-        @param:JsonAlias("rf", "rf_status", "rf_strength")
+        @JsonAlias("rf", "rf_status", "rf_strength")
         open val rfStrength: Int? = null,
 
         /**
          * Battery level
          */
-        @field:JsonProperty("battery_percent")
-        @param:JsonProperty("battery_percent")
+        @JsonProperty("battery_percent")
         open val batteryLevelInPercent: Int? = null,
 
         /**
          * Module Name
          */
-        @field: JsonAlias("module_name", "name")
-        @param: JsonAlias("module_name", "name")
+        @JsonAlias("module_name", "name")
         open val moduleName: String? = null,
 
-        @field:JsonAlias("type")
-        @param:JsonAlias("type")
+        @JsonAlias("type")
         open val type: DeviceType = DeviceType.UNKNOWN
 )

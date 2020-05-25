@@ -13,19 +13,6 @@ internal interface WeatherService {
     @Headers("Content-Type:text/plain")
     @GET("getpublicdata")
     suspend fun getPublicData(
-            @Query("access_token") accessToken: String,
-            @Query("lat_ne") latitudeNorthEast: Float,
-            @Query("lon_ne") longitudeNorthEast: Float,
-            @Query("lat_sw") latitudeSouthWest: Float,
-            @Query("lon_sw") longitudeSouthWest: Float,
-            @Query("required_data") requried: String? = null,
-            @Query("filter") filter: Boolean? = null
-    ): TypedBaseResult<List<Station>>
-
-    @Headers("Content-Type:text/plain")
-    @POST("getpublicdata")
-    suspend fun getPublicDataPost(
-            @Query("access_token") accessToken: String,
             @Query("lat_ne") latitudeNorthEast: Float,
             @Query("lon_ne") longitudeNorthEast: Float,
             @Query("lat_sw") latitudeSouthWest: Float,
@@ -37,15 +24,6 @@ internal interface WeatherService {
     @Headers("Content-Type:text/plain")
     @GET("getstationsdata")
     suspend fun getStationData(
-            @Query("access_token") accessToken: String,
-            @Query("device_id") deviceId: String? = null,
-            @Query("get_favorites") getFavorites: Boolean? = null
-    ): TypedBaseResult<StationResults>
-
-    @Headers("Content-Type:text/plain")
-    @POST("getstationsdata")
-    suspend fun getStationDataPost(
-            @Query("access_token") accessToken: String,
             @Query("device_id") deviceId: String? = null,
             @Query("get_favorites") getFavorites: Boolean? = null
     ): TypedBaseResult<StationResults>
@@ -54,6 +32,4 @@ internal interface WeatherService {
         "Content-Type:application/json"])
     @POST("simplifiedfuturemeasure")
     suspend fun getSimpleForecast(@Body forecastBody: ForecastRequestBody): TypedBaseResult<Forecast>
-
-
 }

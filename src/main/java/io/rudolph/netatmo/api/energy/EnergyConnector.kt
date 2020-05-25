@@ -61,7 +61,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
     fun getHomesData(homeId: String? = null,
                      gatewayTypes: List<DeviceType>? = null): BodyResultExecutable<HomesDataBody> {
         return BodyResultExecutable {
-            energyService.getHomeData(homeId, gatewayTypes?.toMutableList())
+            energyService.getHomeData(homeId, gatewayTypes)
         }
     }
 
@@ -77,25 +77,9 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      * @return an executable object to obtain the [HomesDataBody]
      */
     fun getHomesData(homeId: String? = null,
-                     gatewayType: DeviceType? = null): BodyResultExecutable<HomesDataBody> {
+                     gatewayType: DeviceType): BodyResultExecutable<HomesDataBody> {
         return BodyResultExecutable {
-            energyService.getHomeData(homeId, gatewayType?.let { mutableListOf(gatewayType) })
-        }
-    }
-
-    /**
-     * Get the current status and data measured for all home devices.
-     *
-     * required scope: read_thermostat
-     *
-     * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/energyApi/homestatus)
-     *
-     * @param homeId id of home
-     * @return The requested [HomeStatusBody] or null
-     */
-    fun getHomeStatus(homeId: String): BodyResultExecutable<HomeStatusBody> {
-        return BodyResultExecutable {
-            energyService.getHomeStatus(homeId)
+            energyService.getHomeData(homeId, listOf(gatewayType))
         }
     }
 
@@ -110,6 +94,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      * @param deviceTypes Array of device type
      * @return The requested [HomeStatusBody] or null
      */
+    @JvmOverloads
     fun getHomeStatus(homeId: String,
                       deviceTypes: List<DeviceType>? = null): BodyResultExecutable<HomeStatusBody> {
         return BodyResultExecutable {
@@ -129,9 +114,9 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      * @return The requested [HomeStatusBody] or null
      */
     fun getHomeStatus(homeId: String,
-                      deviceType: DeviceType? = null): BodyResultExecutable<HomeStatusBody> {
+                      deviceType: DeviceType): BodyResultExecutable<HomeStatusBody> {
         return BodyResultExecutable {
-            energyService.getHomeStatus(homeId, deviceType?.let { mutableListOf(it) })
+            energyService.getHomeStatus(homeId, listOf(deviceType))
         }
     }
 
@@ -185,15 +170,19 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
      * @param homeId of home
      * @param thermMode Heating mode
      * @param endTime timestamp
+     * @param scheduleId switch the schedule. This parameter would be used only in "schedule" mode
      * @return a [BaseResult] or null
      */
+    @JvmOverloads
     fun setThermMode(homeId: String,
                      thermMode: Mode,
-                     endTime: LocalDateTime? = null): PlainCallExecutable<BaseResult> {
+                     endTime: LocalDateTime? = null,
+                     scheduleId: String? = null): PlainCallExecutable<BaseResult> {
         return PlainCallExecutable {
-            energyService.setRoomThermMode(homeId,
+            energyService.setThermMode(homeId,
                     thermMode,
-                    endTime.toTimestamp())
+                    endTime.toTimestamp(),
+                    scheduleId)
         }
     }
 
@@ -241,7 +230,6 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
             energyService.setSwitchHomeSchedule(scheduleId, homeId)
         }
     }
-
 
     /**
      * Modify the given schedule for the home. If it's the current schedule, it sends the modification to the devices.
@@ -405,7 +393,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
 
     @Suppress("UNCHECKED_CAST")
     fun <T : EnergyModule<T>> getModuleDataById(homeId: String? = null, moduleId: String): T? {
-        getHomesData(homeId = homeId, gatewayType = null).executeSync()
+        getHomesData(homeId = homeId).executeSync()
                 ?.homes
                 ?.forEach { home ->
                     home.modules
@@ -433,7 +421,7 @@ class EnergyConnector(api: Retrofit) : CommonConnector(api) {
 
     @Suppress("UNCHECKED_CAST")
     fun <T : EnergyModule<T>> getJoinedModuleForId(homeId: String? = null, moduleId: String): T? {
-        getHomesData(homeId = homeId, gatewayType = null).executeSync()
+        getHomesData(homeId = homeId).executeSync()
                 ?.homes
                 ?.forEach { home ->
                     home.modules

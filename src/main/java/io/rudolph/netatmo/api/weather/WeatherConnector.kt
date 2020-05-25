@@ -27,6 +27,7 @@ class WeatherConnector(api: Retrofit) : CommonConnector(api) {
      * @param filter True to exclude station with abnormal temperature measures. Default is false.
      * @return an executable object to obtain the [Station]
      */
+    @JvmOverloads
     fun getPublicData(latitudeNorthEast: Float,
                       longitudeNorthEast: Float,
                       latitudeSouthWest: Float,
@@ -35,7 +36,6 @@ class WeatherConnector(api: Retrofit) : CommonConnector(api) {
                       filter: Boolean? = null): BodyResultExecutable<List<Station>> {
         return BodyResultExecutable {
             weatherService.getPublicData(
-                    "Empty", // will be replaced in Chain.proceed(accessToken: String)
                     latitudeNorthEast,
                     longitudeNorthEast,
                     latitudeSouthWest,
@@ -52,12 +52,11 @@ class WeatherConnector(api: Retrofit) : CommonConnector(api) {
         }
     }
 
+    @JvmOverloads
     fun getStationData(deviceId: String? = null,
                        getFavourites: Boolean? = null): BodyResultExecutable<StationResults> {
         return BodyResultExecutable {
-            weatherService.getStationData("Empty",
-                    deviceId,
-                    getFavourites)
+            weatherService.getStationData( deviceId, getFavourites)
         }
     }
 

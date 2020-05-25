@@ -31,6 +31,7 @@ abstract class CommonConnector(api: Retrofit) {
      * @param realTime If scale different than max, timestamps are by default offset + scale/2. To get exact timestamps, use true. Default is false.
      * @return an executable object to obtain a list of [MeasureRequestResponse]
      */
+    @JvmOverloads
     fun getMeasure(
             moduleId: String,
             deviceId: String,

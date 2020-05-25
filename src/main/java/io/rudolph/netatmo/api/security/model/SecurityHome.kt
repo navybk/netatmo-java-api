@@ -1,4 +1,4 @@
-package io.rudolph.netatmo.api.presence.model
+package io.rudolph.netatmo.api.security.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

@@ -1,9 +1,9 @@
-package io.rudolph.netatmo.api.presence.transform
+package io.rudolph.netatmo.api.security.transform
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
-import io.rudolph.netatmo.api.presence.model.EventType
+import io.rudolph.netatmo.api.security.model.EventType
 
 
 class EventTypeDeserializer : JsonDeserializer<EventType>() {

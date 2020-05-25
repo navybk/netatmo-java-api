@@ -20,6 +20,7 @@ class AirCareConnector(api: Retrofit) : CommonConnector(api) {
      * @param deviceId Healthy Home Coach mac address
      * @return an executable object to obtain the [StationResults]
      */
+    @JvmOverloads
     fun getHomeCoachData(deviceId: String? = null): BodyResultExecutable<StationResults> {
         return BodyResultExecutable {
             airCareService.getHomeCoachsData(

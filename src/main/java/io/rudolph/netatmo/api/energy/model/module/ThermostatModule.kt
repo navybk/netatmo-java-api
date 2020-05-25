@@ -1,13 +1,15 @@
 package io.rudolph.netatmo.api.energy.model.module
 
 import com.fasterxml.jackson.annotation.JsonAlias
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.rudolph.netatmo.api.common.model.DeviceType
 import java.time.LocalDateTime
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class ThermostatModule(
 
-        @field:JsonAlias("id", "_id")
+        @JsonAlias("id", "_id")
         override val id: String,
 
         @JsonProperty("modules_bridged")
@@ -35,10 +37,10 @@ data class ThermostatModule(
         val measure: Measure? = null,
 
         @JsonProperty("firmware_revision")
-        @field:JsonAlias("firmware")
+        @JsonAlias("firmware")
         override val firmware: Int? = null,
 
-        @field:JsonAlias("last_seen", "last_therm_seen")
+        @JsonAlias("last_seen", "last_therm_seen")
         val lastSeen: LocalDateTime? = null,
 
         @JsonProperty("last_message")
@@ -63,10 +65,10 @@ data class ThermostatModule(
          * 60 = full signal
          */
         @JsonProperty("rf_status")
-        @field:JsonAlias("rf_strength")
+        @JsonAlias("rf_strength")
         override val rfStrength: Int? = null,
 
-        @field:JsonAlias("type")
+        @JsonAlias("type")
         override val type: DeviceType = DeviceType.THERMOSTAT
 ) : ValveBaseModule<ThermostatModule>(id = id) {
 

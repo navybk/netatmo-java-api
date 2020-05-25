@@ -1,9 +1,9 @@
-package io.rudolph.netatmo.api.presence.model
+package io.rudolph.netatmo.api.security.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
 
-data class Snapshot(
+data class Face(
         @JsonProperty("id")
         val id: String? = null,
 
@@ -14,8 +14,5 @@ data class Snapshot(
         val key: String? = null,
 
         @JsonProperty("url")
-        val url: String? = null,
-
-        @JsonProperty("filename")
-        val filename: String? = null
+        val url: String? = null
 )

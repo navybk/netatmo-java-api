@@ -46,6 +46,7 @@ class WeatherTest : BaseTest(listOf(Scope.READ_STATION, Scope.WRITE_THERMOSTAT, 
         assert(false)
     }
 
+
     @Test
     fun getForecast() {
         connector.getStationData().executeSync()?.apply {

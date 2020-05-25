@@ -2,9 +2,8 @@ package io.rudolph.netatmo
 
 import io.rudolph.netatmo.api.aircare.AirCareConnector
 import io.rudolph.netatmo.api.energy.EnergyConnector
-import io.rudolph.netatmo.api.presence.PresenceConnector
 import io.rudolph.netatmo.api.weather.WeatherConnector
-import io.rudolph.netatmo.api.welcome.WelcomeConnector
+import io.rudolph.netatmo.api.security.SecurityConnector
 import io.rudolph.netatmo.oauth2.TokenStorage
 import io.rudolph.netatmo.oauth2.model.Scope
 import io.rudolph.netatmo.oauth2.networkinterceptor.AuthInterceptor
@@ -115,8 +114,7 @@ class NetatmoApi @JvmOverloads constructor(userMail: String? = null,
     val energyApi = EnergyConnector(api)
     val weatherApi = WeatherConnector(api)
     val airCareApi = AirCareConnector(api)
-    val presenceApi = PresenceConnector(api)
-    val welcomeApi = WelcomeConnector(api)
+    val securityApi = SecurityConnector(api)
 
     init {
         JacksonTransform.debug = debug

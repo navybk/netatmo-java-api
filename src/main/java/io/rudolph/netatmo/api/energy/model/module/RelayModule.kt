@@ -23,7 +23,7 @@ data class RelayModule(
         /**
          * Module Name
          */
-        @field:JsonAlias("name")
+        @JsonAlias("name")
         override val moduleName: String? = null,
 
         @JsonProperty("setup_date")
@@ -36,7 +36,7 @@ data class RelayModule(
          * 60 = full signal
          */
         @JsonProperty("rf_status")
-        @field:JsonAlias("rf_strength")
+        @JsonAlias("rf_strength")
         override val rfStrength: Int? = null,
 
         /**
@@ -46,7 +46,7 @@ data class RelayModule(
         @JsonProperty("wifi_strength")
         override val wifiStrength: Int? = null,
 
-        @field:JsonAlias("type")
+        @JsonAlias("type")
         override val type: DeviceType = DeviceType.RELAY
 ) : EnergyModule<RelayModule>(id = id) {
 
