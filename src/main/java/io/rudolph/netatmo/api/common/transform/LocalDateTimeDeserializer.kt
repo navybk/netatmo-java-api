@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 
 
-class LocalDateTimeDeserializer : JsonDeserializer<LocalDateTime>() {
+internal class LocalDateTimeDeserializer : JsonDeserializer<LocalDateTime>() {
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext?): LocalDateTime {
         if (p.isNaN) {
             p.valueAsString.apply {

@@ -15,6 +15,9 @@ enum class Scale(val value: String) {
 
     MONTH("1month"),
 
-    UNKNOWN("unknown")
+    UNKNOWN("unknown");
 
+    override fun toString(): String {
+        return this.value
+    }
 }

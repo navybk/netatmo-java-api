@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer
 import io.rudolph.netatmo.oauth2.model.Scope
 
 
-class ScopeDeserializer : JsonDeserializer<Scope>() {
+internal class ScopeDeserializer : JsonDeserializer<Scope>() {
     override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): Scope {
         return p?.readValueAs(String::class.java).let { scopeName ->
             Scope.values().find {

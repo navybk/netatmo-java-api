@@ -27,7 +27,12 @@ class SecurityTest : BaseTest(listOf(Scope.READ_CAMERA,
 
     @Test
     fun getLastEventOf() {
-        api.securityApi.getLastEventOf("", "").executeSync().apply {
+        val id = api.securityApi.getHomeData()
+                .executeSync()!!
+                .homes!!
+                .first()
+                .id!!
+        api.securityApi.getLastEventOf(id, "").executeSync().apply {
             assert(this != null)
         }
     }

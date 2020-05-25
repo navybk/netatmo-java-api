@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer
 import io.rudolph.netatmo.api.common.model.DeviceType
 
 
-class DeviceTypeDeserializer : JsonDeserializer<DeviceType>() {
+internal class DeviceTypeDeserializer : JsonDeserializer<DeviceType>() {
     override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): DeviceType {
         return p?.valueAsString?.let { name ->
             DeviceType.values().find {

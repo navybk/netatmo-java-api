@@ -1,16 +1,16 @@
 package io.rudolph.netatmo.api.common.model
 
-enum class ScaleType(val value: String, val unit: String = "") {
-    TEMPERATURE("Temperature", "°C"),
-    CO2("CO2 ", "ppm"),
-    HUMIDITY("Humidity ", "%"),
-    PRESSURE("Pressure ", "mbar"),
-    NOISE("Noise ", "db"),
-    RAIN("Rain ", "mm"),
-    WINDSTRENGTH("WindStrength ", "km/h"),
-    WINDANGLE("WindAngle ", "angles"),
-    GUSTSTRENGTH("Guststrength ", "km/h"),
-    GUSTANGLE("GustAngle ", "angles"),
+enum class ScaleType(val value: String, val unit: String? = null) {
+    TEMPERATURE("temperature", "°C"),
+    CO2("co2", "ppm"),
+    HUMIDITY("humidity", "%"),
+    PRESSURE("pressure", "mbar"),
+    NOISE("noise", "db"),
+    RAIN("rain", "mm"),
+    WINDSTRENGTH("windStrength", "km/h"),
+    WINDANGLE("windAngle", "angles"),
+    GUSTSTRENGTH("guststrength", "km/h"),
+    GUSTANGLE("gustAngle", "angles"),
     MIN_TEMP("min_temp"),
     MAX_TEMP("max_temp"),
     MIN_HUM("min_hum"),
@@ -28,5 +28,9 @@ enum class ScaleType(val value: String, val unit: String = "") {
     DATE_MIN_CO2("date_min_co2"),
     DATE_MAX_CO2("date_max_co2"),
     DATE_MAX_GUST("date_max_gust"),
-    UNKNOWN("unknown")
+    UNKNOWN("unknown");
+
+    override fun toString(): String {
+        return this.value
+    }
 }

@@ -14,7 +14,7 @@ import java.time.ZoneId
 
 internal val logger = KotlinLogging.logger("Netamo Api")
 
-fun Interceptor.Chain.errorbuilder(code: Int = 0, error: BackendError): Response {
+internal fun Interceptor.Chain.errorbuilder(code: Int = 0, error: BackendError): Response {
     val message = "${error.message}"
     return Response.Builder().request(this.request())
             .protocol(Protocol.HTTP_1_1)
@@ -24,7 +24,7 @@ fun Interceptor.Chain.errorbuilder(code: Int = 0, error: BackendError): Response
             .build()
 }
 
-fun Interceptor.Chain.proceed(accessToken: String): Response {
+internal fun Interceptor.Chain.proceed(accessToken: String): Response {
     val url = request().url.queryParameter("access_token")?.let {
         request().url
                 .newBuilder()
@@ -41,7 +41,7 @@ fun Interceptor.Chain.proceed(accessToken: String): Response {
             .build())
 }
 
-fun Response.createErrorBody(): BackendError {
+internal fun Response.createErrorBody(): BackendError {
     return body?.string()?.let {
         JacksonTransform.parse<ErrorResult>(it)?.error ?: BackendError(0, it)
     } ?: BackendError(0, "empty body")

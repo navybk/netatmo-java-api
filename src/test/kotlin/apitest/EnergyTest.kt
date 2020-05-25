@@ -100,8 +100,8 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
                     api.energyApi
                             .getMeasure(moduleId = moduleId,
                                     deviceId = deviceId,
-                                    scale = Scale.DAY,
-                                    type = ScaleType.MIN_TEMP
+                                    scale = listOf(Scale.DAY, Scale.WEEK),
+                                    type = listOf(ScaleType.MIN_TEMP, ScaleType.CO2)
                             ).executeSync()
                             .apply {
                                 assert(this != null)

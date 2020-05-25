@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer
 import io.rudolph.netatmo.api.common.model.Scale
 
 
-class ScaleDeserializer : JsonDeserializer<Scale>() {
+internal class ScaleDeserializer : JsonDeserializer<Scale>() {
     override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): Scale {
         return p?.valueAsString?.let { name ->
             Scale.values().find {

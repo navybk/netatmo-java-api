@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer
 import io.rudolph.netatmo.api.common.model.BatteryState
 
 
-class BatteryStateDeserializer : JsonDeserializer<BatteryState>() {
+internal class BatteryStateDeserializer : JsonDeserializer<BatteryState>() {
     override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): BatteryState {
         return p?.valueAsString?.let { name ->
             BatteryState.values().find {

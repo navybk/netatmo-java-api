@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.SerializerProvider
 import io.rudolph.netatmo.api.common.model.DeviceType
 
 
-class DeviceTypeSerializer : JsonSerializer<DeviceType>() {
+internal class DeviceTypeSerializer : JsonSerializer<DeviceType>() {
     override fun serialize(value: DeviceType, gen: JsonGenerator, serializers: SerializerProvider?) {
         gen.writeString(value.value)
     }
