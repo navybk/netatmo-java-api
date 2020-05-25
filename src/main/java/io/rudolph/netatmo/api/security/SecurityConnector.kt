@@ -68,7 +68,6 @@ class SecurityConnector(api: Retrofit) : CommonConnector(api) {
      * @param personIds Array of person_id
      * @return an executable object to obtain the [BaseResult]
      */
-    @JvmOverloads
     fun setPersonsHome(homeId: String, personIds: List<String>): PlainCallExecutable<BaseResult> {
         return PlainCallExecutable {
             securityService.setPersonsHome(
