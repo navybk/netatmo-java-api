@@ -1,4 +1,4 @@
-package io.rudolph.netatmo.api.weather.model.transform
+package io.rudolph.netatmo.api.weather.transform
 
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext

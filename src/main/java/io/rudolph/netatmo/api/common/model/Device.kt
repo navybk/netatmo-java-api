@@ -4,25 +4,20 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import io.rudolph.netatmo.api.aircare.model.DashboardData
+import io.rudolph.netatmo.api.aircare.model.HomeCoachDevice
 import io.rudolph.netatmo.api.aircare.model.Place
-import io.rudolph.netatmo.api.energy.model.RelayDevice
+import io.rudolph.netatmo.api.weather.model.BaseStationDevice
 import java.time.LocalDateTime
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
         property = "type",
+        defaultImpl = BaseDevice::class,
         visible = true)
 @JsonSubTypes(
-        JsonSubTypes.Type(value = BaseDevice::class, name = Constant.VALVE_API_STRING),
-        JsonSubTypes.Type(value = BaseDevice::class, name = Constant.THERMOSTAT_API_STRING),
-        JsonSubTypes.Type(value = RelayDevice::class, name = Constant.RELAY_API_STRING),
-        JsonSubTypes.Type(value = BaseDevice::class, name = Constant.INDOORMODULE_API_STRING),
-        JsonSubTypes.Type(value = BaseDevice::class, name = Constant.HOMECOACH_API_STRING),
-        JsonSubTypes.Type(value = BaseDevice::class, name = Constant.OUTDOORMODULE_API_STRING),
-        JsonSubTypes.Type(value = BaseDevice::class, name = Constant.RAINGAUGEMODULE_API_STRING),
-        JsonSubTypes.Type(value = BaseDevice::class, name = Constant.WINDMODULE_API_STRING),
-        JsonSubTypes.Type(value = BaseDevice::class, name = Constant.BASESTATION_API_STRING)
+        JsonSubTypes.Type(value = HomeCoachDevice::class, name = Constant.HOMECOACH_API_STRING),
+        JsonSubTypes.Type(value = BaseStationDevice::class, name = Constant.BASESTATION_API_STRING)
 )
 abstract class Device {
     @JsonProperty("cipher_id")
@@ -99,11 +94,11 @@ abstract class Device {
     @JsonProperty("station_name")
     val stationName: String? = null
 
-    /**
-     * Name of Station
-     */
-    @JsonProperty("modules")
-    val modules: List<Module>? = null
+    @JsonProperty("reachable")
+    val reachable: Boolean?= null
+
+    @JsonProperty("read_only")
+    val read_only: Boolean?= null
 
     val wifiLevel: WifiLevel
         get() = WifiLevel.wifiLevelForSignalStrength(wifiStatus)

@@ -21,7 +21,7 @@ class AirCareConnector(api: Retrofit) : CommonConnector(api) {
      * @return an executable object to obtain the [StationResults]
      */
     @JvmOverloads
-    fun getHomeCoachData(deviceId: String? = null): BodyResultExecutable<StationResults> {
+    fun getHomeCoachsData(deviceId: String? = null): BodyResultExecutable<StationResults> {
         return BodyResultExecutable {
             airCareService.getHomeCoachsData(
                     "Empty", // will be replaced in Chain.proceed(accessToken: String)

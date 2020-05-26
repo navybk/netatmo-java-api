@@ -11,5 +11,6 @@ enum class Scope(val value: String) {
     READ_PRESENCE("read_presence"),
     ACCESS_PRESENCE("access_presence"),
     READ_HOMECOACH("read_homecoach"),
+    READ_SMOKEDETECTOR("read_smokedetector"),
     UNKNOWN("unknown")
 }

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import io.rudolph.netatmo.api.aircare.model.LatLong
+import io.rudolph.netatmo.api.aircare.transform.LatLongDeserializer
 import io.rudolph.netatmo.api.common.model.BatteryState
 import io.rudolph.netatmo.api.common.model.DeviceType
 import io.rudolph.netatmo.api.common.model.Scale
@@ -18,8 +20,8 @@ import io.rudolph.netatmo.api.security.model.EventType
 import io.rudolph.netatmo.api.security.transform.EventTypeDeserializer
 import io.rudolph.netatmo.api.weather.model.DataPoint
 import io.rudolph.netatmo.api.weather.model.Measure
-import io.rudolph.netatmo.api.weather.model.transform.DataPointDeserializer
-import io.rudolph.netatmo.api.weather.model.transform.MeasureDeserializer
+import io.rudolph.netatmo.api.weather.transform.DataPointDeserializer
+import io.rudolph.netatmo.api.weather.transform.MeasureDeserializer
 import io.rudolph.netatmo.oauth2.model.Scope
 import retrofit2.converter.jackson.JacksonConverterFactory
 import java.time.LocalDateTime
@@ -38,12 +40,13 @@ internal object JacksonTransform {
             addDeserializer(ZoneType::class.java, ZoneTypeDeserializer())
             addDeserializer(LocalDateTime::class.java, LocalDateTimeDeserializer())
             addDeserializer(Measure::class.java, MeasureDeserializer())
-            addDeserializer(Scale::class.java, ScaleDeserializer())
             addDeserializer(ScaleType::class.java, ScaleTypeDeserializer())
             addDeserializer(EventType::class.java, EventTypeDeserializer())
             addDeserializer(BatteryState::class.java, BatteryStateDeserializer())
             addDeserializer(DataPoint::class.java, DataPointDeserializer())
+            addDeserializer(LatLong::class.java, LatLongDeserializer())
 
+            addDeserializer(Scale::class.java, ScaleDeserializer())
             addSerializer(ThermMode::class.java, ThermModeSerializer())
             addSerializer(DeviceType::class.java, DeviceTypeSerializer())
             addSerializer(ZoneType::class.java, ZoneTypeSerializer())

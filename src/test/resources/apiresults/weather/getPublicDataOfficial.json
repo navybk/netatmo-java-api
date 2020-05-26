@@ -1,0 +1,60 @@
+{
+  "body": [
+    {
+      "_id": "70:ee:50:22:a3:00",
+      "place": {
+        "timezone": "Africa/Lagos",
+        "country": "EG",
+        "altitude": 144,
+        "location": [
+          "30.89600807058707, 29.94281464724796"
+        ]
+      },
+      "mark": 10,
+      "measures": {
+        "mac_address_NAModule1": {
+          "res": {
+            "time_stamp": [
+              "20, 60"
+            ]
+          },
+          "type": [
+            "temperature"
+          ]
+        },
+        "mac_address_NAMain": {
+          "res": {
+            "time_stamp": [
+              1011.3
+            ]
+          },
+          "type": "pressure"
+        },
+        "mac_address_NAModule3": {
+          "rain_60min": 0,
+          "rain_24h": 0,
+          "rain_live": 0,
+          "rain_timeutc": 1555675431
+        },
+        "mac_address_NAModule2": {
+          "wind_strengh": 10,
+          "wind_angle": 259,
+          "gust_strenght": 17,
+          "gust_angle": 270,
+          "wind_timeutc": 1555675431
+        }
+      },
+      "modules": [
+        "00:00:00:22:ba:aa"
+      ],
+      "module_types": [
+        {
+          "mac_adress": "NAModule1"
+        }
+      ]
+    }
+  ],
+  "status": "ok",
+  "time_exec": "0.060059070587158",
+  "time_server": "1553777827"
+}

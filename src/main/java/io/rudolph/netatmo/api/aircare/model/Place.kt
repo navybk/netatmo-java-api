@@ -27,7 +27,7 @@ data class Place(
          * latitude and longitude
          */
         @JsonProperty("location")
-        val location: List<Float>? = null,
+        val location: List<LatLong> = listOf(),
 
         @JsonProperty("trust_location")
         val trustLocation: Boolean? = null,

@@ -30,7 +30,7 @@ data class Station(
          * list of available modules
          */
         @JsonProperty("modules")
-        val modules: MutableList<String>? = mutableListOf(),
+        val modules: List<String>? = listOf(),
 
         /**
          *

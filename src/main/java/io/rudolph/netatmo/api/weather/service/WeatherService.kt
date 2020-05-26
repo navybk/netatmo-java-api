@@ -23,7 +23,7 @@ internal interface WeatherService {
 
     @Headers("Content-Type:text/plain")
     @GET("getstationsdata")
-    suspend fun getStationData(
+    suspend fun getStationsData(
             @Query("device_id") deviceId: String? = null,
             @Query("get_favorites") getFavorites: Boolean? = null
     ): TypedBaseResult<StationResults>

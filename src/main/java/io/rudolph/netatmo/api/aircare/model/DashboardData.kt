@@ -68,7 +68,10 @@ data class DashboardData(
         val gustAngle: Int? = null,
 
         @JsonProperty("max_wind_str")
-        val maxWindStr: Int? = null,
+        val maxWindStrength: Int? = null,
+
+        @JsonProperty("max_wind_angle")
+        val maxWindAngle: Int? = null,
 
         @JsonProperty("BoilerOff")
         val boilerOff: Int? = null,

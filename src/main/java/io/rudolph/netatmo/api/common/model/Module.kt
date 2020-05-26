@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
 import io.rudolph.netatmo.api.energy.model.module.RelayModule
 import io.rudolph.netatmo.api.energy.model.module.ThermostatModule
 import io.rudolph.netatmo.api.energy.model.module.ValveModule
-import io.rudolph.netatmo.api.security.model.PresenceModule
+import io.rudolph.netatmo.api.security.model.IndoorSireneModule
 
 
 @JsonTypeInfo(
@@ -24,12 +24,13 @@ import io.rudolph.netatmo.api.security.model.PresenceModule
         Type(value = ClimateModule::class, name = Constant.OUTDOORMODULE_API_STRING),
         Type(value = ClimateModule::class, name = Constant.RAINGAUGEMODULE_API_STRING),
         Type(value = ClimateModule::class, name = Constant.WINDMODULE_API_STRING),
-        Type(value = PresenceModule::class, name = Constant.CAM_DOOR_TAG_API_STRING)
+        Type(value = IndoorSireneModule::class, name = Constant.INDOOR_SIRENE_API_STRING)
 )
 abstract class Module internal constructor(
 
         @JsonProperty("id")
-        @JsonAlias("id", "_id")
+        @field:JsonAlias("id", "_id")
+        @param:JsonAlias("id", "_id")
         open val id: String = "notset",
 
         /**
@@ -39,21 +40,26 @@ abstract class Module internal constructor(
          * 60 = full signal
          */
         @JsonProperty("rf_status")
-        @JsonAlias("rf", "rf_status", "rf_strength")
+        @field:JsonAlias("rf", "rf_status", "rf_strength")
+        @param:JsonAlias("rf", "rf_status", "rf_strength")
         open val rfStrength: Int? = null,
 
         /**
          * Battery level
          */
         @JsonProperty("battery_percent")
+        @field:JsonAlias("battery_percent")
+        @param:JsonAlias("battery_percent")
         open val batteryLevelInPercent: Int? = null,
 
         /**
          * Module Name
          */
-        @JsonAlias("module_name", "name")
+        @field:JsonAlias("module_name", "name")
+        @param:JsonAlias("module_name", "name")
         open val moduleName: String? = null,
 
-        @JsonAlias("type")
+        @field:JsonAlias("type")
+        @param:JsonAlias("type")
         open val type: DeviceType = DeviceType.UNKNOWN
 )

@@ -4,6 +4,7 @@ import io.rudolph.netatmo.api.common.model.BatteryState
 import io.rudolph.netatmo.api.common.model.ClimateModule
 import io.rudolph.netatmo.api.common.model.StationResults
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
+import io.rudolph.netatmo.api.weather.model.BaseStationDevice
 import io.rudolph.netatmo.api.weather.model.Forecast
 import io.rudolph.netatmo.api.weather.model.Station
 import io.rudolph.netatmo.oauth2.model.Scope
@@ -17,7 +18,8 @@ class WeatherTest : BaseTest(listOf(Scope.READ_STATION, Scope.WRITE_THERMOSTAT, 
     fun parsingTest() {
         readFileForClass<TypedBaseResult<List<Station>>>("apiresults/weather/getPublicData.json")!!
         readFileForClass<TypedBaseResult<Forecast>>("apiresults/weather/getSimpleForecast.json")!!
-        readFileForClass<TypedBaseResult<StationResults>>("apiresults/weather/StationDataResponse.json")!!
+//        readFileForClass<TypedBaseResult<StationResults>>("apiresults/weather/StationDataResponse.json")!!
+        readFileForClass<TypedBaseResult<StationResults>>("apiresults/weather/getStationsData.json")!!
     }
 
 
@@ -37,7 +39,7 @@ class WeatherTest : BaseTest(listOf(Scope.READ_STATION, Scope.WRITE_THERMOSTAT, 
     fun getStationData() {
         connector.getStationData().executeSync()?.apply {
             assert(this.user.mail != null)
-            devices[0].modules?.forEach {
+            (devices[0] as? BaseStationDevice)?.modules?.forEach {
                 val batteryLevel = (it as? ClimateModule)?.getBatteryState
                 assert(batteryLevel != BatteryState.NO_DATA)
             }
@@ -51,7 +53,7 @@ class WeatherTest : BaseTest(listOf(Scope.READ_STATION, Scope.WRITE_THERMOSTAT, 
     fun getForecast() {
         connector.getStationData().executeSync()?.apply {
             val deviceId = devices[0].id!!
-            val moduleId = devices[0].modules?.get(0)?.id!!
+            val moduleId = (devices[0] as? BaseStationDevice)?.modules?.get(0)?.id!!
             connector.getSimpleForecast(deviceId, moduleId).executeSyncWrapped().apply {
                 assert(this != null)
             }

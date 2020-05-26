@@ -8,5 +8,5 @@ data class BaseOutdoorMeasure(
         val res: MutableMap<LocalDateTime, MutableList<Float>>? = mutableMapOf(),
 
         @JsonProperty("type")
-        val type: MutableList<String> = mutableListOf()
+        val type: List<String> = listOf()
 ) : Measure

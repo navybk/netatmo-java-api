@@ -8,10 +8,10 @@ class CreateNewHomeScheduleBody(
         val homeId: String? = null,
 
         @JsonProperty("timetable")
-        val timetable: MutableList<Timetable>? = null,
+        val timetable: List<Timetable>? = null,
 
         @JsonProperty("zones")
-        val zones: MutableList<Zone>? = null,
+        val zones: List<Zone>? = null,
 
         @JsonProperty("name")
         val name: String? = null,

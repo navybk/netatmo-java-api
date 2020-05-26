@@ -56,7 +56,7 @@ class WeatherConnector(api: Retrofit) : CommonConnector(api) {
     fun getStationData(deviceId: String? = null,
                        getFavourites: Boolean? = null): BodyResultExecutable<StationResults> {
         return BodyResultExecutable {
-            weatherService.getStationData( deviceId, getFavourites)
+            weatherService.getStationsData( deviceId, getFavourites)
         }
     }
 

@@ -4,7 +4,7 @@ import io.rudolph.netatmo.api.energy.model.BaseResult
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.api.security.model.Events
 import io.rudolph.netatmo.api.security.model.Ping
-import io.rudolph.netatmo.api.security.model.SecurityHome
+import io.rudolph.netatmo.api.security.model.SecurityHomeData
 import retrofit2.http.*
 
 
@@ -52,7 +52,7 @@ internal interface SecurityService {
     suspend fun getHomeData(
             @Query("home_id") homeId: String? = null,
             @Query("size") eventId: String? = null
-    ): TypedBaseResult<SecurityHome>
+    ): TypedBaseResult<SecurityHomeData>
 
     @Headers("Content-Type:text/plain")
     @GET("getnextevents")

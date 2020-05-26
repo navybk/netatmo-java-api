@@ -11,7 +11,7 @@ class AirCareTest : BaseTest(listOf(Scope.READ_HOMECOACH)) {
 
     @Test
     fun getPublicData() {
-        connector.getHomeCoachData()
+        connector.getHomeCoachsData()
                 .executeSync()
                 .apply {
                     assert(this != null)
@@ -22,6 +22,9 @@ class AirCareTest : BaseTest(listOf(Scope.READ_HOMECOACH)) {
     fun parsingTest() {
         readFileForClass<TypedBaseResult<StationResults>>("apiresults/aircare/getHomeCoachLive.json")!!
         readFileForClass<TypedBaseResult<StationResults>>("apiresults/aircare/gethomecoachsdata.json")!!
+        readFileForClass<TypedBaseResult<StationResults>>("apiresults/aircare/getHomeCoachsData.json")!!.apply {
+            this.body!!.devices[0].place!!.location[0]
+        }
     }
 
 }

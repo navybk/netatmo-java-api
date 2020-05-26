@@ -137,10 +137,10 @@ class SecurityConnector(api: Retrofit) : CommonConnector(api) {
      *
      * @param homeId ID of the Home you're interested in
      * @param eventId Your request will retrieve all the events until this one
-     * @return an executable object to obtain the [SecurityHome]
+     * @return an executable object to obtain the [SecurityHomeData]
      */
     @JvmOverloads
-    fun getHomeData(homeId: String? = null, eventId: String? = null): BodyResultExecutable<SecurityHome> {
+    fun getHomeData(homeId: String? = null, eventId: String? = null): BodyResultExecutable<SecurityHomeData> {
         return BodyResultExecutable {
             securityService.getHomeData(
                     homeId = homeId,
@@ -213,7 +213,7 @@ class SecurityConnector(api: Retrofit) : CommonConnector(api) {
      * @see [Netatmo Api Reference] (https://dev.netatmo.com/resources/technical/reference/security/gethomedata)
      *
      * @param url ID of the Home you're interested in
-     * @return an executable object to obtain the [SecurityHome]
+     * @return an executable object to obtain the [SecurityHomeData]
      */
     fun ping(url: String) = PlainCallExecutable { securityService.ping(url) }
 
