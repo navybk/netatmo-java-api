@@ -1,0 +1,12 @@
+{
+  "user_id": "5944xxxxxxxxxxxxxxx6e",
+  "event_type": "hush",
+  "device_id": "70:ee:xx:xx:xx:xx",
+  "home_id": "5943xxxxxxxxxxxxxxxxxxx",
+  "home_name": "My home",
+  "camera_id": "70:ee:xx:xx:xx:xx",
+  "event_id": "5bbdaxxxxxxxxxxxxxx",
+  "sub_type": 0,
+  "message": "Daf: Activé",
+  "push_type": "NSD-hush"
+}

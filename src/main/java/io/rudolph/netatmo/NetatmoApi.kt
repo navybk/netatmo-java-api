@@ -4,6 +4,7 @@ import io.rudolph.netatmo.api.aircare.AirCareConnector
 import io.rudolph.netatmo.api.energy.EnergyConnector
 import io.rudolph.netatmo.api.weather.WeatherConnector
 import io.rudolph.netatmo.api.security.SecurityConnector
+import io.rudolph.netatmo.api.security.model.pushevent.PushEvent
 import io.rudolph.netatmo.oauth2.TokenStorage
 import io.rudolph.netatmo.oauth2.model.Scope
 import io.rudolph.netatmo.oauth2.networkinterceptor.AuthInterceptor
@@ -81,6 +82,10 @@ class NetatmoApi @JvmOverloads constructor(userMail: String? = null,
             refreshToken = refreshToken,
             apiEndpoint = BASEAPIENDPOINT,
             debug = debug)
+
+    fun convertToPushEvent(event: String): PushEvent? {
+        return JacksonTransform.mapper.readValue(event, PushEvent::class.java)
+    }
 
     private val api = OkHttpClient.Builder()
             .addInterceptor(

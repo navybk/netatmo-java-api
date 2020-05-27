@@ -1,0 +1,14 @@
+{
+  "user_id": "5c810xxxxxxx45f4",
+  "snapshot_id": "5d19bxxxxxx6380342",
+  "snapshot_key": "f0134210ff83fxxxxxxxf770090a423d9a5",
+  "snapshot_url": "https://netatmocameraimage.blob.core.windows.net/production/5d1xxxa5",
+  "event_type": "movement",
+  "camera_id": "70:exxxxxdd:a7",
+  "device_id": "70:exxxxdd:a7",
+  "home_id": "5c5d79xxxx08cd594",
+  "home_name": "Boulogne Billan.",
+  "event_id": "5d19baae369359e896380341",
+  "message": "Boulogne Billan: Movement detected by Indoor Camera",
+  "push_type": "NACamera-movement"
+}

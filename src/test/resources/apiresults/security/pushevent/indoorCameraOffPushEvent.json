@@ -1,0 +1,11 @@
+{
+  "user_id": "5944xxxxx6e",
+  "event_type": "off",
+  "device_id": "70:ee:xx:xx:xx:xx",
+  "home_id": "5943xxxxxxxxxxx",
+  "home_name": "My home",
+  "camera_id": "70:ee:xx:xx:xx:xx",
+  "event_id": "5bbcaxxxxxxxxx",
+  "message": "My home: Welcome-salon : surveillance suspendue",
+  "push_type": "NACamera-off"
+}

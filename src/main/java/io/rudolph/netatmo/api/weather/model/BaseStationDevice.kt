@@ -13,5 +13,5 @@ data class BaseStationDevice(
 
         @JsonProperty("modules")
         @JsonDeserialize(using = ModuleDeserializer::class)
-        val modules: List<Module>? = null
+        val modules: List<Module> = listOf()
 ): Device()

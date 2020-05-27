@@ -5,6 +5,7 @@ import io.rudolph.netatmo.JacksonTransform
 import io.rudolph.netatmo.api.energy.model.TypedBaseResult
 import io.rudolph.netatmo.api.security.model.Events
 import io.rudolph.netatmo.api.security.model.SecurityHomeData
+import io.rudolph.netatmo.api.security.model.pushevent.*
 import io.rudolph.netatmo.oauth2.model.Scope
 import org.junit.Test
 
@@ -27,6 +28,27 @@ class SecurityTest : BaseTest(listOf(Scope.READ_CAMERA,
         readFileForClass<TypedBaseResult<Events>>("apiresults/security/getEventsUntil.json")!!
         readFileForClass<TypedBaseResult<Events>>("apiresults/security/getLastEventOf.json")!!
         readFileForClass<TypedBaseResult<Events>>("apiresults/security/getNextEvents.json")!!
+    }
+
+    @Test
+    fun parsePushEvents() {
+        val list: List<PushEvent> = listOf(
+                readFileForClass<IndoorCameraConnectedPushEvent>("apiresults/security/pushevent/indoorCameraConnectedPushEvent.json")!!,
+                readFileForClass<IndoorCameraMovementPushEvent>("apiresults/security/pushevent/indoorCameraMovementPushEvent.json")!!,
+                readFileForClass<IndoorCameraOnOffPushEvent>("apiresults/security/pushevent/indoorCameraOffPushEvent.json")!!,
+                readFileForClass<IndoorCameraOnOffPushEvent>("apiresults/security/pushevent/indoorCameraOnPushEvent.json")!!,
+                readFileForClass<IndoorCameraPersonPushEvent>("apiresults/security/pushevent/indoorCameraPersonPushEvent.json")!!,
+                readFileForClass<OutdoorCameraHumanPushEvent>("apiresults/security/pushevent/outdoorCameraHumanPushEvent.json")!!,
+                readFileForClass<SmokeAlarmPushEvent>("apiresults/security/pushevent/smokePushEvent.json")!!
+        )
+        assert(list.size == 7)
+    }
+
+    @Test
+    fun convertPushEvent() {
+        val stream = TestConfig::class.java.getResource("apiresults/security/pushevent/indoorCameraConnectedPushEvent.json").readText()
+        val event = api.convertToPushEvent(stream)!!
+        assert(event.userId == "5c81004fd6e33f0b008b45f4")
     }
 
     @Test

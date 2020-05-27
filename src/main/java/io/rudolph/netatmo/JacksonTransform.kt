@@ -1,5 +1,6 @@
 package io.rudolph.netatmo
 
+import com.fasterxml.jackson.databind.DeserializationConfig
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
@@ -29,6 +30,7 @@ import java.time.LocalDateTime
 
 internal object JacksonTransform {
     val mapper = ObjectMapper().apply {
+        disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 
         registerModule(SimpleModule().apply {

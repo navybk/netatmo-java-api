@@ -1,0 +1,18 @@
+{
+  "user_id": "5cxxxxxxxxxxxxxxf4",
+  "snapshot_id": "5d1xxxxxxxxxxxxx4",
+  "snapshot_key": "712xxxxxxxxxxxxxxxxxx6c5",
+  "snapshot_url": "https://netatmocameraimage.blob.core.windows.net/production/5xxxxxx625",
+  "vignette_id": "5d1xxxxxxx33",
+  "vignette_key": "120ebxxxxxxxxxxxxxxxxxxxxxxec3577",
+  "vignette_url": "https://netatmocameraimage.blob.core.windows.net/production/5xxx",
+  "event_type": "human",
+  "camera_id": "70xxxxxx:98",
+  "device_id": "70:xxxxxx:98",
+  "home_id": "57f3xxxxx905",
+  "home_name": "My home",
+  "event_id": "5dxxxxxxxx3",
+  "subevent_id": "1e9xxxxxxb2",
+  "message": "My home: Personne détectée",
+  "push_type": "NOC-human"
+}

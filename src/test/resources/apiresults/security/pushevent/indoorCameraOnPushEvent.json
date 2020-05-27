@@ -1,0 +1,10 @@
+{
+  "user_id": "5c81004fd6e33f0b008b45f4",
+  "event_type": "on",
+  "device_id": "70:ee:50:1f:dd:6a",
+  "home_id": "5970c8fb764ff4221d8b4e69",
+  "home_name": "My home",
+  "camera_id": "70:ee:50:1f:dd:6a",
+  "event_id": "5d1a01c68b23458b6a61cb62",
+  "push_type": "NACamera-on"
+}

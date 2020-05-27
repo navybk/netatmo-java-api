@@ -8,7 +8,7 @@ object Constant {
     const val INDOOR_SIRENE_API_STRING = "NIS"
     const val OUTDOOR_CAMERA_API_STRING = "NOC"
     const val SMOKEDETECTOR_API_STRING = "NSD"
-    const val DOOR_AND_WINDOW_SENSOR_API_STRING = "NOC"
+    const val DOOR_AND_WINDOW_SENSOR_API_STRING = "NACamDoorTag"
     const val BASESTATION_API_STRING = "NAMain"
     const val OUTDOORMODULE_API_STRING = "NAModule1"
     const val WINDMODULE_API_STRING = "NAModule2"

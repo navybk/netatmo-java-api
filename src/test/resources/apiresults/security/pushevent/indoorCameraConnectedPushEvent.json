@@ -1,0 +1,10 @@
+{
+  "user_id": "5c81004fd6e33f0b008b45f4",
+  "event_type": "connection",
+  "camera_id": "70:ee:50:14:ef:0d",
+  "device_id": "70:ee:50:14:ef:0d",
+  "home_id": "5c5d7903de151313008cd594",
+  "home_name": "Boulogne Billan.",
+  "message": "Boulogne Billan.: Indoor camera connected",
+  "push_type": "NACamera-connection"
+}

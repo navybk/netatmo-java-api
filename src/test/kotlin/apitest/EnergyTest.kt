@@ -31,7 +31,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
     }
 
     @Test
-    fun testAsyncHomeData() {
+    fun asyncHomeData() {
 
         val waitForeverLatch = CountDownLatch(1)
 
@@ -67,7 +67,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
     }
 
     @Test
-    fun testGetHomeStatus() {
+    fun getHomeStatus() {
         api.energyApi.getHomesData().executeSync().apply {
             assert(this != null)
         }?.homes
@@ -110,7 +110,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
     }
 
     @Test
-    fun testGetRoomMeasure() {
+    fun getRoomMeasure() {
         api.energyApi.getHomesData().executeSync().apply {
             assert(this != null)
         }
@@ -141,7 +141,7 @@ class EnergyTest : BaseTest(listOf(Scope.WRITE_THERMOSTAT, Scope.READ_THERMOSTAT
     }
 
     @Test
-    fun testCreateAndSyncAndRenameAndDeleteSchedule() {
+    fun createAndSyncAndRenameAndDeleteSchedule() {
         api.energyApi.getHomesData().executeSync().apply {
             assert(this != null)
         }?.homes?.get(0)?.apply {

@@ -1,0 +1,23 @@
+{
+  "user_id": "5c81004xxxxxxxxxx45f4",
+  "persons": [
+    {
+      "id": "e2bf7xxxxxxxxxxxxea3",
+      "face_id": "5d66xxxxxx9b9",
+      "face_key": "89dxxxxx22",
+      "is_known": true,
+      "face_url": "https://netatmocameraimage.blob.core.windows.net/production/5xxx"
+    }
+  ],
+  "snapshot_id": "5d19bae867368a59e81cca89",
+  "snapshot_key": "d3b3ae0229f7xb74cf8",
+  "snapshot_url": "https://netatmocameraimage.blob.core.windows.net/production/5xxxx",
+  "event_type": "person",
+  "camera_id": "70:xxxxxx:a7",
+  "device_id": "70:xxxxxx:a7",
+  "home_id": "5c5dxxxxxxxd594",
+  "home_name": "Boulogne Billan.",
+  "event_id": "5d19bxxxxxxxxcca88",
+  "message": "Boulogne Billan.: Benoit has been seen by Indoor Camera ",
+  "push_type": "NACamera-person"
+}
